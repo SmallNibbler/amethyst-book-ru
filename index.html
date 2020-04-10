@@ -3,7 +3,7 @@
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
-        <title>Chapter 1 - Игровой движок Amethyst. Руководство</title>
+        <title>Введение - Amethyst Документация</title>
         
 
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
@@ -81,7 +81,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div id="sidebar-scrollbox" class="sidebar-scrollbox">
-                <ol class="chapter"><li class="expanded "><a href="chapter_1.html"><strong aria-hidden="true">1.</strong> Chapter 1</a></li></ol>
+                <ol class="chapter"><li class="expanded "><a href="chapter_1.html"><strong aria-hidden="true">1.</strong> Введение</a></li><li class="expanded "><a href="chapter_2.html"><strong aria-hidden="true">2.</strong> Начало работы</a></li><li class="expanded "><a href="concepts/chapter_3.html"><strong aria-hidden="true">3.</strong> Концепции</a></li><li><ol class="section"><li class="expanded "><a href="concepts/chapter_3_part_1.html"><strong aria-hidden="true">3.1.</strong> Состояния</a></li></ol></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
         </nav>
@@ -113,7 +113,7 @@
                             
                         </div>
 
-                        <h1 class="menu-title">Игровой движок Amethyst. Руководство</h1>
+                        <h1 class="menu-title">Amethyst Документация</h1>
 
                         <div class="right-buttons">
                             <a href="print.html" title="Print this book" aria-label="Print this book">
@@ -148,7 +148,71 @@
 
                 <div id="content" class="content">
                     <main>
-                        <h1><a class="header" href="#Глава-1" id="Глава-1">Глава 1</a></h1>
+                        <div style="display:inline-block;width:100%">
+    <img src="./images/amethyst_emblem.png" alt="Logo" width="96px" style="float:left;margin-right:15px"/>
+    <h1><a class="header" href="#Игровой-движок-amethyst" id="Игровой-движок-amethyst">Игровой движок Amethyst</a></h1>
+</div>
+<h1><a class="header" href="#Презентация" id="Презентация">Презентация</a></h1>
+<p>Привет! Эта книга научит вас всему, что вам нужно знать о создании видео игр и интерактивных симуляций с помощью игрового движка <a href="https://amethyst.rs/">Amethyst</a>. Этот движок полностью написан на <a href="https://www.rust-lang.org/">Rust</a>, безопасном и быстром языке системного программирования, и отличается чистым и современным дизайном. Если быть более точным, Amethyst на самом деле представляет собой набор отдельных библиотек и инструментов, которые вместе составляют игровой движок.</p>
+<p>Amethyst - это бесплатное программное обеспечение с открытым исходным кодом, распространяемое по двойной лицензии <a href="https://github.com/amethyst/amethyst/blob/master/docs/LICENSE-MIT">MIT</a> и <a href="https://github.com/amethyst/amethyst/blob/master/docs/LICENSE-APACHE">Apache</a>. Это означает, что движок предоставляется вам бесплатно, а его исходный код полностью ваш. Код доступен на <a href="https://github.com/amethyst/amethyst/tree/master">GitHub</a>. Вклады и пожелания всегда будут приветствоваться!</p>
+<h1><a class="header" href="#Содержание" id="Содержание">Содержание</a></h1>
+<p>Эта книга разделена на несколько разделов, причем это введение является первым. Другие разделы:</p>
+<ul>
+<li>Начало работы - подготовьте свой компьютер к разработке Amethyst.</li>
+<li>Концепции - обзор концепций, используемых в Amethyst.</li>
+<li>Pong Tutorial - создайте простую игру понг.</li>
+<li>Математика - краткое введение в математику Amethyst.</li>
+<li>Анимация - объясняет архитектуру пакета <code>amethyst_animation</code>.</li>
+<li>Управление выполнением систем - показывает, как структурировать более сложные игры.</li>
+<li>Глоссарий - определяет специальные термины, используемые в книге.</li>
+<li>Приложение A. Файлы конфигурации - показывает, как определить ваши данные в файлах RON.</li>
+</ul>
+<p>Прочитайте <a href="https://docs.amethyst.rs/stable/amethyst/index.html">документацию API</a> пакета для получения дополнительной информации.</p>
+<h1><a class="header" href="#Мотивация" id="Мотивация">Мотивация</a></h1>
+<p>За прошедшие годы большинство из нашей команды работало с несколькими игровыми движками, а именно <a href="http://unity3d.com/">Unity</a>, <a href="https://www.unrealengine.com/">Unreal Engine</a>, <a href="http://jmonkeyengine.org/">JMonkeyEngine</a> и многими другими. Хотя все они являются довольно надежными решениями, если вы хотите создать качественную игру, у каждого есть свои плюсы и минусы, которые вы должны взвесить, прежде чем использовать их, особенно в отношении производительности и масштабируемости.</p>
+<p>Мы считаем, Amethyst основан на хороших и современных принципах, что позволит нам создать игровой движок с открытым исходным кодом, который на самом деле будет более производительным, чем эти движки. Эти принципы:</p>
+<ol>
+<li>
+<p><strong>Модульность.</strong></p>
+<p>Модульность лежит в основе <a href="https://en.wikipedia.org/wiki/Unix_philosophy">философии Unix</a>, которая с годами зарекомендовала себя как отличный способ разработки программного обеспечения. Вы всегда сможете свободно использовать встроенные модули или написать свои собственные и легко интегрировать их в движок. Поскольку модули малы и хорошо интегрированы, легче рассуждать о том, что они делают и как они связаны с другими модулями.</p>
+</li>
+</ol>
+<ol start="2">
+<li>
+<p><strong>Параллельность.</strong></p>
+<p>Современные компьютеры, даже дешевые, имеют многопоточность с многоядерными процессорами. Мы ожидаем, что с годами у параллелизма будет все больше и больше возможностей для повышения производительности. С помощью правильного параллельного движка мы убеждены, что ваша игра будет становиться все более и более производительной с годами, даже не требуя от вас её обновления.</p>
+</li>
+<li>
+<p><strong>Ориентирование на данные.</strong></p>
+<p>Построение вашей игры на основе данных позволяет легко делать прототипы и быстро создавать игры. Сложное поведение, такое как обмен игровыми ресурсами во время игры, становится легким делом, делая тестирование и балансировку намного быстрее.</p>
+</li>
+</ol>
+<h1><a class="header" href="#Зачем-использовать-amethyst" id="Зачем-использовать-amethyst">Зачем использовать Amethyst?</a></h1>
+<p>Хотя в экосистеме Rust есть <a href="http://arewegameyet.com/">множество отличных строительных блоков</a>, использование движка Amethyst вместо создания собственного игрового движка, безусловно, имеет много преимуществ.</p>
+<p>Прежде всего, движок основан на библиотеке <a href="https://github.com/slide-rs/specs">Specs</a>, которая является основой, на которой строятся концепции движка. Прекрасное введение в разработку игр с помощью Rust и Entity Component System можно найти в этом замечательном <a href="https://kyren.github.io/2018/09/14/rustconf-talk.html">выступлении Кэтрин Уэст</a>. Взгляд Amethyst на ECS описан в разделе книги &quot;Концепции&quot;. Многие функции были связаны воедино.</p>
+<p>К примеру, такие как:</p>
+<ul>
+<li>Трансформации</li>
+<li>Графика</li>
+<li>Создание окна</li>
+<li>Ввод</li>
+<li>Аудио</li>
+<li>Анимация</li>
+<li>Локализация</li>
+<li>Сеть</li>
+<li>И другие...</li>
+</ul>
+<p>Если бы вы не использовали Amethyst, вам не только нужно было бы создавать все эти элементы (или использовать уже существующие пакеты), вам также необходимо было бы связать их между собой.</p>
+<p>Amethyst делает все это для вас, чтобы вы могли сосредоточиться на создании своей игры, а не беспокоиться о деталях.</p>
+<p>Кроме того, благодаря архитектуре Amethyst, почти все части являются настраиваемыми и заменяемыми. Это означает, что если вы хотите что-то изменить в соответствии со своими потребностями, всегда есть способ сделать это.</p>
+<p>Например, в настоящее время пакет <a href="https://github.com/tomaka/rodio">rodio</a> используется для функционирования аудио в движке, но если вы предпочитаете использовать какое-то более сложное или нестандартное решение, все, что вам нужно сделать, это организовать передачу данных, поступающих из Specs, в библиотеку которую вы используете для воспроизведения и управления аудио, даже не трогая код движка!</p>
+<h1><a class="header" href="#Помощь-в-развитии-amethyst" id="Помощь-в-развитии-amethyst">Помощь в развитии Amethyst</a></h1>
+<p>Мы всегда рады приветствовать новых участников!</p>
+<p>Чтобы узнать, с чего начать, предлагаем вам ознакомиться с нашими <a href="https://github.com/amethyst/amethyst/blob/master/docs/CONTRIBUTING.md">рекомендациями</a>.</p>
+<p>Если вы хотите внести свой вклад или у вас есть вопросы, сообщите нам об этом на <a href="https://github.com/amethyst/amethyst/tree/master">GitHub</a> или <a href="https://discord.gg/amethyst">Discord</a>.</p>
+<hr />
+<p>Документация была переведена специально для сообщества &quot;<strong>rust_lang_ru</strong>&quot;.</p>
+<p>Подпишись на нас в <strong><a href="http://tlinks.run/rust_lang_ru">Telegram</a></strong> и <strong><a href="https://www.youtube.com/channel/UCu413rnSfuSSOR3OsIThlZA">YouTube</a></strong>!</p>
 
                     </main>
 
@@ -156,6 +220,10 @@
                         <!-- Mobile navigation buttons -->
                         
 
+                        
+                            <a rel="next" href="chapter_2.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
                         
 
                         <div style="clear: both"></div>
@@ -166,6 +234,10 @@
             <nav class="nav-wide-wrapper" aria-label="Page navigation">
                 
 
+                
+                    <a href="chapter_2.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
                 
             </nav>
 

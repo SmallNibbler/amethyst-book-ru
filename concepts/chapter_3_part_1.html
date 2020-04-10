@@ -3,9 +3,7 @@
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
-        <title>Amethyst Документация</title>
-        
-        <meta name="robots" content="noindex" />
+        <title>Состояния - Amethyst Документация</title>
         
 
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
@@ -13,21 +11,21 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="theme-color" content="#ffffff" />
 
-        <link rel="shortcut icon" href="favicon.png">
-        <link rel="stylesheet" href="css/variables.css">
-        <link rel="stylesheet" href="css/general.css">
-        <link rel="stylesheet" href="css/chrome.css">
-        <link rel="stylesheet" href="css/print.css" media="print">
+        <link rel="shortcut icon" href="../favicon.png">
+        <link rel="stylesheet" href="../css/variables.css">
+        <link rel="stylesheet" href="../css/general.css">
+        <link rel="stylesheet" href="../css/chrome.css">
+        <link rel="stylesheet" href="../css/print.css" media="print">
 
         <!-- Fonts -->
-        <link rel="stylesheet" href="FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="../FontAwesome/css/font-awesome.css">
         <link href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" rel="stylesheet" type="text/css">
         <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro:500" rel="stylesheet" type="text/css">
 
         <!-- Highlight.js Stylesheets -->
-        <link rel="stylesheet" href="highlight.css">
-        <link rel="stylesheet" href="tomorrow-night.css">
-        <link rel="stylesheet" href="ayu-highlight.css">
+        <link rel="stylesheet" href="../highlight.css">
+        <link rel="stylesheet" href="../tomorrow-night.css">
+        <link rel="stylesheet" href="../ayu-highlight.css">
 
         <!-- Custom theme stylesheets -->
         
@@ -37,7 +35,7 @@
     <body>
         <!-- Provide site root to javascript -->
         <script type="text/javascript">
-            var path_to_root = "";
+            var path_to_root = "../";
             var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "light" : "light";
         </script>
 
@@ -83,7 +81,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div id="sidebar-scrollbox" class="sidebar-scrollbox">
-                <ol class="chapter"><li class="expanded "><a href="chapter_1.html"><strong aria-hidden="true">1.</strong> Введение</a></li><li class="expanded "><a href="chapter_2.html"><strong aria-hidden="true">2.</strong> Начало работы</a></li><li class="expanded "><a href="concepts/chapter_3.html"><strong aria-hidden="true">3.</strong> Концепции</a></li><li><ol class="section"><li class="expanded "><a href="concepts/chapter_3_part_1.html"><strong aria-hidden="true">3.1.</strong> Состояния</a></li></ol></li></ol>
+                <ol class="chapter"><li class="expanded "><a href="../chapter_1.html"><strong aria-hidden="true">1.</strong> Введение</a></li><li class="expanded "><a href="../chapter_2.html"><strong aria-hidden="true">2.</strong> Начало работы</a></li><li class="expanded "><a href="../concepts/chapter_3.html"><strong aria-hidden="true">3.</strong> Концепции</a></li><li><ol class="section"><li class="expanded "><a href="../concepts/chapter_3_part_1.html" class="active"><strong aria-hidden="true">3.1.</strong> Состояния</a></li></ol></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
         </nav>
@@ -118,7 +116,7 @@
                         <h1 class="menu-title">Amethyst Документация</h1>
 
                         <div class="right-buttons">
-                            <a href="print.html" title="Print this book" aria-label="Print this book">
+                            <a href="../print.html" title="Print this book" aria-label="Print this book">
                                 <i id="print-button" class="fa fa-print"></i>
                             </a>
                             
@@ -150,144 +148,7 @@
 
                 <div id="content" class="content">
                     <main>
-                        <div style="display:inline-block;width:100%">
-    <img src="./images/amethyst_emblem.png" alt="Logo" width="96px" style="float:left;margin-right:15px"/>
-    <h1><a class="header" href="#Игровой-движок-amethyst" id="Игровой-движок-amethyst">Игровой движок Amethyst</a></h1>
-</div>
-<h1><a class="header" href="#Презентация" id="Презентация">Презентация</a></h1>
-<p>Привет! Эта книга научит вас всему, что вам нужно знать о создании видео игр и интерактивных симуляций с помощью игрового движка <a href="https://amethyst.rs/">Amethyst</a>. Этот движок полностью написан на <a href="https://www.rust-lang.org/">Rust</a>, безопасном и быстром языке системного программирования, и отличается чистым и современным дизайном. Если быть более точным, Amethyst на самом деле представляет собой набор отдельных библиотек и инструментов, которые вместе составляют игровой движок.</p>
-<p>Amethyst - это бесплатное программное обеспечение с открытым исходным кодом, распространяемое по двойной лицензии <a href="https://github.com/amethyst/amethyst/blob/master/docs/LICENSE-MIT">MIT</a> и <a href="https://github.com/amethyst/amethyst/blob/master/docs/LICENSE-APACHE">Apache</a>. Это означает, что движок предоставляется вам бесплатно, а его исходный код полностью ваш. Код доступен на <a href="https://github.com/amethyst/amethyst/tree/master">GitHub</a>. Вклады и пожелания всегда будут приветствоваться!</p>
-<h1><a class="header" href="#Содержание" id="Содержание">Содержание</a></h1>
-<p>Эта книга разделена на несколько разделов, причем это введение является первым. Другие разделы:</p>
-<ul>
-<li>Начало работы - подготовьте свой компьютер к разработке Amethyst.</li>
-<li>Концепции - обзор концепций, используемых в Amethyst.</li>
-<li>Pong Tutorial - создайте простую игру понг.</li>
-<li>Математика - краткое введение в математику Amethyst.</li>
-<li>Анимация - объясняет архитектуру пакета <code>amethyst_animation</code>.</li>
-<li>Управление выполнением систем - показывает, как структурировать более сложные игры.</li>
-<li>Глоссарий - определяет специальные термины, используемые в книге.</li>
-<li>Приложение A. Файлы конфигурации - показывает, как определить ваши данные в файлах RON.</li>
-</ul>
-<p>Прочитайте <a href="https://docs.amethyst.rs/stable/amethyst/index.html">документацию API</a> пакета для получения дополнительной информации.</p>
-<h1><a class="header" href="#Мотивация" id="Мотивация">Мотивация</a></h1>
-<p>За прошедшие годы большинство из нашей команды работало с несколькими игровыми движками, а именно <a href="http://unity3d.com/">Unity</a>, <a href="https://www.unrealengine.com/">Unreal Engine</a>, <a href="http://jmonkeyengine.org/">JMonkeyEngine</a> и многими другими. Хотя все они являются довольно надежными решениями, если вы хотите создать качественную игру, у каждого есть свои плюсы и минусы, которые вы должны взвесить, прежде чем использовать их, особенно в отношении производительности и масштабируемости.</p>
-<p>Мы считаем, Amethyst основан на хороших и современных принципах, что позволит нам создать игровой движок с открытым исходным кодом, который на самом деле будет более производительным, чем эти движки. Эти принципы:</p>
-<ol>
-<li>
-<p><strong>Модульность.</strong></p>
-<p>Модульность лежит в основе <a href="https://en.wikipedia.org/wiki/Unix_philosophy">философии Unix</a>, которая с годами зарекомендовала себя как отличный способ разработки программного обеспечения. Вы всегда сможете свободно использовать встроенные модули или написать свои собственные и легко интегрировать их в движок. Поскольку модули малы и хорошо интегрированы, легче рассуждать о том, что они делают и как они связаны с другими модулями.</p>
-</li>
-</ol>
-<ol start="2">
-<li>
-<p><strong>Параллельность.</strong></p>
-<p>Современные компьютеры, даже дешевые, имеют многопоточность с многоядерными процессорами. Мы ожидаем, что с годами у параллелизма будет все больше и больше возможностей для повышения производительности. С помощью правильного параллельного движка мы убеждены, что ваша игра будет становиться все более и более производительной с годами, даже не требуя от вас её обновления.</p>
-</li>
-<li>
-<p><strong>Ориентирование на данные.</strong></p>
-<p>Построение вашей игры на основе данных позволяет легко делать прототипы и быстро создавать игры. Сложное поведение, такое как обмен игровыми ресурсами во время игры, становится легким делом, делая тестирование и балансировку намного быстрее.</p>
-</li>
-</ol>
-<h1><a class="header" href="#Зачем-использовать-amethyst" id="Зачем-использовать-amethyst">Зачем использовать Amethyst?</a></h1>
-<p>Хотя в экосистеме Rust есть <a href="http://arewegameyet.com/">множество отличных строительных блоков</a>, использование движка Amethyst вместо создания собственного игрового движка, безусловно, имеет много преимуществ.</p>
-<p>Прежде всего, движок основан на библиотеке <a href="https://github.com/slide-rs/specs">Specs</a>, которая является основой, на которой строятся концепции движка. Прекрасное введение в разработку игр с помощью Rust и Entity Component System можно найти в этом замечательном <a href="https://kyren.github.io/2018/09/14/rustconf-talk.html">выступлении Кэтрин Уэст</a>. Взгляд Amethyst на ECS описан в разделе книги &quot;Концепции&quot;. Многие функции были связаны воедино.</p>
-<p>К примеру, такие как:</p>
-<ul>
-<li>Трансформации</li>
-<li>Графика</li>
-<li>Создание окна</li>
-<li>Ввод</li>
-<li>Аудио</li>
-<li>Анимация</li>
-<li>Локализация</li>
-<li>Сеть</li>
-<li>И другие...</li>
-</ul>
-<p>Если бы вы не использовали Amethyst, вам не только нужно было бы создавать все эти элементы (или использовать уже существующие пакеты), вам также необходимо было бы связать их между собой.</p>
-<p>Amethyst делает все это для вас, чтобы вы могли сосредоточиться на создании своей игры, а не беспокоиться о деталях.</p>
-<p>Кроме того, благодаря архитектуре Amethyst, почти все части являются настраиваемыми и заменяемыми. Это означает, что если вы хотите что-то изменить в соответствии со своими потребностями, всегда есть способ сделать это.</p>
-<p>Например, в настоящее время пакет <a href="https://github.com/tomaka/rodio">rodio</a> используется для функционирования аудио в движке, но если вы предпочитаете использовать какое-то более сложное или нестандартное решение, все, что вам нужно сделать, это организовать передачу данных, поступающих из Specs, в библиотеку которую вы используете для воспроизведения и управления аудио, даже не трогая код движка!</p>
-<h1><a class="header" href="#Помощь-в-развитии-amethyst" id="Помощь-в-развитии-amethyst">Помощь в развитии Amethyst</a></h1>
-<p>Мы всегда рады приветствовать новых участников!</p>
-<p>Чтобы узнать, с чего начать, предлагаем вам ознакомиться с нашими <a href="https://github.com/amethyst/amethyst/blob/master/docs/CONTRIBUTING.md">рекомендациями</a>.</p>
-<p>Если вы хотите внести свой вклад или у вас есть вопросы, сообщите нам об этом на <a href="https://github.com/amethyst/amethyst/tree/master">GitHub</a> или <a href="https://discord.gg/amethyst">Discord</a>.</p>
-<hr />
-<p>Документация была переведена специально для сообщества &quot;<strong>rust_lang_ru</strong>&quot;.</p>
-<p>Подпишись на нас в <strong><a href="http://tlinks.run/rust_lang_ru">Telegram</a></strong> и <strong><a href="https://www.youtube.com/channel/UCu413rnSfuSSOR3OsIThlZA">YouTube</a></strong>!</p>
-<h1><a class="header" href="#Настройка-rust" id="Настройка-rust">Настройка Rust</a></h1>
-<p>Мы рекомендуем использовать <a href="https://rustup.rs/">rustup</a> для простой установки последней стабильной версии Rust. Инструкции должны быть на экране, как только rustup загрузится.</p>
-<p><strong>Обновление Rust:</strong> Если у вас уже установлен Rust, убедитесь, что вы используете последнюю версию, запустив команду:</p>
-<blockquote>
-<p>&gt; <code>rustup update</code></p>
-</blockquote>
-<p>Мы рекомендуем использовать стабильную версию Rust, так как Rust Nightly обычно ломаются довольно часто.</p>
-<p><strong>Использование стабильной версии:</strong> Rustup можно настроить по умолчанию на стабильную версию, запустив команду:</p>
-<blockquote>
-<p>&gt; <code>rustup default stable</code></p>
-</blockquote>
-<h1><a class="header" href="#Требуемые-зависимости" id="Требуемые-зависимости">Требуемые зависимости</a></h1>
-<p>Пожалуйста, проверьте раздел зависимостей <a href="https://github.com/amethyst/amethyst/blob/master/README.md#dependencies">README.md</a> для получения подробной информации о том, какие зависимости необходимы для компиляции Amethyst.</p>
-<p>Обратите внимание, что вам необходимо установить функциональный графический драйвер. Если вы получаете ошибку из-за того, что средство рендеринга не может создать контекст рендеринга при попытке запустить пример, возможно проблема в неправильной установке драйвера.</p>
-<h1><a class="header" href="#Настройка-amethyst" id="Настройка-amethyst">Настройка Amethyst</a></h1>
-<p>Вы можете использовать <a href="https://github.com/amethyst/tools">Amethyst CLI</a> или <code>cargo</code> для настройки вашего проекта.</p>
-<h2><a class="header" href="#amethyst-cli" id="amethyst-cli">Amethyst CLI</a></h2>
-<p>Если вы хотите использовать инструмент Amethyst CLI, вы можете установить его командой:</p>
-<blockquote>
-<p>&gt; <code>cargo install amethyst_tools</code></p>
-</blockquote>
-<p>А затем запустить командой:</p>
-<blockquote>
-<p>&gt; <code>amethyst new name</code></p>
-</blockquote>
-<p>Вы должны получить папку с файлами <em>Cargo.toml</em>, <em>src/main.rs</em> и <em>config/display.ron</em>.</p>
-<h2><a class="header" href="#Стартовый-проект" id="Стартовый-проект">Стартовый проект</a></h2>
-<p>Если вы хотите начать экспериментировать с Amethyst как можно быстрее, вы также можете использовать стартовые проекты. Они специально созданы для определенных типов игр и предоставят вам основу, необходимую для немедленного начала.</p>
-<p>Файл <em>README.md</em> содержит все, что вам нужно знать для запуска начального проекта.</p>
-<blockquote>
-<p><strong>Примечание:</strong> прямо сейчас, единственный доступный стартовый проект для 2D-игр. Со временем появиться больше вариантов для разных типов игр.</p>
-</blockquote>
-<ul>
-<li><a href="https://github.com/amethyst/amethyst-starter-2d">2D Starter</a></li>
-</ul>
-<h2><a class="header" href="#Ручная-настройка" id="Ручная-настройка">Ручная настройка</a></h2>
-<p>Если вы используете <code>cargo</code>, вот что вам нужно сделать:</p>
-<ul>
-<li>Добавьте Amethyst в качестве зависимости в вашем <em>Cargo.toml</em>.</li>
-<li>Создайте папку <em>config</em> и поместите в нее <em>display.ron</em>.</li>
-<li>(Необязательно) Скопируйте код из одного из примеров аметиста.</li>
-</ul>
-<h1><a class="header" href="#Важное-замечание-о-версии" id="Важное-замечание-о-версии">Важное замечание о версии</a></h1>
-<p>Amethyst делится на две основные версии:</p>
-<ul>
-<li>Выпущенная версия crates.io, которая является последней версией, доступной на crates.io.</li>
-<li>Git (master) версия, которая является текущей неизданной версией разработки Amethyst, доступной на <a href="https://github.com/amethyst/amethyst">Github</a>.</li>
-</ul>
-<blockquote>
-<p><strong>Примечание.</strong> Вы можете узнать, какую версию книги вы просматриваете в настоящий момент, проверив URL в своем браузере. Книга/документация для мастер версии содержит «master» в адресе, версия crates.io называется «стабильной».</p>
-</blockquote>
-<p>В зависимости от версии книги, которую вы выбрали для чтения, убедитесь, что версия Amethyst в вашем <em>Cargo.toml</em> соответствует этому.</p>
-<p>Для выпущенной версии crates.io у вас должно быть что-то вроде этого:</p>
-<pre><code class="language-rust ignore">[dependencies]
-amethyst = &quot;LATEST_CRATES.IO_VERSION&quot;
-</code></pre>
-<p>Последнюю версию crates.io можно найти <a href="https://crates.io/crates/amethyst">здесь</a>.</p>
-<p>Если вы хотите использовать последние неизданные изменения, ваш файл Cargo.toml должен выглядеть следующим образом:</p>
-<pre><code class="language-rust ignore">[dependencies]
-amethyst = { git = &quot;https://github.com/amethyst/amethyst&quot;, rev = &quot;COMMIT_HASH&quot; }
-</code></pre>
-<p>Часть <code>COMMIT_HASH</code> является необязательной. Он указывает, какой конкретный коммит использует ваш проект, чтобы предотвратить непредвиденный сбой при внесении изменений в версию git.</p>
-<hr />
-<p>Документация была переведена специально для сообщества &quot;<strong>rust_lang_ru</strong>&quot;.</p>
-<p>Подпишись на нас в <strong><a href="http://tlinks.run/rust_lang_ru">Telegram</a></strong> и <strong><a href="https://www.youtube.com/channel/UCu413rnSfuSSOR3OsIThlZA">YouTube</a></strong>!</p>
-<h1><a class="header" href="#Концепции-лежащие-в-основе-amethyst" id="Концепции-лежащие-в-основе-amethyst">Концепции лежащие в основе Amethyst</a></h1>
-<p>Amethyst использует несколько концепций, с которыми вы, возможно, не знакомы. В этом разделе книги объясняется, что они из себя представляют, как они работают и как они связаны друг с другом.</p>
-<p>Если вы тот человек, который предпочитает практику и хотите быстро разобраться в коде, вы можете перейти к разделу учебника по понгу, который посвящен практике. Тем не менее, чтение этого раздела предлагается, поскольку может быть трудно понять примеры, не зная теорию, представленную здесь.</p>
-<p>Если вы не понимаете, как что-то работает в Amethyst, знание представленных здесь концепций поможет вам понять, как сделаны некоторые реализации.</p>
-<hr />
-<p>Документация была переведена специально для сообщества &quot;<strong>rust_lang_ru</strong>&quot;.</p>
-<p>Подпишись на нас в <strong><a href="http://tlinks.run/rust_lang_ru">Telegram</a></strong> и <strong><a href="https://www.youtube.com/channel/UCu413rnSfuSSOR3OsIThlZA">YouTube</a></strong>!</p>
-<h1><a class="header" href="#Что-такое-состояние" id="Что-такое-состояние">Что такое состояние?</a></h1>
+                        <h1><a class="header" href="#Что-такое-состояние" id="Что-такое-состояние">Что такое состояние?</a></h1>
 <p>Слово «состояние» (State) может означать много разных вещей в компьютерной науке. В случае Amethyst оно используется для представления «игрового состояния».</p>
 <p>Состояние игры является общей и глобальной частью игры.</p>
 <h2><a class="header" href="#Пример" id="Пример">Пример</a></h2>
@@ -474,6 +335,10 @@ impl State&lt;(), MyEvent&gt; for GameplayState {
                     <nav class="nav-wrapper" aria-label="Page navigation">
                         <!-- Mobile navigation buttons -->
                         
+                            <a rel="prev" href="../concepts/chapter_3.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+                        
 
                         
 
@@ -483,6 +348,10 @@ impl State&lt;(), MyEvent&gt; for GameplayState {
             </div>
 
             <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                
+                    <a href="../concepts/chapter_3.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
                 
 
                 
@@ -505,26 +374,18 @@ impl State&lt;(), MyEvent&gt; for GameplayState {
         
 
         
-        <script src="elasticlunr.min.js" type="text/javascript" charset="utf-8"></script>
-        <script src="mark.min.js" type="text/javascript" charset="utf-8"></script>
-        <script src="searcher.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../elasticlunr.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../mark.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../searcher.js" type="text/javascript" charset="utf-8"></script>
         
 
-        <script src="clipboard.min.js" type="text/javascript" charset="utf-8"></script>
-        <script src="highlight.js" type="text/javascript" charset="utf-8"></script>
-        <script src="book.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../clipboard.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../highlight.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../book.js" type="text/javascript" charset="utf-8"></script>
 
         <!-- Custom JS scripts -->
         
 
-        
-        
-        <script type="text/javascript">
-        window.addEventListener('load', function() {
-            window.setTimeout(window.print, 100);
-        });
-        </script>
-        
         
 
     </body>
