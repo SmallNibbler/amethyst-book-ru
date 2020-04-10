@@ -3,4 +3,4 @@ authors = ["SmallNibbler"]
 language = "ru"
 multilingual = false
 src = "src"
-title = "Игровой движок Amethyst. Руководство"
+title = "Amethyst Документация"
