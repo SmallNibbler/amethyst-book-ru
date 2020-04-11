@@ -81,7 +81,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div id="sidebar-scrollbox" class="sidebar-scrollbox">
-                <ol class="chapter"><li class="expanded "><a href="chapter_1.html"><strong aria-hidden="true">1.</strong> Введение</a></li><li class="expanded "><a href="chapter_2.html" class="active"><strong aria-hidden="true">2.</strong> Начало работы</a></li><li class="expanded "><a href="concepts/chapter_3.html"><strong aria-hidden="true">3.</strong> Концепции</a></li><li><ol class="section"><li class="expanded "><a href="concepts/chapter_3_part_1.html"><strong aria-hidden="true">3.1.</strong> Состояния</a></li></ol></li></ol>
+                <ol class="chapter"><li class="expanded "><a href="chapter_1.html"><strong aria-hidden="true">1.</strong> Введение</a></li><li class="expanded "><a href="chapter_2.html" class="active"><strong aria-hidden="true">2.</strong> Начало работы</a></li><li class="expanded "><a href="concepts/chapter_3.html"><strong aria-hidden="true">3.</strong> Концепции</a></li><li><ol class="section"><li class="expanded "><a href="concepts/chapter_3_part_1.html"><strong aria-hidden="true">3.1.</strong> Состояния</a></li><li class="expanded "><a href="concepts/chapter_3_part_2.html"><strong aria-hidden="true">3.2.</strong> Сущность и компонент</a></li></ol></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
         </nav>
@@ -148,7 +148,8 @@
 
                 <div id="content" class="content">
                     <main>
-                        <h1><a class="header" href="#Настройка-rust" id="Настройка-rust">Настройка Rust</a></h1>
+                        <h1><a class="header" href="#Начало-работы" id="Начало-работы">Начало работы</a></h1>
+<h2><a class="header" href="#Настройка-rust" id="Настройка-rust">Настройка Rust</a></h2>
 <p>Мы рекомендуем использовать <a href="https://rustup.rs/">rustup</a> для простой установки последней стабильной версии Rust. Инструкции должны быть на экране, как только rustup загрузится.</p>
 <p><strong>Обновление Rust:</strong> Если у вас уже установлен Rust, убедитесь, что вы используете последнюю версию, запустив команду:</p>
 <blockquote>
@@ -159,12 +160,12 @@
 <blockquote>
 <p>&gt; <code>rustup default stable</code></p>
 </blockquote>
-<h1><a class="header" href="#Требуемые-зависимости" id="Требуемые-зависимости">Требуемые зависимости</a></h1>
+<h2><a class="header" href="#Требуемые-зависимости" id="Требуемые-зависимости">Требуемые зависимости</a></h2>
 <p>Пожалуйста, проверьте раздел зависимостей <a href="https://github.com/amethyst/amethyst/blob/master/README.md#dependencies">README.md</a> для получения подробной информации о том, какие зависимости необходимы для компиляции Amethyst.</p>
 <p>Обратите внимание, что вам необходимо установить функциональный графический драйвер. Если вы получаете ошибку из-за того, что средство рендеринга не может создать контекст рендеринга при попытке запустить пример, возможно проблема в неправильной установке драйвера.</p>
-<h1><a class="header" href="#Настройка-amethyst" id="Настройка-amethyst">Настройка Amethyst</a></h1>
+<h2><a class="header" href="#Настройка-amethyst" id="Настройка-amethyst">Настройка Amethyst</a></h2>
 <p>Вы можете использовать <a href="https://github.com/amethyst/tools">Amethyst CLI</a> или <code>cargo</code> для настройки вашего проекта.</p>
-<h2><a class="header" href="#amethyst-cli" id="amethyst-cli">Amethyst CLI</a></h2>
+<h3><a class="header" href="#amethyst-cli" id="amethyst-cli">Amethyst CLI</a></h3>
 <p>Если вы хотите использовать инструмент Amethyst CLI, вы можете установить его командой:</p>
 <blockquote>
 <p>&gt; <code>cargo install amethyst_tools</code></p>
@@ -174,7 +175,7 @@
 <p>&gt; <code>amethyst new name</code></p>
 </blockquote>
 <p>Вы должны получить папку с файлами <em>Cargo.toml</em>, <em>src/main.rs</em> и <em>config/display.ron</em>.</p>
-<h2><a class="header" href="#Стартовый-проект" id="Стартовый-проект">Стартовый проект</a></h2>
+<h3><a class="header" href="#Стартовый-проект" id="Стартовый-проект">Стартовый проект</a></h3>
 <p>Если вы хотите начать экспериментировать с Amethyst как можно быстрее, вы также можете использовать стартовые проекты. Они специально созданы для определенных типов игр и предоставят вам основу, необходимую для немедленного начала.</p>
 <p>Файл <em>README.md</em> содержит все, что вам нужно знать для запуска начального проекта.</p>
 <blockquote>
@@ -183,14 +184,14 @@
 <ul>
 <li><a href="https://github.com/amethyst/amethyst-starter-2d">2D Starter</a></li>
 </ul>
-<h2><a class="header" href="#Ручная-настройка" id="Ручная-настройка">Ручная настройка</a></h2>
+<h3><a class="header" href="#Ручная-настройка" id="Ручная-настройка">Ручная настройка</a></h3>
 <p>Если вы используете <code>cargo</code>, вот что вам нужно сделать:</p>
 <ul>
 <li>Добавьте Amethyst в качестве зависимости в вашем <em>Cargo.toml</em>.</li>
 <li>Создайте папку <em>config</em> и поместите в нее <em>display.ron</em>.</li>
 <li>(Необязательно) Скопируйте код из одного из примеров аметиста.</li>
 </ul>
-<h1><a class="header" href="#Важное-замечание-о-версии" id="Важное-замечание-о-версии">Важное замечание о версии</a></h1>
+<h2><a class="header" href="#Важное-замечание-о-версии" id="Важное-замечание-о-версии">Важное замечание о версии</a></h2>
 <p>Amethyst делится на две основные версии:</p>
 <ul>
 <li>Выпущенная версия crates.io, которая является последней версией, доступной на crates.io.</li>

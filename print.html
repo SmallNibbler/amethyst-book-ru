@@ -83,7 +83,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div id="sidebar-scrollbox" class="sidebar-scrollbox">
-                <ol class="chapter"><li class="expanded "><a href="chapter_1.html"><strong aria-hidden="true">1.</strong> Введение</a></li><li class="expanded "><a href="chapter_2.html"><strong aria-hidden="true">2.</strong> Начало работы</a></li><li class="expanded "><a href="concepts/chapter_3.html"><strong aria-hidden="true">3.</strong> Концепции</a></li><li><ol class="section"><li class="expanded "><a href="concepts/chapter_3_part_1.html"><strong aria-hidden="true">3.1.</strong> Состояния</a></li></ol></li></ol>
+                <ol class="chapter"><li class="expanded "><a href="chapter_1.html"><strong aria-hidden="true">1.</strong> Введение</a></li><li class="expanded "><a href="chapter_2.html"><strong aria-hidden="true">2.</strong> Начало работы</a></li><li class="expanded "><a href="concepts/chapter_3.html"><strong aria-hidden="true">3.</strong> Концепции</a></li><li><ol class="section"><li class="expanded "><a href="concepts/chapter_3_part_1.html"><strong aria-hidden="true">3.1.</strong> Состояния</a></li><li class="expanded "><a href="concepts/chapter_3_part_2.html"><strong aria-hidden="true">3.2.</strong> Сущность и компонент</a></li></ol></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
         </nav>
@@ -215,7 +215,8 @@
 <hr />
 <p>Документация была переведена специально для сообщества &quot;<strong>rust_lang_ru</strong>&quot;.</p>
 <p>Подпишись на нас в <strong><a href="http://tlinks.run/rust_lang_ru">Telegram</a></strong> и <strong><a href="https://www.youtube.com/channel/UCu413rnSfuSSOR3OsIThlZA">YouTube</a></strong>!</p>
-<h1><a class="header" href="#Настройка-rust" id="Настройка-rust">Настройка Rust</a></h1>
+<h1><a class="header" href="#Начало-работы" id="Начало-работы">Начало работы</a></h1>
+<h2><a class="header" href="#Настройка-rust" id="Настройка-rust">Настройка Rust</a></h2>
 <p>Мы рекомендуем использовать <a href="https://rustup.rs/">rustup</a> для простой установки последней стабильной версии Rust. Инструкции должны быть на экране, как только rustup загрузится.</p>
 <p><strong>Обновление Rust:</strong> Если у вас уже установлен Rust, убедитесь, что вы используете последнюю версию, запустив команду:</p>
 <blockquote>
@@ -226,12 +227,12 @@
 <blockquote>
 <p>&gt; <code>rustup default stable</code></p>
 </blockquote>
-<h1><a class="header" href="#Требуемые-зависимости" id="Требуемые-зависимости">Требуемые зависимости</a></h1>
+<h2><a class="header" href="#Требуемые-зависимости" id="Требуемые-зависимости">Требуемые зависимости</a></h2>
 <p>Пожалуйста, проверьте раздел зависимостей <a href="https://github.com/amethyst/amethyst/blob/master/README.md#dependencies">README.md</a> для получения подробной информации о том, какие зависимости необходимы для компиляции Amethyst.</p>
 <p>Обратите внимание, что вам необходимо установить функциональный графический драйвер. Если вы получаете ошибку из-за того, что средство рендеринга не может создать контекст рендеринга при попытке запустить пример, возможно проблема в неправильной установке драйвера.</p>
-<h1><a class="header" href="#Настройка-amethyst" id="Настройка-amethyst">Настройка Amethyst</a></h1>
+<h2><a class="header" href="#Настройка-amethyst" id="Настройка-amethyst">Настройка Amethyst</a></h2>
 <p>Вы можете использовать <a href="https://github.com/amethyst/tools">Amethyst CLI</a> или <code>cargo</code> для настройки вашего проекта.</p>
-<h2><a class="header" href="#amethyst-cli" id="amethyst-cli">Amethyst CLI</a></h2>
+<h3><a class="header" href="#amethyst-cli" id="amethyst-cli">Amethyst CLI</a></h3>
 <p>Если вы хотите использовать инструмент Amethyst CLI, вы можете установить его командой:</p>
 <blockquote>
 <p>&gt; <code>cargo install amethyst_tools</code></p>
@@ -241,7 +242,7 @@
 <p>&gt; <code>amethyst new name</code></p>
 </blockquote>
 <p>Вы должны получить папку с файлами <em>Cargo.toml</em>, <em>src/main.rs</em> и <em>config/display.ron</em>.</p>
-<h2><a class="header" href="#Стартовый-проект" id="Стартовый-проект">Стартовый проект</a></h2>
+<h3><a class="header" href="#Стартовый-проект" id="Стартовый-проект">Стартовый проект</a></h3>
 <p>Если вы хотите начать экспериментировать с Amethyst как можно быстрее, вы также можете использовать стартовые проекты. Они специально созданы для определенных типов игр и предоставят вам основу, необходимую для немедленного начала.</p>
 <p>Файл <em>README.md</em> содержит все, что вам нужно знать для запуска начального проекта.</p>
 <blockquote>
@@ -250,14 +251,14 @@
 <ul>
 <li><a href="https://github.com/amethyst/amethyst-starter-2d">2D Starter</a></li>
 </ul>
-<h2><a class="header" href="#Ручная-настройка" id="Ручная-настройка">Ручная настройка</a></h2>
+<h3><a class="header" href="#Ручная-настройка" id="Ручная-настройка">Ручная настройка</a></h3>
 <p>Если вы используете <code>cargo</code>, вот что вам нужно сделать:</p>
 <ul>
 <li>Добавьте Amethyst в качестве зависимости в вашем <em>Cargo.toml</em>.</li>
 <li>Создайте папку <em>config</em> и поместите в нее <em>display.ron</em>.</li>
 <li>(Необязательно) Скопируйте код из одного из примеров аметиста.</li>
 </ul>
-<h1><a class="header" href="#Важное-замечание-о-версии" id="Важное-замечание-о-версии">Важное замечание о версии</a></h1>
+<h2><a class="header" href="#Важное-замечание-о-версии" id="Важное-замечание-о-версии">Важное замечание о версии</a></h2>
 <p>Amethyst делится на две основные версии:</p>
 <ul>
 <li>Выпущенная версия crates.io, которая является последней версией, доступной на crates.io.</li>
@@ -287,7 +288,8 @@ amethyst = { git = &quot;https://github.com/amethyst/amethyst&quot;, rev = &quot
 <hr />
 <p>Документация была переведена специально для сообщества &quot;<strong>rust_lang_ru</strong>&quot;.</p>
 <p>Подпишись на нас в <strong><a href="http://tlinks.run/rust_lang_ru">Telegram</a></strong> и <strong><a href="https://www.youtube.com/channel/UCu413rnSfuSSOR3OsIThlZA">YouTube</a></strong>!</p>
-<h1><a class="header" href="#Что-такое-состояние" id="Что-такое-состояние">Что такое состояние?</a></h1>
+<h1><a class="header" href="#Состояния" id="Состояния">Состояния</a></h1>
+<h2><a class="header" href="#Что-такое-состояние" id="Что-такое-состояние">Что такое состояние?</a></h2>
 <p>Слово «состояние» (State) может означать много разных вещей в компьютерной науке. В случае Amethyst оно используется для представления «игрового состояния».</p>
 <p>Состояние игры является общей и глобальной частью игры.</p>
 <h2><a class="header" href="#Пример" id="Пример">Пример</a></h2>
@@ -308,12 +310,12 @@ amethyst = { git = &quot;https://github.com/amethyst/amethyst&quot;, rev = &quot
 <li>Результаты (<code>ResultState</code>)</li>
 </ul>
 <p>Мы могли бы эффективно вставить всю игровую логику в одно состояние <code>GameState</code>, разделение его на несколько частей значительно упрощает анализ и поддержку.</p>
-<h1><a class="header" href="#Менеджер-состояний" id="Менеджер-состояний">Менеджер состояний</a></h1>
+<h2><a class="header" href="#Менеджер-состояний" id="Менеджер-состояний">Менеджер состояний</a></h2>
 <p>Amethyst имеет встроенный менеджер состояний, который позволяет легко переключаться между различными состояниями. Он основан на концепции автомата с магазинной памятью (<a href="https://ru.wikipedia.org/wiki/%D0%90%D0%B2%D1%82%D0%BE%D0%BC%D0%B0%D1%82_%D1%81_%D0%BC%D0%B0%D0%B3%D0%B0%D0%B7%D0%B8%D0%BD%D0%BD%D0%BE%D0%B9_%D0%BF%D0%B0%D0%BC%D1%8F%D1%82%D1%8C%D1%8E">pushdown-automaton</a>), который представляет собой комбинацию стека и конечного автомата.</p>
-<h2><a class="header" href="#Стек" id="Стек">Стек</a></h2>
+<h3><a class="header" href="#Стек" id="Стек">Стек</a></h3>
 <p>Концепция стека позволяет вам «накладывать» состояния друг на друга.</p>
 <p>Если мы возьмем пример понга рассмотренный ранее, вы можете вызвать <code>PauseState</code> поверх <code>GameplayState</code>. Когда вы хотите выйти из паузы, вы вытаскиваете <code>PauseState</code> из стека и возвращаетесь в <code>GameplayState</code>, как раз на тот момент, когда вы его покинули.</p>
-<h2><a class="header" href="#Конечный-автомат" id="Конечный-автомат">Конечный автомат</a></h2>
+<h3><a class="header" href="#Конечный-автомат" id="Конечный-автомат">Конечный автомат</a></h3>
 <p>Понятие конечного автомата (State Machine) может быть довольно сложным, но здесь мы рассмотрим только его основы.</p>
 <p>Конечный автомат обычно состоит из двух элементов: переходов и событий.</p>
 <p><strong>Переходы</strong> - это просто «переключение» между двумя состояниями. Например, из <code>LoadingState</code> перейдите в состояние <code>MainMenuState</code>.</p>
@@ -323,7 +325,7 @@ amethyst = { git = &quot;https://github.com/amethyst/amethyst&quot;, rev = &quot
 <li>Вы также можете переключить состояние, которое заменяет текущее состояние новым.</li>
 </ul>
 <p><strong>События</strong> - это то, что вызывает переходы. В случае с Amethyst это разные методы, вызываемые состоянием. Продолжайте читать, чтобы узнать о них.</p>
-<h1><a class="header" href="#Жизненный-цикл" id="Жизненный-цикл">Жизненный цикл</a></h1>
+<h2><a class="header" href="#Жизненный-цикл" id="Жизненный-цикл">Жизненный цикл</a></h2>
 <p>Состояния действительны только в течение определенного периода времени, в течение которого может происходить много вещей. Состояние содержит методы, которые вызываются для них, при инициировании событий:</p>
 <ul>
 <li><code>on_start</code>: когда состояние добавляется в стек;</li>
@@ -337,7 +339,7 @@ amethyst = { git = &quot;https://github.com/amethyst/amethyst&quot;, rev = &quot
 <li><code>shadow_fixed_update</code>: вызывается через фиксированный интервал времени (по умолчанию 1/60 секунды) для всех состояний, которые находятся в стеке <code>StateMachines</code>, включая активное состояние. В отличие от <code>fixed_update</code>, это не возвращает <code>Trans</code>.</li>
 </ul>
 <p>Если вы не используете <code>SimpleState</code> или <code>EmptyState</code>, вы должны реализовать метод <code>update</code> для вызова <code>data.data.update (&amp; mut data.world)</code>.</p>
-<h1><a class="header" href="#Данные-игры" id="Данные-игры">Данные игры</a></h1>
+<h2><a class="header" href="#Данные-игры" id="Данные-игры">Данные игры</a></h2>
 <p>Состояния могут иметь произвольные данные, связанные с ними. Если вам нужно хранить данные, которые тесно связаны с вашим состоянием, классический способ - поместить их в структуру состояния.</p>
 <p>Состояния также имеют внутренние данные любого типа <code>T</code>. В большинстве случаев используются два следующих: <code>()</code> и <code>GameData</code>.</p>
 <ul>
@@ -345,10 +347,10 @@ amethyst = { git = &quot;https://github.com/amethyst/amethyst&quot;, rev = &quot
 <li><code>GameData</code> - является стандартом де-факто. Это структура, содержащая <code>Dispatcher</code>. Это будет обсуждаться позже.</li>
 </ul>
 <p>При вызове методов вашего <code>State</code>, движок будет передавать структуру <code>StateData</code>, которая содержит и <code>World</code> (его обсудим позже), и тип игровых данных, который вы выбрали.</p>
-<h1><a class="header" href="#Код" id="Код">Код</a></h1>
+<h2><a class="header" href="#Код" id="Код">Код</a></h2>
 <p>Да! Наконец-то пришло время добавить код!</p>
 <p>Рассмотрим только небольшой фрагмент кода, который показывает основы использования <code>State</code>. Для более сложных примеров, сотрите главу про создание игры понг.</p>
-<h2><a class="header" href="#Создание-состояния" id="Создание-состояния">Создание состояния</a></h2>
+<h3><a class="header" href="#Создание-состояния" id="Создание-состояния">Создание состояния</a></h3>
 <pre><code class="language-rust edition2018 no_run noplaypen">extern crate amethyst;
 use amethyst::prelude::*;
 
@@ -368,7 +370,7 @@ impl SimpleState for GameplayState {
 <p>Сначала мы объявляем структуру состояния <code>GameplayState</code>.</p>
 <p>В этом случае мы даем ему некоторые данные: <code>player_count</code>, размером в байт.</p>
 <p>Затем мы реализуем типаж <code>SimpleState</code> для нашего <code>GameplayState</code>. <code>SimpleState</code> - это сокращение для <code>State &lt;GameData &lt;'static, 'static&gt;, ()&gt;</code>, где <code>GameData</code> - это внутренние общие данные между состояниями.</p>
-<h2><a class="header" href="#Переключение-состояний" id="Переключение-состояний">Переключение состояний</a></h2>
+<h3><a class="header" href="#Переключение-состояний" id="Переключение-состояний">Переключение состояний</a></h3>
 <p>Теперь, если мы хотим перейти во второе состояние, как мы это сделаем?</p>
 <p>Что же, нам нужно использовать один из методов, которые возвращают тип <code>Trans</code>. Это:</p>
 <ul>
@@ -416,7 +418,7 @@ impl EmptyState for PausedState {
     }
 }
 </code></pre>
-<h2><a class="header" href="#Обработка-событий" id="Обработка-событий">Обработка событий</a></h2>
+<h3><a class="header" href="#Обработка-событий" id="Обработка-событий">Обработка событий</a></h3>
 <p>Как вы уже видели, мы можем обрабатывать события из метода <code>handle_event</code>. Но что это за странный <code>StateEvent</code>?</p>
 <p>Ну, это просто перечисление. Оно группирует несколько типов событий, которые по умолчанию генерируются во всем движке. Чтобы изменить набор событий, которые получает состояние, вы создаете новое перечисление событий и извлекаете <code>EventReader</code> для этого типа.</p>
 <pre><code class="language-rust edition2018 no_run noplaypen"><span class="boring">#[macro_use] extern crate amethyst;
@@ -465,6 +467,131 @@ impl State&lt;(), MyEvent&gt; for GameplayState {
 </span></code></pre>
 <p>Чтобы приложение узнало об изменении событий, отправляемых в состояние, вам также необходимо указать и тип события, и тип <code>EventReader</code> (имя, которое вы даете в атрибуте <code>#[reader(SomeReader)]</code>), когда приложение создано. Это делается путем замены <code>Application::build</code> (или <code>Application::new</code>) на <code>CoreApplication::&lt;\_, MyEvent, MyEventReader&gt;::build()</code> (или <code>CoreApplication::&lt;\_, MyEvent, MyEventReader&gt;::new()</code>) ,</p>
 <p>Примечание. События собираются из <code>EventChannels</code>. <code>EventChannels</code> описаны в отдельном разделе книги.</p>
+<hr />
+<p>Документация была переведена специально для сообщества &quot;<strong>rust_lang_ru</strong>&quot;.</p>
+<p>Подпишись на нас в <strong><a href="http://tlinks.run/rust_lang_ru">Telegram</a></strong> и <strong><a href="https://www.youtube.com/channel/UCu413rnSfuSSOR3OsIThlZA">YouTube</a></strong>!</p>
+<h1><a class="header" href="#Сущность-и-компонент" id="Сущность-и-компонент">Сущность и компонент</a></h1>
+<h2><a class="header" href="#Что-такое-entity-и-component" id="Что-такое-entity-и-component">Что такое <code>Entity</code> и <code>Component</code>?</a></h2>
+<p>Сущность (<code>Entity</code>) представляет один объект в вашем мире. Компонент (<code>Component</code>) представляет один аспект объекта. Например, бутылка воды имеет форму, объем, цвет и изготовлена ​​из материала (обычно из пластика). В этом примере бутылка - это сущность, а свойства - это компоненты.</p>
+<h2><a class="header" href="#Сущность-и-компонент-в-amethyst" id="Сущность-и-компонент-в-amethyst">Сущность и компонент в Amethyst</a></h2>
+<p>В дизайне наследования, сущность обычно содержит компоненты. Все данные и методы, связанные с сущностью, хранятся внутри. Однако в проекте ECS сущность является просто объектом общего назначения. На самом деле реализация <code>Entity</code> в Amethyst - это просто:</p>
+<pre><code class="language-rust ignore">struct Entity(u32, Generation);
+</code></pre>
+<p>Где <code>u32</code> - идентификатор объекта, а <code>Generation</code> используется для проверки была ли удалена сущность.</p>
+<p><code>Entity</code> хранятся в специальном контейнере <code>EntitiesRes</code>. Принимая во внимание, что данные, связанные с объектами, группируются в компоненты и хранятся в назначенных хранилищах.</p>
+<p>Рассмотрим пример, где у вас есть три объекта: две бутылки и человек.</p>
+<table><thead><tr><th align="center">object</th><th align="center">x</th><th align="center">y</th><th align="center">shape</th><th align="center">color</th><th align="center">name</th></tr></thead><tbody>
+<tr><td align="center">Bottle A</td><td align="center">150.0</td><td align="center">202.1</td><td align="center">&quot;round&quot;</td><td align="center">&quot;red&quot;</td><td align="center"></td></tr>
+<tr><td align="center">Bottle B</td><td align="center">570.0</td><td align="center">122.0</td><td align="center">&quot;square&quot;</td><td align="center">&quot;white&quot;</td><td align="center"></td></tr>
+<tr><td align="center">Person C</td><td align="center">100.5</td><td align="center">300.8</td><td align="center"></td><td align="center"></td><td align="center">&quot;Peter&quot;</td></tr>
+</tbody></table>
+<p>Мы можем разделить свойства бутылки на <code>PositionComponent</code> и <code>BottleComponent</code>, а свойства человека на <code>PositionComponent</code> и <code>PersonComponent</code>. Вот иллюстрация того, как будут храниться три объекта.</p>
+<p><img src="concepts/..%5Cimages%5Cchapter_3_part_2.png" alt="alt text" /></p>
+<p>Как видно из графика, сущности не хранят данные. Они также не знают никакой информации о своих компонентах. Они служат для идентификации объекта и отслеживания существования объекта. Хранилище компонентов хранит все данные и их связь с сущностями.</p>
+<p>Если вы знакомы с реляционными базами данных, эта организация выглядит очень похоже на таблицы в базе данных, где идентификатор сущности служит ключом в каждой таблице. На самом деле, вы даже можете объединять компоненты или сущности, также как объединяете таблицы. Например, чтобы обновить положение всех людей, вам нужно соединить <code>PersonComponent</code> и <code>PositionComponent</code>.</p>
+<h2><a class="header" href="#entitiesres" id="entitiesres">EntitiesRes</a></h2>
+<p>Хотя структура сущности довольно проста, манипуляции с сущностями очень сложны и имеют решающее значение для производительности игры. Вот почему сущности обрабатываются исключительно структурой <code>EntitiesRes</code>. <code>EntitiesRes</code> предоставляет два способа создания/удаления объектов:</p>
+<ul>
+<li>Немедленное создание/удаление, используется для настройки игры или очистки.</li>
+<li>Ленивое создание/удаление, используется в игровом состоянии. Он обновляет сущности в пакете в конце каждого игрового цикла. Это также называется атомарным созданием/удалением.</li>
+</ul>
+<p>Вы увидите, как эти методы используются в следующих главах.</p>
+<h2><a class="header" href="#Объявление-компонента" id="Объявление-компонента">Объявление компонента</a></h2>
+<p>Чтобы объявить компонент, вы сначала объявляете соответствующие базовые данные:</p>
+<pre><code class="language-rust edition2018 no_run noplaypen">/// Этот `Component` описывает форму `Entity`
+enum Shape {
+    Sphere { radius: f32 },
+    Cuboid { height: f32, width: f32, depth: f32 },
+}
+
+/// Этот `Component` описывает преобразование `Entity`
+pub struct Transform {
+    /// Значение сдвиг + вращение
+    iso: Isometry3&lt;f32&gt;,
+    /// Вектор масштаба
+    scale: Vector3&lt;f32&gt;,
+}
+</code></pre>
+<p>А затем реализуете для них типаж <code>Component</code>:</p>
+<pre><code class="language-rust edition2018 no_run noplaypen">use amethyst::ecs::{Component, DenseVecStorage, FlaggedStorage};
+
+impl Component for Shape {
+    type Storage = DenseVecStorage&lt;Self&gt;;
+}
+
+impl Component for Transform {
+    type Storage = FlaggedStorage&lt;Self, DenseVecStorage&lt;Self&gt;&gt;;
+}
+</code></pre>
+<p>Тип хранилища будет определять способ хранения компонента, но не инициализировать хранилище. Хранилище инициализируется при регистрации компонента в <code>World</code> или при использовании этого компонента в <code>System</code>.</p>
+<h2><a class="header" href="#Хранилища" id="Хранилища">Хранилища</a></h2>
+<p>Существует несколько стратегий хранения для различных сценариев использования. Наиболее часто используемые типы - <code>DenseVecStorage</code>, <code>VecStorage</code> и <code>FlaggedStorage</code>.</p>
+<ul>
+<li><code>DenseVecStorage</code>: Элементы хранятся в непрерывном векторе. Между компонентами не остается пустого пространства, что позволяет уменьшить использование памяти для больших компонентов.</li>
+<li><code>VecStorage</code>: Элементы хранятся в разреженном массиве. Идентификатор объекта совпадает с индексом компонента. Если ваш компонент небольшой (&lt;= 16 байт) или поддерживается большинством объектов, это предпочтительнее, чем <code>DenseVecStorage</code>.</li>
+<li><code>FlaggedStorage</code>: Используется для отслеживания изменений компонента. Полезно для кэширования.</li>
+</ul>
+<!-- DenseVec Storage Diagram Table -->
+<div style="width: 100%">
+    <h4 style="text-align: center; font-weight: bold">DenseVecStorage ( <em>entity_id</em> сопоставляет с <em>data_id</em> )</h4>
+    <div style="display: flex">
+        <div style="margin-right: 3em">
+            <table style="text-align: center;">
+                <tr><td style="background-color: #D8E5FD; color: black;">data</td></tr>
+                <tr><td style="background-color: #D8E5FD; color: black;">data_id</td></tr>
+                <tr><td style="background-color: #D8E5FD; color: black;">entity_id</td></tr>
+            </table>
+        </div>
+        <div style="flex-grow: 1; text-align: center">
+            <table style="width: 100%">
+                <tr>
+                    <td>data</td>
+                    <td>data</td>
+                    <td>data</td>
+                    <td>data</td>
+                    <td>...</td>
+                </tr>
+                <tr>
+                    <td>0</td>
+                    <td>2</td>
+                    <td>3</td>
+                    <td>1</td>
+                    <td>...</td>
+                </tr>
+                <tr>
+                    <td>0</td>
+                    <td>1</td>
+                    <td>5</td>
+                    <td>9</td>
+                    <td>...</td>
+                </tr>
+            </table>
+        </div>
+</div>
+<!-- VecStorage Diagram Table -->
+<div style="width: 100%">
+    <h4 style="text-align: center; font-weight: bold">VecStorage ( <em>entity_id</em> = индекс данных, может быть пустым )</h4>
+    <div style="display: flex">
+        <div style="margin-right: 3em">
+            <table><tr><td style="background-color: #D8E5FD; color: black;">data</td></tr></table>
+        </div>
+        <div style="flex-grow: 1; text-align: center">
+            <table style="width: 100%">
+                <tr>
+                    <td>data</td>
+                    <td>data</td>
+                    <td style="background-color: #E22C2C99; color: black;">empty</td>
+                    <td>data</td>
+                    <td>...</td>
+                </tr>
+            </table>
+        </div>
+</div>
+<p>Для получения дополнительной информации см. <a href="https://docs.rs/specs/0.16.1/specs/storage/index.html">specs::storage</a> и <a href="https://specs.amethyst.rs/docs/tutorials/05_storages.html">раздел «Хранилища»</a> книги specs.</p>
+<p>Существует множество других хранилищ, и решение о том, какое из них лучше, не тривиально и должно быть сделано на основе тщательного бенчмаркинга. Общее правило: если ваш компонент используется более чем в 30% объектов, используйте <code>VecStorage</code>. Если вы не знаете, какой из них следует использовать, <code>DenseVecStorage</code> будет хорошим вариантом по умолчанию. Ему потребуется больше памяти, чем <code>VecStorage</code> для указателей размера компонентов, но он будет работать хорошо для большинства сценариев.</p>
+<h2><a class="header" href="#Теги" id="Теги">Теги</a></h2>
+<p>Компоненты также могут быть использованы для «маркировки» объектов. Обычный способ сделать это - создать пустую структуру и реализовать <code>Component</code>, используя <code>NullStorage</code> в качестве типа хранилища для него. Нулевое хранилище означает, что для хранения этих компонентов не потребуется пространство памяти.</p>
+<p>Вы узнаете, как использовать эти компоненты тегов в главе «Система».</p>
 <hr />
 <p>Документация была переведена специально для сообщества &quot;<strong>rust_lang_ru</strong>&quot;.</p>
 <p>Подпишись на нас в <strong><a href="http://tlinks.run/rust_lang_ru">Telegram</a></strong> и <strong><a href="https://www.youtube.com/channel/UCu413rnSfuSSOR3OsIThlZA">YouTube</a></strong>!</p>
