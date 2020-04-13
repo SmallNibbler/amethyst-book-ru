@@ -83,7 +83,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div id="sidebar-scrollbox" class="sidebar-scrollbox">
-                <ol class="chapter"><li class="expanded "><a href="chapter_1.html"><strong aria-hidden="true">1.</strong> Введение</a></li><li class="expanded "><a href="chapter_2.html"><strong aria-hidden="true">2.</strong> Начало работы</a></li><li class="expanded "><a href="concepts/chapter_3.html"><strong aria-hidden="true">3.</strong> Концепции</a></li><li><ol class="section"><li class="expanded "><a href="concepts/chapter_3_part_1.html"><strong aria-hidden="true">3.1.</strong> Состояния</a></li><li class="expanded "><a href="concepts/chapter_3_part_2.html"><strong aria-hidden="true">3.2.</strong> Сущность и компонент</a></li><li class="expanded "><a href="concepts/chapter_3_part_3.html"><strong aria-hidden="true">3.3.</strong> Ресурс</a></li></ol></li></ol>
+                <ol class="chapter"><li class="expanded "><a href="chapter_1.html"><strong aria-hidden="true">1.</strong> Введение</a></li><li class="expanded "><a href="chapter_2.html"><strong aria-hidden="true">2.</strong> Начало работы</a></li><li class="expanded "><a href="concepts/chapter_3.html"><strong aria-hidden="true">3.</strong> Концепции</a></li><li><ol class="section"><li class="expanded "><a href="concepts/chapter_3_part_1.html"><strong aria-hidden="true">3.1.</strong> Состояния</a></li><li class="expanded "><a href="concepts/chapter_3_part_2.html"><strong aria-hidden="true">3.2.</strong> Сущность и компонент</a></li><li class="expanded "><a href="concepts/chapter_3_part_3.html"><strong aria-hidden="true">3.3.</strong> Ресурс</a></li><li class="expanded "><a href="concepts/chapter_3_part_4.html"><strong aria-hidden="true">3.4.</strong> Мир</a></li></ol></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
         </nav>
@@ -683,6 +683,198 @@ let fetched = world.entry::&lt;MyResource&gt;().or_insert_with(|| my);
 <p><code>Storage</code> компонента - это ресурс. Компоненты «привязаны» к объектам, но, как было сказано ранее, они не «принадлежат» объектам на уровне реализации. Храня их в хранилищах и размещая <code>Storage</code> внутри <code>World</code>, он обеспечивает глобальный доступ ко всем компонентам во время выполнения с минимальными усилиями.</p>
 <p>Фактический доступ к компонентам внутри хранилищ будет описан в разделах книги &quot;Мир&quot; и &quot;Система&quot;.</p>
 <p><strong>ВНИМАНИЕ:</strong> Если вы попытаетесь получить компонент напрямую, вы не получите хранилище. Вы получите экземпляр <code>Default::default()</code> этого компонента. Чтобы получить ресурс <code>Storage</code>, в котором хранятся все экземпляры <code>MyComponent</code>, необходимо извлечь <code>ReadStorage&lt;MyComponent&gt;</code>.</p>
+<hr />
+<p>Документация была переведена специально для сообщества &quot;<strong>rust_lang_ru</strong>&quot;.</p>
+<p>Подпишись на нас в <strong><a href="http://tlinks.run/rust_lang_ru">Telegram</a></strong> и <strong><a href="https://www.youtube.com/channel/UCu413rnSfuSSOR3OsIThlZA">YouTube</a></strong>!</p>
+<h1><a class="header" href="#Мир" id="Мир">Мир</a></h1>
+<h2><a class="header" href="#Что-такое-мир" id="Что-такое-мир">Что такое мир?</a></h2>
+<p>Мир (<code>World</code>) - это контейнер для ресурсов с некоторыми вспомогательными функциями, которые облегчают вашу жизнь. Эта глава продемонстрирует эти функции и их использование.</p>
+<h2><a class="header" href="#Добавление-ресурса" id="Добавление-ресурса">Добавление ресурса</a></h2>
+<pre><code class="language-rust edition2018 no_run noplaypen"><span class="boring">extern crate amethyst;
+</span>use amethyst::ecs::{World, WorldExt};
+
+// Простая структура без данных.
+struct MyResource;
+
+fn main() {
+    // Мы создали новый экземпляр `World`.
+    let mut world = World::new();
+
+    // Мы создали наш ресурс.
+    let my = MyResource;
+
+    // Мы добавили ресурс в наш мир.
+    world.insert(my);
+}
+</code></pre>
+<h2><a class="header" href="#Извлечение-ресурса" id="Извлечение-ресурса">Извлечение ресурса</a></h2>
+<p>Вот как можно получить ресурс только для чтения. Помните, что этот метод вызывает панику, если ресурс не присутствует в <code>Resources</code>.</p>
+<pre><code class="language-rust edition2018 no_run noplaypen"><span class="boring">extern crate amethyst;
+</span><span class="boring">use amethyst::ecs::{World, WorldExt};
+</span><span class="boring">struct MyResource;
+</span><span class="boring">fn main() {
+</span><span class="boring">  let mut world = World::new();
+</span>    let my = world.read_resource::&lt;MyResource&gt;();
+<span class="boring">}
+</span></code></pre>
+<p>Если вы не уверены, что ресурс присутствует, используйте методы, доступные в <code>Resources</code>, как показано в главе, посвященной ресурсам.</p>
+<pre><code class="language-rust edition2018 no_run noplaypen"><span class="boring">extern crate amethyst;
+</span><span class="boring">use amethyst::ecs::{World, WorldExt};
+</span><span class="boring">struct MyResource;
+</span><span class="boring">fn main() {
+</span><span class="boring">  let mut world = World::new();
+</span>    let my = world.entry::&lt;MyResource&gt;().or_insert_with(|| MyResource);
+<span class="boring">}
+</span></code></pre>
+<h2><a class="header" href="#Модификация-ресурса" id="Модификация-ресурса">Модификация ресурса</a></h2>
+<pre><code class="language-rust edition2018 no_run noplaypen"><span class="boring">extern crate amethyst;
+</span><span class="boring">use amethyst::ecs::{World, WorldExt};
+</span><span class="boring">struct MyResource;
+</span><span class="boring">fn main() {
+</span><span class="boring">  let mut world = World::new();
+</span>    let mut my = world.write_resource::&lt;MyResource&gt;();
+<span class="boring">}
+</span></code></pre>
+<h2><a class="header" href="#Создание-сущностей" id="Создание-сущностей">Создание сущностей</a></h2>
+<p>Сначала вы создаете построитель сущностей. Затем вы можете добавить компоненты к вашей сущности. Наконец, вы вызываете метод <code>build()</code> для построителя сущностей, чтобы получить данную сущность.</p>
+<p><strong>Обратите внимание.</strong> Для использования этого синтаксиса вам необходимо импортировать типаж <code>amethyst::prelude::Builder</code>.</p>
+<pre><code class="language-rust edition2018 no_run noplaypen"><span class="boring">extern crate amethyst;
+</span><span class="boring">use amethyst::ecs::{World, WorldExt};
+</span><span class="boring">struct MyComponent;
+</span><span class="boring">impl amethyst::ecs::Component for MyComponent {
+</span><span class="boring">  type Storage = amethyst::ecs::VecStorage&lt;MyComponent&gt;;
+</span><span class="boring">}
+</span><span class="boring">fn main() {
+</span><span class="boring">  let mut world = World::new();
+</span>    world.register::&lt;MyComponent&gt;();
+    use amethyst::prelude::Builder;
+
+    let mut entity_builder = world.create_entity();
+    entity_builder = entity_builder.with(MyComponent);
+    let my_entity = entity_builder.build();
+<span class="boring">}
+</span></code></pre>
+<p>Короткая версия:</p>
+<pre><code class="language-rust edition2018 no_run noplaypen"><span class="boring">extern crate amethyst;
+</span><span class="boring">use amethyst::ecs::{World, WorldExt};
+</span><span class="boring">struct MyComponent;
+</span><span class="boring">impl amethyst::ecs::Component for MyComponent {
+</span><span class="boring">  type Storage = amethyst::ecs::VecStorage&lt;MyComponent&gt;;
+</span><span class="boring">}
+</span><span class="boring">fn main() {
+</span><span class="boring">  let mut world = World::new();
+</span>    use amethyst::prelude::Builder;
+
+    let my_entity = world
+       .create_entity()
+       .with(MyComponent)
+       .build();
+<span class="boring">}
+</span></code></pre>
+<p>Внутренне <code>World</code> взаимодействует с <code>EntitiesRes</code>, который является ресурсом, содержащим сущности внутри <code>Resources</code>.</p>
+<h2><a class="header" href="#Доступ-к-component" id="Доступ-к-component">Доступ к <code>Component</code></a></h2>
+<pre><code class="language-rust edition2018 no_run noplaypen"><span class="boring">extern crate amethyst;
+</span><span class="boring">use amethyst::ecs::{Builder, World, WorldExt};
+</span><span class="boring">struct MyComponent;
+</span><span class="boring">impl amethyst::ecs::Component for MyComponent {
+</span><span class="boring">  type Storage = amethyst::ecs::VecStorage&lt;MyComponent&gt;;
+</span><span class="boring">}
+</span><span class="boring">fn main() {
+</span><span class="boring">  let mut world = World::new();
+</span>    // Создаём `Entity` с `MyComponent`.
+    // `World` будет неявно записывать в хранилище компонента в `Resources`.
+    let my_entity = world.create_entity().with(MyComponent).build();
+
+    // Получаем ReadStorage&lt;MyComponent&gt;
+    let storage = world.read_storage::&lt;MyComponent&gt;();
+
+    // Получаем наш компонент из хранилища.
+    let my = storage.get(my_entity).expect(&quot;Failed to get component for entity&quot;);
+<span class="boring">}
+</span></code></pre>
+<h2><a class="header" href="#Изменение-component" id="Изменение-component">Изменение <code>Component</code></a></h2>
+<p>Это почти то же самое, что и доступ к компоненту:</p>
+<pre><code class="language-rust edition2018 no_run noplaypen"><span class="boring">extern crate amethyst;
+</span><span class="boring">use amethyst::ecs::{Builder, World, WorldExt};
+</span><span class="boring">struct MyComponent;
+</span><span class="boring">impl amethyst::ecs::Component for MyComponent {
+</span><span class="boring">  type Storage = amethyst::ecs::VecStorage&lt;MyComponent&gt;;
+</span><span class="boring">}
+</span><span class="boring">fn main() {
+</span><span class="boring">  let mut world = World::new();
+</span>    let my_entity = world.create_entity().with(MyComponent).build();
+    let mut storage = world.write_storage::&lt;MyComponent&gt;();
+    let mut my = storage.get_mut(my_entity).expect(&quot;Failed to get component for entity&quot;);
+<span class="boring">}
+</span></code></pre>
+<h2><a class="header" href="#Получение-всех-сущностей" id="Получение-всех-сущностей">Получение всех сущностей</a></h2>
+<p>Это довольно редко используется, но может быть полезно в некоторых случаях.</p>
+<pre><code class="language-rust edition2018 no_run noplaypen"><span class="boring">extern crate amethyst;
+</span><span class="boring">use amethyst::ecs::{World, WorldExt};
+</span><span class="boring">fn main() {
+</span><span class="boring">  let mut world = World::new();
+</span>    // Возвращает `EntitiesRes`.
+    let entities = world.entities();
+<span class="boring">}
+</span></code></pre>
+<h2><a class="header" href="#Удалить-сущность" id="Удалить-сущность">Удалить сущность</a></h2>
+<p>Одину:</p>
+<pre><code class="language-rust edition2018 no_run noplaypen"><span class="boring">extern crate amethyst;
+</span><span class="boring">use amethyst::ecs::{Builder, World, WorldExt};
+</span><span class="boring">fn main() {
+</span><span class="boring">  let mut world = World::new();
+</span><span class="boring">  let my_entity = world.create_entity().build();
+</span>    world.delete_entity(my_entity).expect(&quot;Failed to delete entity. Was it already removed?&quot;);
+<span class="boring">}
+</span></code></pre>
+<p>Несколько:</p>
+<pre><code class="language-rust edition2018 no_run noplaypen"><span class="boring">extern crate amethyst;
+</span><span class="boring">use amethyst::ecs::{Builder, World, WorldExt};
+</span><span class="boring">fn main() {
+</span><span class="boring">  let mut world = World::new();
+</span><span class="boring">  let entity_vec: Vec&lt;amethyst::ecs::Entity&gt; = vec![world.create_entity().build()];
+</span>    world.delete_entities(entity_vec.as_slice()).expect(&quot;Failed to delete entities from specified list.&quot;);
+<span class="boring">}
+</span></code></pre>
+<p>Все:</p>
+<pre><code class="language-rust edition2018 no_run noplaypen"><span class="boring">extern crate amethyst;
+</span><span class="boring">use amethyst::ecs::{World, WorldExt};
+</span><span class="boring">fn main() {
+</span><span class="boring">  let mut world = World::new();
+</span>    world.delete_all();
+<span class="boring">}
+</span></code></pre>
+<p><strong>Примечание.</strong> Объекты удаляются лениво, что означает, что удаление происходит только в конце кадра, а не сразу при вызове метода удаления.</p>
+<h2><a class="header" href="#Проверка-была-ли-сущность-удалена" id="Проверка-была-ли-сущность-удалена">Проверка, была ли сущность удалена</a></h2>
+<pre><code class="language-rust edition2018 no_run noplaypen"><span class="boring">extern crate amethyst;
+</span><span class="boring">use amethyst::ecs::{Builder, World, WorldExt};
+</span><span class="boring">fn main() {
+</span><span class="boring">  let mut world = World::new();
+</span><span class="boring">  let my_entity = world.create_entity().build();
+</span>    // Возвращает true если сущность НЕ удалена.
+    let is_alive = world.is_alive(my_entity);
+<span class="boring">}
+</span></code></pre>
+<h2><a class="header" href="#exec" id="exec">Exec</a></h2>
+<p>Эта часть просто чтобы показать, что эта функция существует. Это нормально, не понимать, что она делает, пока вы не прочитаете главу &quot;Система&quot;. Иногда вам может понадобиться создать объект, для которого вам нужно получить ресурсы, чтобы создать для него правильные компоненты. Есть функция, которая действует как сокращение для этого:</p>
+<pre><code class="language-rust edition2018 no_run noplaypen"><span class="boring">extern crate amethyst;
+</span><span class="boring">use amethyst::ecs::{ReadExpect, World, WorldExt};
+</span><span class="boring">struct Dummy;
+</span><span class="boring">type SomeSystemData&lt;'a&gt; = ReadExpect&lt;'a, Dummy&gt;;
+</span><span class="boring">trait DoSomething {
+</span><span class="boring">  fn do_something(&amp;mut self);
+</span><span class="boring">}
+</span><span class="boring">impl&lt;'a&gt; DoSomething for SomeSystemData&lt;'a&gt; {
+</span><span class="boring">  fn do_something(&amp;mut self) { }
+</span><span class="boring">}
+</span><span class="boring">fn main() {
+</span><span class="boring">  let mut world = World::new();
+</span>    world.exec(|mut data: SomeSystemData| {
+        data.do_something();
+    });
+<span class="boring">}
+</span></code></pre>
+<p>Мы поговорим о том, что такое <code>SystemData</code>, в главе &quot;Система&quot;.</p>
 <hr />
 <p>Документация была переведена специально для сообщества &quot;<strong>rust_lang_ru</strong>&quot;.</p>
 <p>Подпишись на нас в <strong><a href="http://tlinks.run/rust_lang_ru">Telegram</a></strong> и <strong><a href="https://www.youtube.com/channel/UCu413rnSfuSSOR3OsIThlZA">YouTube</a></strong>!</p>
