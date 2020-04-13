@@ -83,7 +83,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div id="sidebar-scrollbox" class="sidebar-scrollbox">
-                <ol class="chapter"><li class="expanded "><a href="chapter_1.html"><strong aria-hidden="true">1.</strong> Введение</a></li><li class="expanded "><a href="chapter_2.html"><strong aria-hidden="true">2.</strong> Начало работы</a></li><li class="expanded "><a href="concepts/chapter_3.html"><strong aria-hidden="true">3.</strong> Концепции</a></li><li><ol class="section"><li class="expanded "><a href="concepts/chapter_3_part_1.html"><strong aria-hidden="true">3.1.</strong> Состояния</a></li><li class="expanded "><a href="concepts/chapter_3_part_2.html"><strong aria-hidden="true">3.2.</strong> Сущность и компонент</a></li></ol></li></ol>
+                <ol class="chapter"><li class="expanded "><a href="chapter_1.html"><strong aria-hidden="true">1.</strong> Введение</a></li><li class="expanded "><a href="chapter_2.html"><strong aria-hidden="true">2.</strong> Начало работы</a></li><li class="expanded "><a href="concepts/chapter_3.html"><strong aria-hidden="true">3.</strong> Концепции</a></li><li><ol class="section"><li class="expanded "><a href="concepts/chapter_3_part_1.html"><strong aria-hidden="true">3.1.</strong> Состояния</a></li><li class="expanded "><a href="concepts/chapter_3_part_2.html"><strong aria-hidden="true">3.2.</strong> Сущность и компонент</a></li><li class="expanded "><a href="concepts/chapter_3_part_3.html"><strong aria-hidden="true">3.3.</strong> Ресурс</a></li></ol></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
         </nav>
@@ -592,6 +592,97 @@ impl Component for Transform {
 <h2><a class="header" href="#Теги" id="Теги">Теги</a></h2>
 <p>Компоненты также могут быть использованы для «маркировки» объектов. Обычный способ сделать это - создать пустую структуру и реализовать <code>Component</code>, используя <code>NullStorage</code> в качестве типа хранилища для него. Нулевое хранилище означает, что для хранения этих компонентов не потребуется пространство памяти.</p>
 <p>Вы узнаете, как использовать эти компоненты тегов в главе «Система».</p>
+<hr />
+<p>Документация была переведена специально для сообщества &quot;<strong>rust_lang_ru</strong>&quot;.</p>
+<p>Подпишись на нас в <strong><a href="http://tlinks.run/rust_lang_ru">Telegram</a></strong> и <strong><a href="https://www.youtube.com/channel/UCu413rnSfuSSOR3OsIThlZA">YouTube</a></strong>!</p>
+<h1><a class="header" href="#Ресурс" id="Ресурс">Ресурс</a></h1>
+<h2><a class="header" href="#Что-такое-ресурс" id="Что-такое-ресурс">Что такое ресурс?</a></h2>
+<p>Ресурс - это любой тип, в котором хранятся данные, которые могут вам понадобиться для вашей игры, и которые не относятся к конкретной сущности. Например, счет игры в понг является глобальным для всей игры и не принадлежит ни одной из сущностей (ракетка, мяч и даже текст количества очков в пользовательском интерфейсе).</p>
+<h2><a class="header" href="#Создание-ресурса" id="Создание-ресурса">Создание ресурса</a></h2>
+<p>Ресурсы хранятся в контейнере <code>World</code>. Добавление ресурса в экземпляр <code>World</code> производится следующим образом:</p>
+<pre><code class="language-rust edition2018 no_run noplaypen"><span class="boring">extern crate amethyst;
+</span>use amethyst::ecs::World;
+
+struct MyResource {
+    pub game_score: i32,
+}
+
+fn main() {
+    let mut world = World::empty();
+
+    let my = MyResource {
+        game_score: 0,
+    };
+
+    world.insert(my);
+}
+</code></pre>
+<h2><a class="header" href="#Получение-ресурса-из-world" id="Получение-ресурса-из-world">Получение ресурса (из <code>World</code>)</a></h2>
+<p>Извлечение ресурса может быть сделано так:</p>
+<pre><code class="language-rust edition2018 no_run noplaypen"><span class="boring">extern crate amethyst;
+</span><span class="boring">use amethyst::ecs::World;
+</span><span class="boring">#[derive(Debug, PartialEq)]
+</span><span class="boring">struct MyResource {
+</span><span class="boring">  pub game_score: i32,
+</span><span class="boring">}
+</span><span class="boring">fn main() {
+</span><span class="boring">  let mut world = World::empty();
+</span><span class="boring">  let my = MyResource{
+</span><span class="boring">    game_score: 0,
+</span><span class="boring">  };
+</span><span class="boring">  world.insert(my);
+</span>  // try_fetch возвращает тип Option&lt;Fetch&lt;MyResource&gt;&gt;.
+  let fetched = world.try_fetch::&lt;MyResource&gt;();
+  if let Some(fetched_resource) = fetched {
+      // Разыменование Fetch&lt;MyResource&gt; для доступа к данным.
+      assert_eq!(*fetched_resource, MyResource{ game_score: 0, });
+  } else {
+      println!(&quot;No MyResource present in `World`&quot;);
+  }
+<span class="boring">}
+</span></code></pre>
+<p>Если вы хотите получить ресурс или создать его, если он не существует:</p>
+<pre><code class="language-rust edition2018 no_run noplaypen"><span class="boring">extern crate amethyst;
+</span><span class="boring">use amethyst::ecs::World;
+</span><span class="boring">struct MyResource;
+</span><span class="boring">fn main() {
+</span><span class="boring">  let mut world = World::empty();
+</span>    let my = MyResource;
+  // Если ресурс не внутри `World`,
+  // он вставит экземпляр, который мы создали.
+let fetched = world.entry::&lt;MyResource&gt;().or_insert_with(|| my);
+<span class="boring">}
+</span></code></pre>
+<p>Если вы хотите изменить ресурс, который уже находится внутри <code>World</code>:</p>
+<pre><code class="language-rust edition2018 no_run noplaypen"><span class="boring">extern crate amethyst;
+</span><span class="boring">use amethyst::ecs::World;
+</span><span class="boring">struct MyResource {
+</span><span class="boring">  pub game_score: i32,
+</span><span class="boring">}
+</span><span class="boring">fn main() {
+</span><span class="boring">  let mut world = World::empty();
+</span><span class="boring">  let my = MyResource{
+</span><span class="boring">    game_score: 0,
+</span><span class="boring">  };
+</span><span class="boring">  world.insert(my);
+</span>  // try_fetch_mut возвращает Option&lt;FetchMut&lt;MyResource&gt;&gt;.
+  let fetched = world.try_fetch_mut::&lt;MyResource&gt;();
+  if let Some(mut fetched_resource) = fetched {
+    assert_eq!(fetched_resource.game_score, 0);
+    fetched_resource.game_score = 10;
+    assert_eq!(fetched_resource.game_score, 10);
+  } else {
+    println!(&quot;No MyResource present in `World`&quot;);
+  }
+<span class="boring">}
+</span></code></pre>
+<p>Другие способы получения ресурса будут рассмотрены в разделе книги &quot;Система&quot;.</p>
+<h2><a class="header" href="#Удаление-ресурса" id="Удаление-ресурса">Удаление ресурса</a></h2>
+<p>Нет способа правильно «удалить» ресурс, добавленный в мир. Обычный метод для достижения чего-то похожего - это добавить <code>Option&lt;MyResource&gt;</code> и установить его в <code>None</code>, когда вы хотите удалить его.</p>
+<h2><a class="header" href="#Хранилища-часть-2" id="Хранилища-часть-2">Хранилища, часть 2</a></h2>
+<p><code>Storage</code> компонента - это ресурс. Компоненты «привязаны» к объектам, но, как было сказано ранее, они не «принадлежат» объектам на уровне реализации. Храня их в хранилищах и размещая <code>Storage</code> внутри <code>World</code>, он обеспечивает глобальный доступ ко всем компонентам во время выполнения с минимальными усилиями.</p>
+<p>Фактический доступ к компонентам внутри хранилищ будет описан в разделах книги &quot;Мир&quot; и &quot;Система&quot;.</p>
+<p><strong>ВНИМАНИЕ:</strong> Если вы попытаетесь получить компонент напрямую, вы не получите хранилище. Вы получите экземпляр <code>Default::default()</code> этого компонента. Чтобы получить ресурс <code>Storage</code>, в котором хранятся все экземпляры <code>MyComponent</code>, необходимо извлечь <code>ReadStorage&lt;MyComponent&gt;</code>.</p>
 <hr />
 <p>Документация была переведена специально для сообщества &quot;<strong>rust_lang_ru</strong>&quot;.</p>
 <p>Подпишись на нас в <strong><a href="http://tlinks.run/rust_lang_ru">Telegram</a></strong> и <strong><a href="https://www.youtube.com/channel/UCu413rnSfuSSOR3OsIThlZA">YouTube</a></strong>!</p>
