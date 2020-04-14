@@ -83,7 +83,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div id="sidebar-scrollbox" class="sidebar-scrollbox">
-                <ol class="chapter"><li class="expanded "><a href="chapter_1.html"><strong aria-hidden="true">1.</strong> Введение</a></li><li class="expanded "><a href="chapter_2.html"><strong aria-hidden="true">2.</strong> Начало работы</a></li><li class="expanded "><a href="concepts/chapter_3.html"><strong aria-hidden="true">3.</strong> Концепции</a></li><li><ol class="section"><li class="expanded "><a href="concepts/chapter_3_part_1.html"><strong aria-hidden="true">3.1.</strong> Состояния</a></li><li class="expanded "><a href="concepts/chapter_3_part_2.html"><strong aria-hidden="true">3.2.</strong> Сущность и компонент</a></li><li class="expanded "><a href="concepts/chapter_3_part_3.html"><strong aria-hidden="true">3.3.</strong> Ресурс</a></li><li class="expanded "><a href="concepts/chapter_3_part_4.html"><strong aria-hidden="true">3.4.</strong> Мир</a></li></ol></li></ol>
+                <ol class="chapter"><li class="expanded "><a href="chapter_1.html"><strong aria-hidden="true">1.</strong> Введение</a></li><li class="expanded "><a href="chapter_2.html"><strong aria-hidden="true">2.</strong> Начало работы</a></li><li class="expanded "><a href="concepts/chapter_3.html"><strong aria-hidden="true">3.</strong> Концепции</a></li><li><ol class="section"><li class="expanded "><a href="concepts/chapter_3_part_1.html"><strong aria-hidden="true">3.1.</strong> Состояния</a></li><li class="expanded "><a href="concepts/chapter_3_part_2.html"><strong aria-hidden="true">3.2.</strong> Сущность и компонент</a></li><li class="expanded "><a href="concepts/chapter_3_part_3.html"><strong aria-hidden="true">3.3.</strong> Ресурс</a></li><li class="expanded "><a href="concepts/chapter_3_part_4.html"><strong aria-hidden="true">3.4.</strong> Мир</a></li><li class="expanded "><a href="concepts/chapter_3_part_5.html"><strong aria-hidden="true">3.5.</strong> Система</a></li><li><ol class="section"><li class="expanded "><a href="concepts/system/chapter_3_part_5.1.html"><strong aria-hidden="true">3.5.1.</strong> Инициализация системы</a></li><li class="expanded "><a href="concepts/system/chapter_3_part_5.2.html"><strong aria-hidden="true">3.5.2.</strong> Производная SystemDesc</a></li><li class="expanded "><a href="concepts/system/chapter_3_part_5.3.html"><strong aria-hidden="true">3.5.3.</strong> Реализация типажа SystemDesc</a></li></ol></li></ol></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
         </nav>
@@ -875,6 +875,1004 @@ fn main() {
 <span class="boring">}
 </span></code></pre>
 <p>Мы поговорим о том, что такое <code>SystemData</code>, в главе &quot;Система&quot;.</p>
+<hr />
+<p>Документация была переведена специально для сообщества &quot;<strong>rust_lang_ru</strong>&quot;.</p>
+<p>Подпишись на нас в <strong><a href="http://tlinks.run/rust_lang_ru">Telegram</a></strong> и <strong><a href="https://www.youtube.com/channel/UCu413rnSfuSSOR3OsIThlZA">YouTube</a></strong>!</p>
+<h1><a class="header" href="#Система" id="Система">Система</a></h1>
+<h2><a class="header" href="#Что-такое-система" id="Что-такое-система">Что такое система?</a></h2>
+<p>Система (<code>System</code>) - это место, где выполняется логика игры. На практике система состоит из структуры, реализующей функцию, выполняемую на каждой итерации игрового цикла, и принимающей в качестве аргумента данные об игре. Системы можно рассматривать как маленькую единицу логики. Все системы запускаются движком вместе (даже параллельно, когда это возможно) и выполняют специализированную операцию с одной или группой сущностей.</p>
+<p>Структура</p>
+<p>Структура системы - это структура, реализующая типаж amethyst::ecs::System. Вот очень простой пример реализации:</p>
+<pre><code class="language-rust edition2018 no_run noplaypen"><span class="boring">extern crate amethyst;
+</span><span class="boring">use amethyst::ecs::System;
+</span>struct MyFirstSystem;
+
+impl&lt;'a&gt; System&lt;'a&gt; for MyFirstSystem {
+    type SystemData = ();
+
+    fn run(&amp;mut self, data: Self::SystemData) {
+        println!(&quot;Hello!&quot;);
+    }
+}
+</code></pre>
+<p>Эта система будет на каждой итерации игрового цикла выводить «Hello!» в консоли. Это довольно скучная система, поскольку она вообще не взаимодействует с игрой. Давайте немного оживим это.</p>
+<p>Доступ к контексту игры</p>
+<p>В определении системы этот типаж требует от вас определения типа <code>SystemData</code>. Этот тип определяет, какие данные будут предоставляться системой при каждом вызове метода <code>run</code>. <code>SystemData</code> предназначен только для переноса информации, доступной для нескольких систем. Данные, локальные для системы, обычно хранятся в самой структуре системы.</p>
+<p>Движок Amethyst предоставляет полезные системные типы данных для доступа к контексту игры. Вот некоторые из наиболее важных:</p>
+<ul>
+<li><code>Read&lt;'a, Resource&gt;</code> (или <code>Write&lt;'a, Resource&gt;</code> соответственно) позволяет вам получить неизменяемую (или соответственно изменяемую) ссылку на ресурс указанного вами типа. Это гарантированно не завершится сбоем, так как если ресурс недоступен, он даст вам <code>Default::default()</code> вашего ресурса.</li>
+<li><code>ReadExpect&lt;'a, Resource&gt;</code> (или <code>WriteExpect&lt;'a, Resource&gt;</code> соответственно) является отказоустойчивой альтернативой предыдущему типу, поэтому вы можете использовать ресурсы, которые не реализуют типаж <code>Default</code>.</li>
+<li><code>ReadStorage&lt;'a, Component&gt;</code> (или <code>WriteStorage&lt;'a, Component&gt;</code> соответственно) позволяет получить неизменяемую (или соответственно изменяемую) ссылку на всё хранилище определенного типа <code>Component</code>.</li>
+<li><code>Entities&lt;'a&gt;</code> позволяет вам создавать или уничтожать сущности в контексте системы.</li>
+</ul>
+<p>Затем вы можете использовать один или несколько из них с помощью кортежа.</p>
+<pre><code class="language-rust edition2018 no_run noplaypen"><span class="boring">extern crate amethyst;
+</span><span class="boring">use amethyst::ecs::{System, Read};
+</span><span class="boring">use amethyst::core::timing::Time;
+</span>struct MyFirstSystem;
+
+impl&lt;'a&gt; System&lt;'a&gt; for MyFirstSystem {
+    type SystemData = Read&lt;'a, Time&gt;;
+
+    fn run(&amp;mut self, data: Self::SystemData) {
+        println!(&quot;{}&quot;, data.delta_seconds());
+    }
+}
+</code></pre>
+<p>Здесь мы получаем ресурс <code>amethyst::core::timer::Time</code> для печати в консоль времени, прошедшего между двумя кадрами. Хорошо! Но это все еще немного скучно.</p>
+<h2><a class="header" href="#Манипуляции-с-хранилищами" id="Манипуляции-с-хранилищами">Манипуляции с хранилищами</a></h2>
+<p>Получив доступ к хранилищу, вы можете использовать их по-разному.</p>
+<h3><a class="header" href="#Получение-компонента-конкретной-сущности" id="Получение-компонента-конкретной-сущности">Получение компонента конкретной сущности</a></h3>
+<p>Иногда бывает полезно получить компонент конкретной сущности из хранилища. Это легко сделать с помощью метода <code>get</code> или, для изменяемых хранилищ, метода <code>get_mut</code>.</p>
+<pre><code class="language-rust edition2018 no_run noplaypen"><span class="boring">extern crate amethyst;
+</span><span class="boring">use amethyst::ecs::{Entity, System, WriteStorage};
+</span><span class="boring">use amethyst::core::Transform;
+</span>struct WalkPlayerUp {
+    player: Entity,
+}
+
+impl&lt;'a&gt; System&lt;'a&gt; for WalkPlayerUp {
+    type SystemData = WriteStorage&lt;'a, Transform&gt;;
+
+    fn run(&amp;mut self, mut transforms: Self::SystemData) {
+        transforms.get_mut(self.player).unwrap().prepend_translation_y(0.1);
+    }
+}
+</code></pre>
+<p>Эта система заставляет игрока подниматься на 0,1 единицы за каждую итерацию игрового цикла! Чтобы определить, что это за игрок, мы заранее сохранили его в структуре системы. Затем мы получаем его <code>Transform</code> из хранилища <code>Transform</code> и перемещаем его вдоль оси Y на 0,1.</p>
+<blockquote>
+<p><code>Transform</code> - очень распространенная структура в разработке игр. Она представляет положение, вращение и масштаб объекта в игровом мире. Вы будете использовать их очень часто, так как они - то, что вам нужно изменить, когда вы хотите что-то изменить в своей игре.</p>
+</blockquote>
+<p>Однако такой подход довольно редок, потому что большую часть времени вы не знаете, какой сущностью вы хотите манипулировать, и чаще вы будете применить свои изменения к нескольким сущностям.</p>
+<h3><a class="header" href="#Получение-всех-сущностей-с-конкретными-компонентами" id="Получение-всех-сущностей-с-конкретными-компонентами">Получение всех сущностей с конкретными компонентами</a></h3>
+<p>В большинстве случаев вы захотите выполнить логику для всех сущностей с определенным компонентом или даже для всех сущностей с набором компонентов.</p>
+<p>Это возможно с помощью метода <code>join</code>. Возможно, вы знакомы с операциями объединения, если вы когда-либо работали с базами данных. Метод <code>join</code> принимает несколько хранилищ и выполняет итерацию по всем сущностям, которые имеют компонент в каждом из этих хранилищ. Это работает как &quot;И&quot; ворота. Он вернет итератор, содержащий кортеж всех запрошенных компонентов, если они <strong>все</strong> на одной и той же сущности.</p>
+<p>Если вы используете 'join' c компонентами A, B и C, будут рассматриваться только те объекты, которые имеют ВСЕ эти компоненты.</p>
+<p>Само собой разумеется, что вы можете использовать его только с одним хранилищем для перебора всех объектов с определенным компонентом.</p>
+<p>Помните, что метод <code>join</code> доступен только при импорте <code>amethyst::ecs::Join</code>.</p>
+<pre><code class="language-rust edition2018 no_run noplaypen"><span class="boring">extern crate amethyst;
+</span><span class="boring">use amethyst::ecs::{System, ReadStorage, WriteStorage};
+</span><span class="boring">use amethyst::core::Transform;
+</span><span class="boring">struct FallingObject;
+</span><span class="boring">impl amethyst::ecs::Component for FallingObject {
+</span><span class="boring">  type Storage = amethyst::ecs::DenseVecStorage&lt;FallingObject&gt;;
+</span><span class="boring">}
+</span>use amethyst::ecs::Join;
+
+struct MakeObjectsFall;
+
+impl&lt;'a&gt; System&lt;'a&gt; for MakeObjectsFall {
+    type SystemData = (
+        WriteStorage&lt;'a, Transform&gt;,
+        ReadStorage&lt;'a, FallingObject&gt;,
+    );
+
+    fn run(&amp;mut self, (mut transforms, falling): Self::SystemData) {
+        for (mut transform, _) in (&amp;mut transforms, &amp;falling).join() {
+            if transform.translation().y &gt; 0.0 {
+                transform.prepend_translation_y(-0.1);
+            }
+        }
+    }
+}
+</code></pre>
+<p>Эта система найдёт все сущности которым принадлежат оба компонента. Компонент <code>Transform</code> с положительной координатой <code>y</code> и компонент тег <code>FallingObject</code>. И уменьшит их координату <code>y</code> на 0,1 единицу за итерацию игрового цикла. Обратите внимание, что поскольку <code>FallingObject</code> присутствует здесь только в качестве тега для ограничения операции объединения (<code>join</code>), мы немедленно отбрасываем его, используя синтаксис <code>\_</code>.</p>
+<p>Здорово! Теперь это похоже на то, что мы действительно будем делать в наших играх!</p>
+<h3><a class="header" href="#Получение-сущностей-которые-имеют-некоторые-компоненты-но-не-другие" id="Получение-сущностей-которые-имеют-некоторые-компоненты-но-не-другие">Получение сущностей, которые имеют некоторые компоненты, но не другие</a></h3>
+<p>В спецификациях есть специальный тип хранилища, называемый <code>AntiStorage</code>. Оператор <em>not</em> (<code>!</code>) превращает хранилище в его аналог <code>AntiStorage</code>, что позволяет перебирать объекты, которые <em>не</em> имеют этот компонент.</p>
+<p>Используется так:</p>
+<pre><code class="language-rust edition2018 no_run noplaypen"><span class="boring">extern crate amethyst;
+</span><span class="boring">use amethyst::ecs::{System, ReadStorage, WriteStorage};
+</span><span class="boring">use amethyst::core::Transform;
+</span><span class="boring">struct FallingObject;
+</span><span class="boring">impl amethyst::ecs::Component for FallingObject {
+</span><span class="boring">  type Storage = amethyst::ecs::DenseVecStorage&lt;FallingObject&gt;;
+</span><span class="boring">}
+</span>use amethyst::ecs::Join;
+
+struct NotFallingObjects;
+
+impl&lt;'a&gt; System&lt;'a&gt; for NotFallingObjects {
+    type SystemData = (
+        WriteStorage&lt;'a, Transform&gt;,
+        ReadStorage&lt;'a, FallingObject&gt;,
+    );
+
+    fn run(&amp;mut self, (mut transforms, falling): Self::SystemData) {
+        for (mut transform, _) in (&amp;mut transforms, !&amp;falling).join() {
+            // Если они не падают, почему бы не заставить их подняться!
+            transform.prepend_translation_y(0.1);
+        }
+    }
+}
+</code></pre>
+<h2><a class="header" href="#Управление-структурой-сущностей" id="Управление-структурой-сущностей">Управление структурой сущностей</a></h2>
+<p>Иногда может быть полезно манипулировать структурой сущностей в системе, например, создавать новые или модифицировать компоновку существующих компонентов. Этот процесс выполняется с использованием системных данных <code>Entities &lt;'a&gt;</code>.</p>
+<blockquote>
+<p>Запрос <code>Entities&lt;'a&gt;</code> не влияет на производительность, поскольку он содержит только неизменяемые ресурсы и, следовательно, <a href="https://book-src.amethyst.rs/stable/concepts/dispatcher.html">не блокирует диспетчеризацию</a>.</p>
+</blockquote>
+<h3><a class="header" href="#Создание-новых-сущностей-в-системе" id="Создание-новых-сущностей-в-системе">Создание новых сущностей в системе</a></h3>
+<p>Создание сущности в контексте системы очень похоже на способ создания сущности с использованием структуры <code>World</code>. Единственное отличие состоит в том, что необходимо обеспечить изменяемые хранилища всех компонентов, которые вы планируете добавить в сущность.</p>
+<pre><code class="language-rust edition2018 no_run noplaypen"><span class="boring">extern crate amethyst;
+</span><span class="boring">use amethyst::ecs::{System, WriteStorage, Entities};
+</span><span class="boring">use amethyst::core::Transform;
+</span><span class="boring">struct Enemy;
+</span><span class="boring">impl amethyst::ecs::Component for Enemy {
+</span><span class="boring">  type Storage = amethyst::ecs::VecStorage&lt;Enemy&gt;;
+</span><span class="boring">}
+</span>struct SpawnEnemies {
+    counter: u32,
+}
+
+impl&lt;'a&gt; System&lt;'a&gt; for SpawnEnemies {
+    type SystemData = (
+        WriteStorage&lt;'a, Transform&gt;,
+        WriteStorage&lt;'a, Enemy&gt;,
+        Entities&lt;'a&gt;,
+    );
+
+    fn run(&amp;mut self, (mut transforms, mut enemies, entities): Self::SystemData) {
+        self.counter += 1;
+        if self.counter &gt; 200 {
+            entities.build_entity()
+                .with(Transform::default(), &amp;mut transforms)
+                .with(Enemy, &amp;mut enemies)
+                .build();
+            self.counter = 0;
+        }
+    }
+}
+</code></pre>
+<p>Эта система будет порождать нового врага каждые 200 итераций игрового цикла.</p>
+<h3><a class="header" href="#Удаление-сущности" id="Удаление-сущности">Удаление сущности</a></h3>
+<p>Удалить сущность очень легко, используя <code>Entities &lt;'a&gt;</code>.</p>
+<pre><code class="language-rust edition2018 no_run noplaypen"><span class="boring">extern crate amethyst;
+</span><span class="boring">use amethyst::ecs::{System, Entities, Entity};
+</span><span class="boring">struct MySystem { entity: Entity }
+</span><span class="boring">impl&lt;'a&gt; System&lt;'a&gt; for MySystem {
+</span><span class="boring">  type SystemData = Entities&lt;'a&gt;;
+</span><span class="boring">  fn run(&amp;mut self, entities: Self::SystemData) {
+</span><span class="boring">      let entity = self.entity;
+</span>entities.delete(entity);
+<span class="boring">  }
+</span><span class="boring">}
+</span></code></pre>
+<h3><a class="header" href="#Перебор-компонентов-со-связанной-сущностью" id="Перебор-компонентов-со-связанной-сущностью">Перебор компонентов со связанной сущностью</a></h3>
+<p>Иногда, когда вы перебираете компоненты, вы также можете узнать, с какой сущностью вы работаете. Для этого вы можете использовать операцию <code>join</code> с <code>Entities &lt;'a&gt;</code>.</p>
+<pre><code class="language-rust edition2018 no_run noplaypen"><span class="boring">extern crate amethyst;
+</span><span class="boring">use amethyst::ecs::{Join, System, Entities, WriteStorage, ReadStorage};
+</span><span class="boring">use amethyst::core::Transform;
+</span><span class="boring">struct FallingObject;
+</span><span class="boring">impl amethyst::ecs::Component for FallingObject {
+</span><span class="boring">  type Storage = amethyst::ecs::VecStorage&lt;FallingObject&gt;;
+</span><span class="boring">}
+</span>struct MakeObjectsFall;
+
+impl&lt;'a&gt; System&lt;'a&gt; for MakeObjectsFall {
+    type SystemData = (
+        Entities&lt;'a&gt;,
+        WriteStorage&lt;'a, Transform&gt;,
+        ReadStorage&lt;'a, FallingObject&gt;,
+    );
+
+    fn run(&amp;mut self, (entities, mut transforms, falling): Self::SystemData) {
+        for (e, mut transform, _) in (&amp;*entities, &amp;mut transforms, &amp;falling).join() {
+            if transform.translation().y &gt; 0.0 {
+                transform.prepend_translation_y(-0.1);
+            } else {
+                entities.delete(e);
+            }
+        }
+    }
+}
+</code></pre>
+<p>Эта система делает то же самое, что и предыдущая <code>MakeObjectsFall</code>, но также убирает падающие объекты, которые достигли земли.</p>
+<h3><a class="header" href="#Добавление-или-удаление-компонентов" id="Добавление-или-удаление-компонентов">Добавление или удаление компонентов</a></h3>
+<p>Вы также можете вставить или удалить компоненты из определенной сущности. Для этого вам нужно получить изменяемое хранилище компонента, который вы хотите изменить, и просто выполните:</p>
+<pre><code class="language-rust edition2018 no_run noplaypen"><span class="boring">extern crate amethyst;
+</span><span class="boring">use amethyst::ecs::{System, Entities, Entity, WriteStorage};
+</span><span class="boring">struct MyComponent;
+</span><span class="boring">impl amethyst::ecs::Component for MyComponent {
+</span><span class="boring">  type Storage = amethyst::ecs::VecStorage&lt;MyComponent&gt;;
+</span><span class="boring">}
+</span><span class="boring">struct MySystem { entity: Entity }
+</span><span class="boring">impl&lt;'a&gt; System&lt;'a&gt; for MySystem {
+</span><span class="boring">  type SystemData = WriteStorage&lt;'a, MyComponent&gt;;
+</span><span class="boring">  fn run(&amp;mut self, mut write_storage: Self::SystemData) {
+</span><span class="boring">      let entity = self.entity;
+</span>// Add the component
+write_storage.insert(entity, MyComponent);
+
+// Remove the component
+write_storage.remove(entity);
+<span class="boring">  }
+</span><span class="boring">}
+</span></code></pre>
+<p>Имейте в виду, что вставка компонента в сущность, которая уже имеет компонент того же типа, <em>перезапишет предыдущий</em>.</p>
+<h2><a class="header" href="#Изменение-состояния-через-ресурсы" id="Изменение-состояния-через-ресурсы">Изменение состояния через ресурсы</a></h2>
+<p>В одном из предыдущих разделов мы говорили о состояниях (<code>States</code>) и о том, как они используются для организации вашей игры в разные логические разделы. Иногда мы хотим инициировать переход состояния из системы. Например, если игрок умирает, мы можем захотеть удалить его сущность и дать сигнал конечному автомату выдвинуть состояние, которое показывает экран «Вы умерли».</p>
+<p>Итак, как мы можем влиять на состояния из систем? Есть несколько способов, но в этом разделе мы рассмотрим самый простой: использование ресурса (<code>Resource</code>).</p>
+<p>Перед этим давайте просто быстро напомним себе, что такое ресурс:</p>
+<blockquote>
+<p><code>Resource</code> - это любой тип, в котором хранятся данные, которые могут вам понадобиться для вашей игры, и которые не относятся к конкретной сущности.</p>
+</blockquote>
+<p>Данные в ресурсе доступны как для систем, так и для состояний. Мы можем использовать это в наших интересах!</p>
+<p>Допустим, у вас есть два следующих состояния:</p>
+<ul>
+<li><code>GameplayState</code>: состояние, в котором запущена игра.</li>
+<li><code>GameMenuState</code>: состояние, в котором игра приостановлена, и мы взаимодействуем с игровым меню.</li>
+</ul>
+<p>В следующем примере показано, как отслеживать в каком состоянии мы находимся в данный момент. Это позволяет нам сделать немного условной логики в наших системах, чтобы определить, что делать в зависимости от того, какое состояние в данный момент активно, и манипулировать состояниями, отслеживая действия пользователя.</p>
+<pre><code class="language-rust edition2018 no_run noplaypen"><span class="boring">extern crate amethyst;
+</span>use amethyst::prelude::*;
+
+#[derive(Clone, Copy, Debug, PartialEq, Eq)]
+enum CurrentState {
+    MainMenu,
+    Gameplay,
+}
+
+#[derive(Clone, Copy, Debug, PartialEq, Eq)]
+enum UserAction {
+    OpenMenu,
+    ResumeGame,
+    Quit,
+}
+
+impl Default for CurrentState {
+    fn default() -&gt; Self {
+        CurrentState::Gameplay
+    }
+}
+
+struct Game {
+    user_action: Option&lt;UserAction&gt;,
+    current_state: CurrentState,
+}
+
+impl Default for Game {
+    fn default() -&gt; Self {
+        Game {
+            user_action: None,
+            current_state: CurrentState::default(),
+        }
+    }
+}
+
+struct GameplayState;
+
+impl SimpleState for GameplayState {
+    fn update(&amp;mut self, data: &amp;mut StateData&lt;'_, GameData&lt;'_, '_&gt;&gt;) -&gt; SimpleTrans {
+        // Если ресурс `Game` был настроен для возврата в меню, нажмите
+        // состояние меню, чтобы мы вернулись.
+
+        let mut game = data.world.write_resource::&lt;Game&gt;();
+
+        if let Some(UserAction::OpenMenu) = game.user_action.take() {
+            return Trans::Push(Box::new(GameMenuState));
+        }
+
+        Trans::None
+    }
+
+    fn on_resume(&amp;mut self, mut data: StateData&lt;'_, GameData&lt;'_, '_&gt;&gt;) {
+        // Отметьте, что текущее состояние является состоянием геймплея.
+        data.world.write_resource::&lt;Game&gt;().current_state = CurrentState::Gameplay;
+    }
+}
+
+struct GameMenuState;
+
+impl SimpleState for GameMenuState {
+    fn update(&amp;mut self, data: &amp;mut StateData&lt;'_, GameData&lt;'_, '_&gt;&gt;) -&gt; SimpleTrans {
+        let mut game = data.world.write_resource::&lt;Game&gt;();
+
+        match game.user_action.take() {
+            Some(UserAction::ResumeGame) =&gt; Trans::Pop,
+            Some(UserAction::Quit) =&gt; {
+                // Примечание: убирать не нужно :)
+                Trans::Quit
+            },
+            _ =&gt; Trans::None,
+        }
+    }
+
+    fn on_resume(&amp;mut self, mut data: StateData&lt;'_, GameData&lt;'_, '_&gt;&gt;) {
+        // Отметьте, что текущее состояние является состоянием главного меню.
+        data.world.write_resource::&lt;Game&gt;().current_state = CurrentState::MainMenu;
+    }
+}
+</code></pre>
+<p>Допустим, мы хотим, чтобы игрок мог нажать escape, чтобы войти в меню. Мы модифицируем наш обработчик ввода, чтобы отобразить действие <code>open_menu</code> на <code>Esc</code>, и мы пишем следующую систему:</p>
+<pre><code class="language-rust edition2018 no_run noplaypen"><span class="boring">extern crate amethyst;
+</span><span class="boring">
+</span><span class="boring">#[derive(Clone, Copy, Debug, PartialEq, Eq)]
+</span><span class="boring">enum CurrentState {
+</span><span class="boring">    MainMenu,
+</span><span class="boring">    Gameplay,
+</span><span class="boring">}
+</span><span class="boring">
+</span><span class="boring">impl Default for CurrentState { fn default() -&gt; Self { CurrentState::Gameplay } }
+</span><span class="boring">
+</span><span class="boring">#[derive(Clone, Copy, Debug, PartialEq, Eq)]
+</span><span class="boring">enum UserAction {
+</span><span class="boring">    OpenMenu,
+</span><span class="boring">    ResumeGame,
+</span><span class="boring">    Quit,
+</span><span class="boring">}
+</span><span class="boring">
+</span><span class="boring">struct Game {
+</span><span class="boring">    user_action: Option&lt;UserAction&gt;,
+</span><span class="boring">    current_state: CurrentState,
+</span><span class="boring">}
+</span><span class="boring">
+</span><span class="boring">impl Default for Game {
+</span><span class="boring">    fn default() -&gt; Self {
+</span><span class="boring">        Game {
+</span><span class="boring">            user_action: None,
+</span><span class="boring">            current_state: CurrentState::default(),
+</span><span class="boring">        }
+</span><span class="boring">    }
+</span><span class="boring">}
+</span><span class="boring">
+</span>use amethyst::{
+    prelude::*,
+    ecs::{System, prelude::*},
+    input::{InputHandler, StringBindings},
+};
+
+struct MyGameplaySystem;
+
+impl&lt;'s&gt; System&lt;'s&gt; for MyGameplaySystem {
+    type SystemData = (
+        Read&lt;'s, InputHandler&lt;StringBindings&gt;&gt;,
+        Write&lt;'s, Game&gt;,
+    );
+
+    fn run(&amp;mut self, (input, mut game): Self::SystemData) {
+        match game.current_state {
+            CurrentState::Gameplay =&gt; {
+                let open_menu = input
+                    .action_is_down(&quot;open_menu&quot;)
+                    .unwrap_or(false);
+
+                // Переключите переменную `open_menu`, чтобы указать состояние
+                // перехода.
+                if open_menu {
+                    game.user_action = Some(UserAction::OpenMenu);
+                }
+            }
+            // Ничего не делать для других состояний.
+            _ =&gt; {}
+        }
+    }
+}
+</code></pre>
+<p>Теперь, когда вы играете в игру и нажимаете кнопку, связанную с действием <code>open_menu</code>, <code>GameMenuState</code> возобновляется, а <code>GameplayState</code> приостанавливается.</p>
+<h2><a class="header" href="#Типаж-systemdata" id="Типаж-systemdata">Типаж SystemData</a></h2>
+<p>Хоть это и редко может быть полезно, но возможно создание пользовательских типов <code>SystemData</code>.</p>
+<p><code>Dispatcher</code> заполняет <code>SystemData</code> при каждом вызове метода <code>run</code>. Чтобы сделать это, ваш тип <code>SystemData</code> должен реализовать типаж <code>amethyst::ecs::SystemData</code> для того, чтобы он был действительным.</p>
+<p>Это довольно сложная черта для реализации, к счастью, Amethyst предоставляет для нее производный макрос, который может реализовать черту для любой структуры, если все ее поля - <code>SystemData</code>. Однако в большинстве случаев вам даже не нужно будет реализовывать это вообще, так как вы будете использовать структуры <code>SystemData</code>, предоставляемые движком.</p>
+<p>Обратите внимание, что кортежи структур, реализующих <code>SystemData</code>, сами являются <code>SystemData</code>. Это очень полезно, когда вам нужно быстро запросить несколько <code>SystemData</code> одновременно.</p>
+<pre><code class="language-rust edition2018 no_run noplaypen"><span class="boring">extern crate amethyst;
+</span><span class="boring">extern crate shred;
+</span><span class="boring">#[macro_use] extern crate shred_derive;
+</span><span class="boring">
+</span><span class="boring">use amethyst::{
+</span><span class="boring">    ecs::{Component, Join, ReadStorage, System, SystemData, VecStorage, World, WriteStorage},
+</span><span class="boring">    shred::ResourceId,
+</span><span class="boring">};
+</span><span class="boring">
+</span><span class="boring">struct FooComponent {
+</span><span class="boring">  stuff: f32,
+</span><span class="boring">}
+</span><span class="boring">impl Component for FooComponent {
+</span><span class="boring">  type Storage = VecStorage&lt;FooComponent&gt;;
+</span><span class="boring">}
+</span><span class="boring">
+</span><span class="boring">struct BarComponent {
+</span><span class="boring">  stuff: f32,
+</span><span class="boring">}
+</span><span class="boring">impl Component for BarComponent {
+</span><span class="boring">  type Storage = VecStorage&lt;BarComponent&gt;;
+</span><span class="boring">}
+</span><span class="boring">
+</span><span class="boring">#[derive(SystemData)]
+</span><span class="boring">struct BazSystemData&lt;'a&gt; {
+</span><span class="boring"> field: ReadStorage&lt;'a, FooComponent&gt;,
+</span><span class="boring">}
+</span><span class="boring">
+</span><span class="boring">impl&lt;'a&gt; BazSystemData&lt;'a&gt; {
+</span><span class="boring">  fn should_process(&amp;self) -&gt; bool {
+</span><span class="boring">      true
+</span><span class="boring">  }
+</span><span class="boring">}
+</span><span class="boring">
+</span>#[derive(SystemData)]
+struct MySystemData&lt;'a&gt; {
+    foo: ReadStorage&lt;'a, FooComponent&gt;,
+    bar: WriteStorage&lt;'a, BarComponent&gt;,
+    baz: BazSystemData&lt;'a&gt;,
+}
+
+struct MyFirstSystem;
+
+impl&lt;'a&gt; System&lt;'a&gt; for MyFirstSystem {
+    type SystemData = MySystemData&lt;'a&gt;;
+
+    fn run(&amp;mut self, mut data: Self::SystemData) {
+        if data.baz.should_process() {
+            for (foo, mut bar) in (&amp;data.foo, &amp;mut data.bar).join() {
+                bar.stuff += foo.stuff;
+            }
+        }
+    }
+}
+</code></pre>
+<hr />
+<p>Документация была переведена специально для сообщества &quot;<strong>rust_lang_ru</strong>&quot;.</p>
+<p>Подпишись на нас в <strong><a href="http://tlinks.run/rust_lang_ru">Telegram</a></strong> и <strong><a href="https://www.youtube.com/channel/UCu413rnSfuSSOR3OsIThlZA">YouTube</a></strong>!</p>
+<h1><a class="header" href="#Инициализация-системы" id="Инициализация-системы">Инициализация системы</a></h1>
+<p>Системы могут нуждаться в доступе к ресурсам из <code>World</code>, чтобы быть реализованными. Например, получение <code>ReaderId</code> для <code>EventChannel</code>, который существует в <code>World</code>. Когда в <code>World</code> существует канал событий, <code>System</code> должна зарегистрироваться как читатель этого канала, а не заменить его, поскольку это делает недействительными всех других читателей.</p>
+<p>В Amethyst <code>World</code>, с которого начинается приложение, заполняется несколькими ресурсами по умолчанию - каналами событий, пулом потоков, ограничителем кадров и так далее.</p>
+<p>Поскольку ресурсы по умолчанию начинаются со специальных ограничений, нам нужен способ передать логику инициализации <code>System</code> в приложение, включая параметры в конструктор <code>System</code>. Это информация, которую захватывает типаж <code>SystemDesc</code>.</p>
+<p>Для каждой <code>System</code> реализация признака <code>SystemDesc</code> определяет логику для создания экземпляра <code>System</code>. Для систем, которые не требуют специальной логики инициализации, <code>#[derive(SystemDesc)]</code> автоматически реализует типаж <code>SystemDesc</code> для типа системы:</p>
+<pre><code class="language-rust edition2018 no_run noplaypen"><span class="boring">extern crate amethyst;
+</span>use amethyst::{
+    core::SystemDesc,
+    derive::SystemDesc,
+    ecs::{System, SystemData, World},
+};
+
+#[derive(SystemDesc)]
+struct SystemName;
+
+impl&lt;'a&gt; System&lt;'a&gt; for SystemName {
+    type SystemData = ();
+
+    fn run(&amp;mut self, data: Self::SystemData) {
+        println!(&quot;Hello!&quot;);
+    }
+}
+</code></pre>
+<p><a href="concepts/system/./chapter_3_part_5.2.html">Страница производная <code>SystemDesc</code></a> демонстрирует варианты использования, поддерживаемые производной <code>SystemDesc</code>. Для более сложных случаев страница <a href="concepts/system/./chapter_3_part_5.3.html">«Реализация типажа <code>SystemDesc</code>»</a> объясняет, как реализовать типаж <code>SystemDesc</code>.</p>
+<hr />
+<p>Документация была переведена специально для сообщества &quot;<strong>rust_lang_ru</strong>&quot;.</p>
+<p>Подпишись на нас в <strong><a href="http://tlinks.run/rust_lang_ru">Telegram</a></strong> и <strong><a href="https://www.youtube.com/channel/UCu413rnSfuSSOR3OsIThlZA">YouTube</a></strong>!</p>
+<h1><a class="header" href="#Производная-systemdesc" id="Производная-systemdesc">Производная SystemDesc</a></h1>
+<p>Производная <code>SystemDesc</code> поддерживает следующие случаи при создании реализации типажа <code>SystemDesc</code>:</p>
+<ul>
+<li>Параметры для передачи в системный конструктор.</li>
+<li>Поля для пропуска по умолчанию используемые системным конструктором.</li>
+<li>Регистрация <code>ReaderId</code> для <code>EventChannel&lt;\_&gt;</code> в <code>World</code>.</li>
+<li>Регистрация <code>ReaderId</code> в <code>FlaggedStorage</code> компонента.</li>
+<li>Вставка ресурса в <code>World</code>.</li>
+</ul>
+<p>Если ваш сценарий использования для инициализации системы не описан, см. страницу <a href="concepts/system/./chapter_3_part_5.3.html">«Реализация типажа <code>SystemDesc</code>»</a>.</p>
+<h2><a class="header" href="#Передача-параметров-в-системный-конструктор" id="Передача-параметров-в-системный-конструктор">Передача параметров в системный конструктор</a></h2>
+<pre><code class="language-rust edition2018 no_run noplaypen"><span class="boring">extern crate amethyst;
+</span><span class="boring">
+</span><span class="boring">use amethyst::{
+</span><span class="boring">    derive::SystemDesc,
+</span><span class="boring">    ecs::{System, SystemData},
+</span><span class="boring">};
+</span><span class="boring">
+</span>#[derive(SystemDesc)]
+#[system_desc(name(SystemNameDesc))]
+pub struct SystemName {
+    field_0: u32,
+    field_1: String,
+}
+
+impl SystemName {
+    fn new(field_0: u32, field_1: String) -&gt; Self {
+        SystemName { field_0, field_1 }
+    }
+}
+<span class="boring">
+</span><span class="boring">impl&lt;'a&gt; System&lt;'a&gt; for SystemName {
+</span><span class="boring">    type SystemData = ();
+</span><span class="boring">    fn run(&amp;mut self, data: Self::SystemData) {}
+</span><span class="boring">}
+</span></code></pre>
+<details>
+<summary>Generated code</summary>
+<pre><code class="language-rust edition2018 no_run noplaypen"><span class="boring">extern crate amethyst;
+</span><span class="boring">
+</span><span class="boring">use amethyst::{
+</span><span class="boring">    derive::SystemDesc,
+</span><span class="boring">    ecs::{System, SystemData},
+</span><span class="boring">};
+</span><span class="boring">
+</span><span class="boring">pub struct SystemName {
+</span><span class="boring">    field_0: u32,
+</span><span class="boring">    field_1: String,
+</span><span class="boring">}
+</span><span class="boring">
+</span><span class="boring">impl SystemName {
+</span><span class="boring">    fn new(field_0: u32, field_1: String) -&gt; Self {
+</span><span class="boring">        SystemName { field_0, field_1 }
+</span><span class="boring">    }
+</span><span class="boring">}
+</span><span class="boring">
+</span><span class="boring">impl&lt;'a&gt; System&lt;'a&gt; for SystemName {
+</span><span class="boring">    type SystemData = ();
+</span><span class="boring">    fn run(&amp;mut self, data: Self::SystemData) {}
+</span><span class="boring">}
+</span><span class="boring">
+</span>/// Собирает `SystemName`.
+#[derive(Default, Debug)]
+pub struct SystemNameDesc {
+    field_0: u32,
+    field_1: String,
+}
+
+impl SystemNameDesc {
+    fn new(field_0: u32, field_1: String) -&gt; Self {
+        SystemNameDesc { field_0, field_1 }
+    }
+}
+
+impl&lt;'a, 'b&gt; ::amethyst::core::SystemDesc&lt;'a, 'b, SystemName&gt; for SystemNameDesc {
+    fn build(self, world: &amp;mut ::amethyst::ecs::World) -&gt; SystemName {
+        &lt;SystemName as ::amethyst::ecs::System&lt;'_&gt;&gt;::SystemData::setup(world);
+
+        SystemName::new(self.field_0, self.field_1)
+    }
+}
+</code></pre>
+</details>
+<h2><a class="header" href="#Поля-для-пропуска-по-умолчанию--используемые-конструктором-системы" id="Поля-для-пропуска-по-умолчанию--используемые-конструктором-системы">Поля для пропуска по умолчанию  используемые конструктором системы</a></h2>
+<pre><code class="language-rust edition2018 no_run noplaypen"><span class="boring">extern crate amethyst;
+</span><span class="boring">
+</span><span class="boring">use amethyst::{
+</span><span class="boring">    derive::SystemDesc,
+</span><span class="boring">    ecs::{System, SystemData},
+</span><span class="boring">};
+</span><span class="boring">
+</span>#[derive(SystemDesc)]
+#[system_desc(name(SystemNameDesc))]
+pub struct SystemName {
+    #[system_desc(skip)]
+    field_0: u32,
+    field_1: String,
+}
+
+impl SystemName {
+    fn new(field_1: String) -&gt; Self {
+        SystemName { field_0: 123, field_1 }
+    }
+}
+<span class="boring">
+</span><span class="boring">impl&lt;'a&gt; System&lt;'a&gt; for SystemName {
+</span><span class="boring">    type SystemData = ();
+</span><span class="boring">    fn run(&amp;mut self, data: Self::SystemData) {}
+</span><span class="boring">}
+</span></code></pre>
+<details>
+<summary>Generated code</summary>
+<pre><code class="language-rust edition2018 no_run noplaypen"><span class="boring">extern crate amethyst;
+</span><span class="boring">
+</span><span class="boring">use amethyst::{
+</span><span class="boring">    derive::SystemDesc,
+</span><span class="boring">    ecs::{System, SystemData},
+</span><span class="boring">};
+</span><span class="boring">
+</span><span class="boring">pub struct SystemName {
+</span><span class="boring">    field_0: u32,
+</span><span class="boring">    field_1: String,
+</span><span class="boring">}
+</span><span class="boring">
+</span><span class="boring">impl SystemName {
+</span><span class="boring">    fn new(field_1: String) -&gt; Self {
+</span><span class="boring">        SystemName { field_0: 123, field_1 }
+</span><span class="boring">    }
+</span><span class="boring">}
+</span><span class="boring">
+</span><span class="boring">impl&lt;'a&gt; System&lt;'a&gt; for SystemName {
+</span><span class="boring">    type SystemData = ();
+</span><span class="boring">    fn run(&amp;mut self, data: Self::SystemData) {}
+</span><span class="boring">}
+</span><span class="boring">
+</span>/// Собирает `SystemName`.
+#[derive(Default, Debug)]
+pub struct SystemNameDesc {
+    field_1: String,
+}
+
+impl SystemNameDesc {
+    fn new(field_1: String) -&gt; Self {
+        SystemNameDesc { field_1 }
+    }
+}
+
+impl&lt;'a, 'b&gt; ::amethyst::core::SystemDesc&lt;'a, 'b, SystemName&gt; for SystemNameDesc {
+    fn build(self, world: &amp;mut ::amethyst::ecs::World) -&gt; SystemName {
+        &lt;SystemName as ::amethyst::ecs::System&lt;'_&gt;&gt;::SystemData::setup(world);
+
+        SystemName::new(self.field_1)
+    }
+}
+</code></pre>
+</details>
+<p><strong>Примечание.</strong> Если параметры поля отсутствуют, реализация <code>SystemDesc</code> вызовет <code>SystemName::default()</code>:</p>
+<pre><code class="language-rust edition2018 no_run noplaypen"><span class="boring">extern crate amethyst;
+</span><span class="boring">
+</span><span class="boring">use amethyst::{
+</span><span class="boring">    derive::SystemDesc,
+</span><span class="boring">    ecs::{System, SystemData},
+</span><span class="boring">};
+</span><span class="boring">
+</span>#[derive(Default, SystemDesc)]
+#[system_desc(name(SystemNameDesc))]
+pub struct SystemName {
+    #[system_desc(skip)]
+    field_0: u32,
+}
+<span class="boring">
+</span><span class="boring">impl&lt;'a&gt; System&lt;'a&gt; for SystemName {
+</span><span class="boring">    type SystemData = ();
+</span><span class="boring">    fn run(&amp;mut self, data: Self::SystemData) {}
+</span><span class="boring">}
+</span></code></pre>
+<details>
+<summary>Generated code</summary>
+<pre><code class="language-rust edition2018 no_run noplaypen"><span class="boring">extern crate amethyst;
+</span><span class="boring">
+</span><span class="boring">use amethyst::{
+</span><span class="boring">    derive::SystemDesc,
+</span><span class="boring">    ecs::{System, SystemData},
+</span><span class="boring">};
+</span><span class="boring">
+</span><span class="boring">#[derive(Default)]
+</span><span class="boring">pub struct SystemName {
+</span><span class="boring">    field_0: u32,
+</span><span class="boring">}
+</span><span class="boring">
+</span><span class="boring">impl&lt;'a&gt; System&lt;'a&gt; for SystemName {
+</span><span class="boring">    type SystemData = ();
+</span><span class="boring">    fn run(&amp;mut self, data: Self::SystemData) {}
+</span><span class="boring">}
+</span><span class="boring">
+</span>/// Собирает `SystemName`.
+#[derive(Debug)]
+pub struct SystemNameDesc {}
+
+impl Default for SystemNameDesc {
+    fn default() -&gt; Self {
+        SystemNameDesc {}
+    }
+}
+
+impl&lt;'a, 'b&gt; ::amethyst::core::SystemDesc&lt;'a, 'b, SystemName&gt; for SystemNameDesc {
+    fn build(self, world: &amp;mut ::amethyst::ecs::World) -&gt; SystemName {
+        &lt;SystemName as ::amethyst::ecs::System&lt;'_&gt;&gt;::SystemData::setup(world);
+
+        SystemName::default()
+    }
+}
+</code></pre>
+</details>
+<h2><a class="header" href="#Регистрация-readerid-для-eventchannel_-в-world" id="Регистрация-readerid-для-eventchannel_-в-world">Регистрация <code>ReaderId</code> для <code>EventChannel&lt;\_&gt;</code> в <code>World</code>.</a></h2>
+<pre><code class="language-rust edition2018 no_run noplaypen"><span class="boring">extern crate amethyst;
+</span><span class="boring">
+</span><span class="boring">use amethyst::{
+</span><span class="boring">    derive::SystemDesc,
+</span><span class="boring">    ecs::{System, SystemData},
+</span><span class="boring">    shrev::{EventChannel, ReaderId},
+</span><span class="boring">    ui::UiEvent,
+</span><span class="boring">};
+</span><span class="boring">
+</span>#[derive(SystemDesc)]
+#[system_desc(name(SystemNameDesc))]
+pub struct SystemName {
+    #[system_desc(event_channel_reader)]
+    reader_id: ReaderId&lt;UiEvent&gt;,
+}
+
+impl SystemName {
+    fn new(reader_id: ReaderId&lt;UiEvent&gt;) -&gt; Self {
+        SystemName { reader_id }
+    }
+}
+<span class="boring">
+</span><span class="boring">impl&lt;'a&gt; System&lt;'a&gt; for SystemName {
+</span><span class="boring">    type SystemData = ();
+</span><span class="boring">    fn run(&amp;mut self, data: Self::SystemData) {}
+</span><span class="boring">}
+</span></code></pre>
+<details>
+<summary>Generated code</summary>
+<pre><code class="language-rust edition2018 no_run noplaypen"><span class="boring">extern crate amethyst;
+</span><span class="boring">
+</span><span class="boring">use amethyst::{
+</span><span class="boring">    derive::SystemDesc,
+</span><span class="boring">    ecs::{System, SystemData},
+</span><span class="boring">    shrev::{EventChannel, ReaderId},
+</span><span class="boring">    ui::UiEvent,
+</span><span class="boring">};
+</span><span class="boring">
+</span><span class="boring">pub struct SystemName {
+</span><span class="boring">    reader_id: ReaderId&lt;UiEvent&gt;,
+</span><span class="boring">}
+</span><span class="boring">
+</span><span class="boring">impl SystemName {
+</span><span class="boring">    fn new(reader_id: ReaderId&lt;UiEvent&gt;) -&gt; Self {
+</span><span class="boring">        SystemName { reader_id }
+</span><span class="boring">    }
+</span><span class="boring">}
+</span><span class="boring">
+</span><span class="boring">impl&lt;'a&gt; System&lt;'a&gt; for SystemName {
+</span><span class="boring">    type SystemData = ();
+</span><span class="boring">    fn run(&amp;mut self, data: Self::SystemData) {}
+</span><span class="boring">}
+</span><span class="boring">
+</span>/// Собирает `SystemName`.
+#[derive(Debug)]
+pub struct SystemNameDesc;
+
+impl Default for SystemNameDesc {
+    fn default() -&gt; Self {
+        SystemNameDesc {}
+    }
+}
+
+impl&lt;'a, 'b&gt; ::amethyst::core::SystemDesc&lt;'a, 'b, SystemName&gt; for SystemNameDesc {
+    fn build(self, world: &amp;mut ::amethyst::ecs::World) -&gt; SystemName {
+        &lt;SystemName as ::amethyst::ecs::System&lt;'_&gt;&gt;::SystemData::setup(world);
+
+        let reader_id = world
+            .fetch_mut::&lt;EventChannel&lt;UiEvent&gt;&gt;()
+            .register_reader();
+
+        SystemName::new(reader_id)
+    }
+}
+</code></pre>
+</details>
+<h2><a class="header" href="#Регистрация-readerid-в-flaggedstorage-компонента" id="Регистрация-readerid-в-flaggedstorage-компонента">Регистрация <code>ReaderId</code> в <code>FlaggedStorage</code> компонента.</a></h2>
+<pre><code class="language-rust edition2018 no_run noplaypen"><span class="boring">extern crate amethyst;
+</span><span class="boring">
+</span><span class="boring">use amethyst::{
+</span><span class="boring">    derive::SystemDesc,
+</span><span class="boring">    ecs::{storage::ComponentEvent, System, SystemData, WriteStorage},
+</span><span class="boring">    shrev::{EventChannel, ReaderId},
+</span><span class="boring">    ui::UiResize,
+</span><span class="boring">};
+</span><span class="boring">
+</span>#[derive(SystemDesc)]
+#[system_desc(name(SystemNameDesc))]
+pub struct SystemName {
+    #[system_desc(flagged_storage_reader(UiResize))]
+    resize_events_id: ReaderId&lt;ComponentEvent&gt;,
+}
+
+impl SystemName {
+    fn new(resize_events_id: ReaderId&lt;ComponentEvent&gt;) -&gt; Self {
+        SystemName { resize_events_id }
+    }
+}
+<span class="boring">
+</span><span class="boring">impl&lt;'a&gt; System&lt;'a&gt; for SystemName {
+</span><span class="boring">    type SystemData = ();
+</span><span class="boring">    fn run(&amp;mut self, data: Self::SystemData) {}
+</span><span class="boring">}
+</span></code></pre>
+<details>
+<summary>Generated code</summary>
+<pre><code class="language-rust edition2018 no_run noplaypen"><span class="boring">extern crate amethyst;
+</span><span class="boring">
+</span><span class="boring">use amethyst::{
+</span><span class="boring">    derive::SystemDesc,
+</span><span class="boring">    ecs::{storage::ComponentEvent, System, SystemData, WriteStorage},
+</span><span class="boring">    shrev::{EventChannel, ReaderId},
+</span><span class="boring">    ui::UiResize,
+</span><span class="boring">};
+</span><span class="boring">
+</span><span class="boring">pub struct SystemName {
+</span><span class="boring">    resize_events_id: ReaderId&lt;ComponentEvent&gt;,
+</span><span class="boring">}
+</span><span class="boring">
+</span><span class="boring">impl SystemName {
+</span><span class="boring">    fn new(resize_events_id: ReaderId&lt;ComponentEvent&gt;) -&gt; Self {
+</span><span class="boring">        SystemName { resize_events_id }
+</span><span class="boring">    }
+</span><span class="boring">}
+</span><span class="boring">
+</span><span class="boring">impl&lt;'a&gt; System&lt;'a&gt; for SystemName {
+</span><span class="boring">    type SystemData = ();
+</span><span class="boring">    fn run(&amp;mut self, data: Self::SystemData) {}
+</span><span class="boring">}
+</span><span class="boring">
+</span>/// Собирает `SystemName`.
+#[derive(Debug)]
+pub struct SystemNameDesc;
+
+impl Default for SystemNameDesc {
+    fn default() -&gt; Self {
+        SystemNameDesc {}
+    }
+}
+
+impl&lt;'a, 'b&gt; ::amethyst::core::SystemDesc&lt;'a, 'b, SystemName&gt; for SystemNameDesc {
+    fn build(self, world: &amp;mut ::amethyst::ecs::World) -&gt; SystemName {
+        &lt;SystemName as ::amethyst::ecs::System&lt;'_&gt;&gt;::SystemData::setup(world);
+
+        let resize_events_id = WriteStorage::&lt;UiResize&gt;::fetch(&amp;world)
+                            .register_reader();
+
+        SystemName::new(resize_events_id)
+    }
+}
+</code></pre>
+</details>
+<h2><a class="header" href="#Вставка-ресурса-в-world" id="Вставка-ресурса-в-world">Вставка ресурса в <code>World</code>.</a></h2>
+<p><strong>Примечание.</strong> Если ресурс, который вы хотите вставить, является результатом выражения, такого как вызов функции, вы должны заключить это выражение в кавычки, например, <code>#[system_desc(insert(&quot;MyResource::default()&quot;))]</code>.</p>
+<pre><code class="language-rust edition2018 no_run noplaypen"><span class="boring">extern crate amethyst;
+</span><span class="boring">
+</span><span class="boring">use amethyst::{
+</span><span class="boring">    derive::SystemDesc,
+</span><span class="boring">    ecs::{ReadExpect, System, SystemData},
+</span><span class="boring">};
+</span><span class="boring">
+</span>pub struct NonDefault;
+
+#[derive(Default, SystemDesc)]
+#[system_desc(insert(NonDefault))]
+pub struct SystemName;
+
+impl&lt;'a&gt; System&lt;'a&gt; for SystemName {
+    type SystemData = ReadExpect&lt;'a, NonDefault&gt;;
+    fn run(&amp;mut self, data: Self::SystemData) {}
+}
+</code></pre>
+<details>
+<summary>Generated code</summary>
+<pre><code class="language-rust edition2018 no_run noplaypen"><span class="boring">extern crate amethyst;
+</span><span class="boring">
+</span><span class="boring">use amethyst::{
+</span><span class="boring">    derive::SystemDesc,
+</span><span class="boring">    ecs::{ReadExpect, System, SystemData},
+</span><span class="boring">};
+</span><span class="boring">
+</span><span class="boring">pub struct NonDefault;
+</span><span class="boring">
+</span><span class="boring">#[derive(Default)]
+</span><span class="boring">pub struct SystemName;
+</span><span class="boring">
+</span><span class="boring">impl&lt;'a&gt; System&lt;'a&gt; for SystemName {
+</span><span class="boring">    type SystemData = ReadExpect&lt;'a, NonDefault&gt;;
+</span><span class="boring">    fn run(&amp;mut self, data: Self::SystemData) {}
+</span><span class="boring">}
+</span><span class="boring">
+</span>/// Собирает `SystemName`.
+#[derive(Debug)]
+pub struct SystemNameDesc;
+
+impl Default for SystemNameDesc {
+    fn default() -&gt; Self {
+        SystemNameDesc {}
+    }
+}
+
+impl&lt;'a, 'b&gt; ::amethyst::core::SystemDesc&lt;'a, 'b, SystemName&gt; for SystemNameDesc {
+    fn build(self, world: &amp;mut ::amethyst::ecs::World) -&gt; SystemName {
+        &lt;SystemName as ::amethyst::ecs::System&lt;'_&gt;&gt;::SystemData::setup(world);
+
+        world.insert(NonDefault);
+
+        SystemName::default()
+    }
+}
+</code></pre>
+<hr />
+<p>Документация была переведена специально для сообщества &quot;<strong>rust_lang_ru</strong>&quot;.</p>
+<p>Подпишись на нас в <strong><a href="http://tlinks.run/rust_lang_ru">Telegram</a></strong> и <strong><a href="https://www.youtube.com/channel/UCu413rnSfuSSOR3OsIThlZA">YouTube</a></strong>!</p>
+<h1><a class="header" href="#Реализация-типажа-systemdesc" id="Реализация-типажа-systemdesc">Реализация типажа SystemDesc</a></h1>
+<p>Если производная <code>SystemDesc</code> не может сгенерировать реализацию типажа <code>SystemDesc</code> для инициализации системы, типаж <code>SystemDesc</code> можно реализовать вручную:</p>
+<pre><code class="language-rust edition2018 no_run noplaypen"><span class="boring">extern crate amethyst;
+</span><span class="boring">
+</span>use amethyst::{
+    audio::output::Output,
+    core::SystemDesc,
+    ecs::{System, SystemData, World},
+};
+
+<span class="boring">/// Syncs 3D transform data with the audio engine to provide 3D audio.
+</span><span class="boring">#[derive(Debug, Default)]
+</span><span class="boring">pub struct AudioSystem(Output);
+</span><span class="boring">impl&lt;'a&gt; System&lt;'a&gt; for AudioSystem {
+</span><span class="boring">    type SystemData = ();
+</span><span class="boring">    fn run(&amp;mut self, _: Self::SystemData) {}
+</span><span class="boring">}
+</span><span class="boring">
+</span>/// Собирает `AudioSystem`.
+#[derive(Default, Debug)]
+pub struct AudioSystemDesc {
+    /// Аудио `Output`.
+    pub output: Output,
+}
+
+impl&lt;'a, 'b&gt; SystemDesc&lt;'a, 'b, AudioSystem&gt; for AudioSystemDesc {
+    fn build(self, world: &amp;mut World) -&gt; AudioSystem {
+        &lt;AudioSystem as System&lt;'_&gt;&gt;::SystemData::setup(world);
+
+        world.insert(self.output.clone());
+
+        AudioSystem(self.output)
+    }
+}
+
+// in `main.rs`:
+// let game_data = GameDataBuilder::default()
+//     .with_system_desc(AudioSystemDesc::default(), &quot;&quot;, &amp;[]);
+</code></pre>
+<h2><a class="header" href="#Шаблоны" id="Шаблоны">Шаблоны</a></h2>
+<pre><code class="language-rust ignore">use amethyst_core::SystemDesc;
+
+/// Собирает `SystemName`.
+#[derive(Default, Debug)]
+pub struct SystemNameDesc;
+
+impl&lt;'a, 'b&gt; SystemDesc&lt;'a, 'b, SystemName&gt; for SystemNameDesc {
+    fn build(self, world: &amp;mut World) -&gt; SystemName {
+        &lt;SystemName as System&lt;'_&gt;&gt;::SystemData::setup(world);
+
+        let arg = unimplemented!(&quot;Replace code here&quot;);
+
+        SystemName::new(arg)
+    }
+}
+</code></pre>
+<p>С параметрами типа:</p>
+<pre><code class="language-rust ignore">use std::marker::PhantomData;
+
+use derivative::Derivative;
+
+use amethyst_core::ecs::SystemData;
+use amethyst_core::SystemDesc;
+
+/// Собирает `SystemName`.
+#[derive(Derivative, Debug)]
+#[derivative(Default(bound = &quot;&quot;))]
+pub struct SystemNameDesc&lt;T&gt; {
+    marker: PhantomData&lt;T&gt;,
+}
+
+impl&lt;'a, 'b, T&gt; SystemDesc&lt;'a, 'b, SystemName&lt;T&gt;&gt;
+    for SystemNameDesc&lt;T&gt;
+where
+    T: unimplemented!(&quot;Replace me.&quot;),
+{
+    fn build(self, world: &amp;mut World) -&gt; SystemName&lt;T&gt; {
+        &lt;SystemName&lt;T&gt; as System&lt;'_&gt;&gt;::SystemData::setup(world);
+
+        let arg = unimplemented!(&quot;Replace code here&quot;);
+
+        SystemName::new(arg)
+    }
+}
+</code></pre>
 <hr />
 <p>Документация была переведена специально для сообщества &quot;<strong>rust_lang_ru</strong>&quot;.</p>
 <p>Подпишись на нас в <strong><a href="http://tlinks.run/rust_lang_ru">Telegram</a></strong> и <strong><a href="https://www.youtube.com/channel/UCu413rnSfuSSOR3OsIThlZA">YouTube</a></strong>!</p>

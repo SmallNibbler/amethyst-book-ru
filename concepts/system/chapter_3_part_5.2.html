@@ -1,0 +1,648 @@
+<!DOCTYPE HTML>
+<html lang="ru" class="sidebar-visible no-js light">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Производная SystemDesc - Amethyst Документация</title>
+        
+
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff" />
+
+        <link rel="shortcut icon" href="../../favicon.png">
+        <link rel="stylesheet" href="../../css/variables.css">
+        <link rel="stylesheet" href="../../css/general.css">
+        <link rel="stylesheet" href="../../css/chrome.css">
+        <link rel="stylesheet" href="../../css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../../FontAwesome/css/font-awesome.css">
+        <link href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" rel="stylesheet" type="text/css">
+        <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro:500" rel="stylesheet" type="text/css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="../../highlight.css">
+        <link rel="stylesheet" href="../../tomorrow-night.css">
+        <link rel="stylesheet" href="../../ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+        
+
+        
+    </head>
+    <body>
+        <!-- Provide site root to javascript -->
+        <script type="text/javascript">
+            var path_to_root = "../../";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "light" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script type="text/javascript">
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script type="text/javascript">
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('no-js')
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add('js');
+        </script>
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script type="text/javascript">
+            var html = document.querySelector('html');
+            var sidebar = 'hidden';
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            }
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div id="sidebar-scrollbox" class="sidebar-scrollbox">
+                <ol class="chapter"><li class="expanded "><a href="../../chapter_1.html"><strong aria-hidden="true">1.</strong> Введение</a></li><li class="expanded "><a href="../../chapter_2.html"><strong aria-hidden="true">2.</strong> Начало работы</a></li><li class="expanded "><a href="../../concepts/chapter_3.html"><strong aria-hidden="true">3.</strong> Концепции</a></li><li><ol class="section"><li class="expanded "><a href="../../concepts/chapter_3_part_1.html"><strong aria-hidden="true">3.1.</strong> Состояния</a></li><li class="expanded "><a href="../../concepts/chapter_3_part_2.html"><strong aria-hidden="true">3.2.</strong> Сущность и компонент</a></li><li class="expanded "><a href="../../concepts/chapter_3_part_3.html"><strong aria-hidden="true">3.3.</strong> Ресурс</a></li><li class="expanded "><a href="../../concepts/chapter_3_part_4.html"><strong aria-hidden="true">3.4.</strong> Мир</a></li><li class="expanded "><a href="../../concepts/chapter_3_part_5.html"><strong aria-hidden="true">3.5.</strong> Система</a></li><li><ol class="section"><li class="expanded "><a href="../../concepts/system/chapter_3_part_5.1.html"><strong aria-hidden="true">3.5.1.</strong> Инициализация системы</a></li><li class="expanded "><a href="../../concepts/system/chapter_3_part_5.2.html" class="active"><strong aria-hidden="true">3.5.2.</strong> Производная SystemDesc</a></li><li class="expanded "><a href="../../concepts/system/chapter_3_part_5.3.html"><strong aria-hidden="true">3.5.3.</strong> Реализация типажа SystemDesc</a></li></ol></li></ol></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                
+                <div id="menu-bar" class="menu-bar">
+                    <div id="menu-bar-sticky-container">
+                        <div class="left-buttons">
+                            <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                                <i class="fa fa-bars"></i>
+                            </button>
+                            <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                                <i class="fa fa-paint-brush"></i>
+                            </button>
+                            <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                                <li role="none"><button role="menuitem" class="theme" id="light">Light (default)</button></li>
+                                <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                                <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                                <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                                <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                            </ul>
+                            
+                            <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                                <i class="fa fa-search"></i>
+                            </button>
+                            
+                        </div>
+
+                        <h1 class="menu-title">Amethyst Документация</h1>
+
+                        <div class="right-buttons">
+                            <a href="../../print.html" title="Print this book" aria-label="Print this book">
+                                <i id="print-button" class="fa fa-print"></i>
+                            </a>
+                            
+                        </div>
+                    </div>
+                </div>
+
+                
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" name="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+                
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script type="text/javascript">
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1><a class="header" href="#Производная-systemdesc" id="Производная-systemdesc">Производная SystemDesc</a></h1>
+<p>Производная <code>SystemDesc</code> поддерживает следующие случаи при создании реализации типажа <code>SystemDesc</code>:</p>
+<ul>
+<li>Параметры для передачи в системный конструктор.</li>
+<li>Поля для пропуска по умолчанию используемые системным конструктором.</li>
+<li>Регистрация <code>ReaderId</code> для <code>EventChannel&lt;\_&gt;</code> в <code>World</code>.</li>
+<li>Регистрация <code>ReaderId</code> в <code>FlaggedStorage</code> компонента.</li>
+<li>Вставка ресурса в <code>World</code>.</li>
+</ul>
+<p>Если ваш сценарий использования для инициализации системы не описан, см. страницу <a href="./chapter_3_part_5.3.html">«Реализация типажа <code>SystemDesc</code>»</a>.</p>
+<h2><a class="header" href="#Передача-параметров-в-системный-конструктор" id="Передача-параметров-в-системный-конструктор">Передача параметров в системный конструктор</a></h2>
+<pre><code class="language-rust edition2018 no_run noplaypen"><span class="boring">extern crate amethyst;
+</span><span class="boring">
+</span><span class="boring">use amethyst::{
+</span><span class="boring">    derive::SystemDesc,
+</span><span class="boring">    ecs::{System, SystemData},
+</span><span class="boring">};
+</span><span class="boring">
+</span>#[derive(SystemDesc)]
+#[system_desc(name(SystemNameDesc))]
+pub struct SystemName {
+    field_0: u32,
+    field_1: String,
+}
+
+impl SystemName {
+    fn new(field_0: u32, field_1: String) -&gt; Self {
+        SystemName { field_0, field_1 }
+    }
+}
+<span class="boring">
+</span><span class="boring">impl&lt;'a&gt; System&lt;'a&gt; for SystemName {
+</span><span class="boring">    type SystemData = ();
+</span><span class="boring">    fn run(&amp;mut self, data: Self::SystemData) {}
+</span><span class="boring">}
+</span></code></pre>
+<details>
+<summary>Generated code</summary>
+<pre><code class="language-rust edition2018 no_run noplaypen"><span class="boring">extern crate amethyst;
+</span><span class="boring">
+</span><span class="boring">use amethyst::{
+</span><span class="boring">    derive::SystemDesc,
+</span><span class="boring">    ecs::{System, SystemData},
+</span><span class="boring">};
+</span><span class="boring">
+</span><span class="boring">pub struct SystemName {
+</span><span class="boring">    field_0: u32,
+</span><span class="boring">    field_1: String,
+</span><span class="boring">}
+</span><span class="boring">
+</span><span class="boring">impl SystemName {
+</span><span class="boring">    fn new(field_0: u32, field_1: String) -&gt; Self {
+</span><span class="boring">        SystemName { field_0, field_1 }
+</span><span class="boring">    }
+</span><span class="boring">}
+</span><span class="boring">
+</span><span class="boring">impl&lt;'a&gt; System&lt;'a&gt; for SystemName {
+</span><span class="boring">    type SystemData = ();
+</span><span class="boring">    fn run(&amp;mut self, data: Self::SystemData) {}
+</span><span class="boring">}
+</span><span class="boring">
+</span>/// Собирает `SystemName`.
+#[derive(Default, Debug)]
+pub struct SystemNameDesc {
+    field_0: u32,
+    field_1: String,
+}
+
+impl SystemNameDesc {
+    fn new(field_0: u32, field_1: String) -&gt; Self {
+        SystemNameDesc { field_0, field_1 }
+    }
+}
+
+impl&lt;'a, 'b&gt; ::amethyst::core::SystemDesc&lt;'a, 'b, SystemName&gt; for SystemNameDesc {
+    fn build(self, world: &amp;mut ::amethyst::ecs::World) -&gt; SystemName {
+        &lt;SystemName as ::amethyst::ecs::System&lt;'_&gt;&gt;::SystemData::setup(world);
+
+        SystemName::new(self.field_0, self.field_1)
+    }
+}
+</code></pre>
+</details>
+<h2><a class="header" href="#Поля-для-пропуска-по-умолчанию--используемые-конструктором-системы" id="Поля-для-пропуска-по-умолчанию--используемые-конструктором-системы">Поля для пропуска по умолчанию  используемые конструктором системы</a></h2>
+<pre><code class="language-rust edition2018 no_run noplaypen"><span class="boring">extern crate amethyst;
+</span><span class="boring">
+</span><span class="boring">use amethyst::{
+</span><span class="boring">    derive::SystemDesc,
+</span><span class="boring">    ecs::{System, SystemData},
+</span><span class="boring">};
+</span><span class="boring">
+</span>#[derive(SystemDesc)]
+#[system_desc(name(SystemNameDesc))]
+pub struct SystemName {
+    #[system_desc(skip)]
+    field_0: u32,
+    field_1: String,
+}
+
+impl SystemName {
+    fn new(field_1: String) -&gt; Self {
+        SystemName { field_0: 123, field_1 }
+    }
+}
+<span class="boring">
+</span><span class="boring">impl&lt;'a&gt; System&lt;'a&gt; for SystemName {
+</span><span class="boring">    type SystemData = ();
+</span><span class="boring">    fn run(&amp;mut self, data: Self::SystemData) {}
+</span><span class="boring">}
+</span></code></pre>
+<details>
+<summary>Generated code</summary>
+<pre><code class="language-rust edition2018 no_run noplaypen"><span class="boring">extern crate amethyst;
+</span><span class="boring">
+</span><span class="boring">use amethyst::{
+</span><span class="boring">    derive::SystemDesc,
+</span><span class="boring">    ecs::{System, SystemData},
+</span><span class="boring">};
+</span><span class="boring">
+</span><span class="boring">pub struct SystemName {
+</span><span class="boring">    field_0: u32,
+</span><span class="boring">    field_1: String,
+</span><span class="boring">}
+</span><span class="boring">
+</span><span class="boring">impl SystemName {
+</span><span class="boring">    fn new(field_1: String) -&gt; Self {
+</span><span class="boring">        SystemName { field_0: 123, field_1 }
+</span><span class="boring">    }
+</span><span class="boring">}
+</span><span class="boring">
+</span><span class="boring">impl&lt;'a&gt; System&lt;'a&gt; for SystemName {
+</span><span class="boring">    type SystemData = ();
+</span><span class="boring">    fn run(&amp;mut self, data: Self::SystemData) {}
+</span><span class="boring">}
+</span><span class="boring">
+</span>/// Собирает `SystemName`.
+#[derive(Default, Debug)]
+pub struct SystemNameDesc {
+    field_1: String,
+}
+
+impl SystemNameDesc {
+    fn new(field_1: String) -&gt; Self {
+        SystemNameDesc { field_1 }
+    }
+}
+
+impl&lt;'a, 'b&gt; ::amethyst::core::SystemDesc&lt;'a, 'b, SystemName&gt; for SystemNameDesc {
+    fn build(self, world: &amp;mut ::amethyst::ecs::World) -&gt; SystemName {
+        &lt;SystemName as ::amethyst::ecs::System&lt;'_&gt;&gt;::SystemData::setup(world);
+
+        SystemName::new(self.field_1)
+    }
+}
+</code></pre>
+</details>
+<p><strong>Примечание.</strong> Если параметры поля отсутствуют, реализация <code>SystemDesc</code> вызовет <code>SystemName::default()</code>:</p>
+<pre><code class="language-rust edition2018 no_run noplaypen"><span class="boring">extern crate amethyst;
+</span><span class="boring">
+</span><span class="boring">use amethyst::{
+</span><span class="boring">    derive::SystemDesc,
+</span><span class="boring">    ecs::{System, SystemData},
+</span><span class="boring">};
+</span><span class="boring">
+</span>#[derive(Default, SystemDesc)]
+#[system_desc(name(SystemNameDesc))]
+pub struct SystemName {
+    #[system_desc(skip)]
+    field_0: u32,
+}
+<span class="boring">
+</span><span class="boring">impl&lt;'a&gt; System&lt;'a&gt; for SystemName {
+</span><span class="boring">    type SystemData = ();
+</span><span class="boring">    fn run(&amp;mut self, data: Self::SystemData) {}
+</span><span class="boring">}
+</span></code></pre>
+<details>
+<summary>Generated code</summary>
+<pre><code class="language-rust edition2018 no_run noplaypen"><span class="boring">extern crate amethyst;
+</span><span class="boring">
+</span><span class="boring">use amethyst::{
+</span><span class="boring">    derive::SystemDesc,
+</span><span class="boring">    ecs::{System, SystemData},
+</span><span class="boring">};
+</span><span class="boring">
+</span><span class="boring">#[derive(Default)]
+</span><span class="boring">pub struct SystemName {
+</span><span class="boring">    field_0: u32,
+</span><span class="boring">}
+</span><span class="boring">
+</span><span class="boring">impl&lt;'a&gt; System&lt;'a&gt; for SystemName {
+</span><span class="boring">    type SystemData = ();
+</span><span class="boring">    fn run(&amp;mut self, data: Self::SystemData) {}
+</span><span class="boring">}
+</span><span class="boring">
+</span>/// Собирает `SystemName`.
+#[derive(Debug)]
+pub struct SystemNameDesc {}
+
+impl Default for SystemNameDesc {
+    fn default() -&gt; Self {
+        SystemNameDesc {}
+    }
+}
+
+impl&lt;'a, 'b&gt; ::amethyst::core::SystemDesc&lt;'a, 'b, SystemName&gt; for SystemNameDesc {
+    fn build(self, world: &amp;mut ::amethyst::ecs::World) -&gt; SystemName {
+        &lt;SystemName as ::amethyst::ecs::System&lt;'_&gt;&gt;::SystemData::setup(world);
+
+        SystemName::default()
+    }
+}
+</code></pre>
+</details>
+<h2><a class="header" href="#Регистрация-readerid-для-eventchannel_-в-world" id="Регистрация-readerid-для-eventchannel_-в-world">Регистрация <code>ReaderId</code> для <code>EventChannel&lt;\_&gt;</code> в <code>World</code>.</a></h2>
+<pre><code class="language-rust edition2018 no_run noplaypen"><span class="boring">extern crate amethyst;
+</span><span class="boring">
+</span><span class="boring">use amethyst::{
+</span><span class="boring">    derive::SystemDesc,
+</span><span class="boring">    ecs::{System, SystemData},
+</span><span class="boring">    shrev::{EventChannel, ReaderId},
+</span><span class="boring">    ui::UiEvent,
+</span><span class="boring">};
+</span><span class="boring">
+</span>#[derive(SystemDesc)]
+#[system_desc(name(SystemNameDesc))]
+pub struct SystemName {
+    #[system_desc(event_channel_reader)]
+    reader_id: ReaderId&lt;UiEvent&gt;,
+}
+
+impl SystemName {
+    fn new(reader_id: ReaderId&lt;UiEvent&gt;) -&gt; Self {
+        SystemName { reader_id }
+    }
+}
+<span class="boring">
+</span><span class="boring">impl&lt;'a&gt; System&lt;'a&gt; for SystemName {
+</span><span class="boring">    type SystemData = ();
+</span><span class="boring">    fn run(&amp;mut self, data: Self::SystemData) {}
+</span><span class="boring">}
+</span></code></pre>
+<details>
+<summary>Generated code</summary>
+<pre><code class="language-rust edition2018 no_run noplaypen"><span class="boring">extern crate amethyst;
+</span><span class="boring">
+</span><span class="boring">use amethyst::{
+</span><span class="boring">    derive::SystemDesc,
+</span><span class="boring">    ecs::{System, SystemData},
+</span><span class="boring">    shrev::{EventChannel, ReaderId},
+</span><span class="boring">    ui::UiEvent,
+</span><span class="boring">};
+</span><span class="boring">
+</span><span class="boring">pub struct SystemName {
+</span><span class="boring">    reader_id: ReaderId&lt;UiEvent&gt;,
+</span><span class="boring">}
+</span><span class="boring">
+</span><span class="boring">impl SystemName {
+</span><span class="boring">    fn new(reader_id: ReaderId&lt;UiEvent&gt;) -&gt; Self {
+</span><span class="boring">        SystemName { reader_id }
+</span><span class="boring">    }
+</span><span class="boring">}
+</span><span class="boring">
+</span><span class="boring">impl&lt;'a&gt; System&lt;'a&gt; for SystemName {
+</span><span class="boring">    type SystemData = ();
+</span><span class="boring">    fn run(&amp;mut self, data: Self::SystemData) {}
+</span><span class="boring">}
+</span><span class="boring">
+</span>/// Собирает `SystemName`.
+#[derive(Debug)]
+pub struct SystemNameDesc;
+
+impl Default for SystemNameDesc {
+    fn default() -&gt; Self {
+        SystemNameDesc {}
+    }
+}
+
+impl&lt;'a, 'b&gt; ::amethyst::core::SystemDesc&lt;'a, 'b, SystemName&gt; for SystemNameDesc {
+    fn build(self, world: &amp;mut ::amethyst::ecs::World) -&gt; SystemName {
+        &lt;SystemName as ::amethyst::ecs::System&lt;'_&gt;&gt;::SystemData::setup(world);
+
+        let reader_id = world
+            .fetch_mut::&lt;EventChannel&lt;UiEvent&gt;&gt;()
+            .register_reader();
+
+        SystemName::new(reader_id)
+    }
+}
+</code></pre>
+</details>
+<h2><a class="header" href="#Регистрация-readerid-в-flaggedstorage-компонента" id="Регистрация-readerid-в-flaggedstorage-компонента">Регистрация <code>ReaderId</code> в <code>FlaggedStorage</code> компонента.</a></h2>
+<pre><code class="language-rust edition2018 no_run noplaypen"><span class="boring">extern crate amethyst;
+</span><span class="boring">
+</span><span class="boring">use amethyst::{
+</span><span class="boring">    derive::SystemDesc,
+</span><span class="boring">    ecs::{storage::ComponentEvent, System, SystemData, WriteStorage},
+</span><span class="boring">    shrev::{EventChannel, ReaderId},
+</span><span class="boring">    ui::UiResize,
+</span><span class="boring">};
+</span><span class="boring">
+</span>#[derive(SystemDesc)]
+#[system_desc(name(SystemNameDesc))]
+pub struct SystemName {
+    #[system_desc(flagged_storage_reader(UiResize))]
+    resize_events_id: ReaderId&lt;ComponentEvent&gt;,
+}
+
+impl SystemName {
+    fn new(resize_events_id: ReaderId&lt;ComponentEvent&gt;) -&gt; Self {
+        SystemName { resize_events_id }
+    }
+}
+<span class="boring">
+</span><span class="boring">impl&lt;'a&gt; System&lt;'a&gt; for SystemName {
+</span><span class="boring">    type SystemData = ();
+</span><span class="boring">    fn run(&amp;mut self, data: Self::SystemData) {}
+</span><span class="boring">}
+</span></code></pre>
+<details>
+<summary>Generated code</summary>
+<pre><code class="language-rust edition2018 no_run noplaypen"><span class="boring">extern crate amethyst;
+</span><span class="boring">
+</span><span class="boring">use amethyst::{
+</span><span class="boring">    derive::SystemDesc,
+</span><span class="boring">    ecs::{storage::ComponentEvent, System, SystemData, WriteStorage},
+</span><span class="boring">    shrev::{EventChannel, ReaderId},
+</span><span class="boring">    ui::UiResize,
+</span><span class="boring">};
+</span><span class="boring">
+</span><span class="boring">pub struct SystemName {
+</span><span class="boring">    resize_events_id: ReaderId&lt;ComponentEvent&gt;,
+</span><span class="boring">}
+</span><span class="boring">
+</span><span class="boring">impl SystemName {
+</span><span class="boring">    fn new(resize_events_id: ReaderId&lt;ComponentEvent&gt;) -&gt; Self {
+</span><span class="boring">        SystemName { resize_events_id }
+</span><span class="boring">    }
+</span><span class="boring">}
+</span><span class="boring">
+</span><span class="boring">impl&lt;'a&gt; System&lt;'a&gt; for SystemName {
+</span><span class="boring">    type SystemData = ();
+</span><span class="boring">    fn run(&amp;mut self, data: Self::SystemData) {}
+</span><span class="boring">}
+</span><span class="boring">
+</span>/// Собирает `SystemName`.
+#[derive(Debug)]
+pub struct SystemNameDesc;
+
+impl Default for SystemNameDesc {
+    fn default() -&gt; Self {
+        SystemNameDesc {}
+    }
+}
+
+impl&lt;'a, 'b&gt; ::amethyst::core::SystemDesc&lt;'a, 'b, SystemName&gt; for SystemNameDesc {
+    fn build(self, world: &amp;mut ::amethyst::ecs::World) -&gt; SystemName {
+        &lt;SystemName as ::amethyst::ecs::System&lt;'_&gt;&gt;::SystemData::setup(world);
+
+        let resize_events_id = WriteStorage::&lt;UiResize&gt;::fetch(&amp;world)
+                            .register_reader();
+
+        SystemName::new(resize_events_id)
+    }
+}
+</code></pre>
+</details>
+<h2><a class="header" href="#Вставка-ресурса-в-world" id="Вставка-ресурса-в-world">Вставка ресурса в <code>World</code>.</a></h2>
+<p><strong>Примечание.</strong> Если ресурс, который вы хотите вставить, является результатом выражения, такого как вызов функции, вы должны заключить это выражение в кавычки, например, <code>#[system_desc(insert(&quot;MyResource::default()&quot;))]</code>.</p>
+<pre><code class="language-rust edition2018 no_run noplaypen"><span class="boring">extern crate amethyst;
+</span><span class="boring">
+</span><span class="boring">use amethyst::{
+</span><span class="boring">    derive::SystemDesc,
+</span><span class="boring">    ecs::{ReadExpect, System, SystemData},
+</span><span class="boring">};
+</span><span class="boring">
+</span>pub struct NonDefault;
+
+#[derive(Default, SystemDesc)]
+#[system_desc(insert(NonDefault))]
+pub struct SystemName;
+
+impl&lt;'a&gt; System&lt;'a&gt; for SystemName {
+    type SystemData = ReadExpect&lt;'a, NonDefault&gt;;
+    fn run(&amp;mut self, data: Self::SystemData) {}
+}
+</code></pre>
+<details>
+<summary>Generated code</summary>
+<pre><code class="language-rust edition2018 no_run noplaypen"><span class="boring">extern crate amethyst;
+</span><span class="boring">
+</span><span class="boring">use amethyst::{
+</span><span class="boring">    derive::SystemDesc,
+</span><span class="boring">    ecs::{ReadExpect, System, SystemData},
+</span><span class="boring">};
+</span><span class="boring">
+</span><span class="boring">pub struct NonDefault;
+</span><span class="boring">
+</span><span class="boring">#[derive(Default)]
+</span><span class="boring">pub struct SystemName;
+</span><span class="boring">
+</span><span class="boring">impl&lt;'a&gt; System&lt;'a&gt; for SystemName {
+</span><span class="boring">    type SystemData = ReadExpect&lt;'a, NonDefault&gt;;
+</span><span class="boring">    fn run(&amp;mut self, data: Self::SystemData) {}
+</span><span class="boring">}
+</span><span class="boring">
+</span>/// Собирает `SystemName`.
+#[derive(Debug)]
+pub struct SystemNameDesc;
+
+impl Default for SystemNameDesc {
+    fn default() -&gt; Self {
+        SystemNameDesc {}
+    }
+}
+
+impl&lt;'a, 'b&gt; ::amethyst::core::SystemDesc&lt;'a, 'b, SystemName&gt; for SystemNameDesc {
+    fn build(self, world: &amp;mut ::amethyst::ecs::World) -&gt; SystemName {
+        &lt;SystemName as ::amethyst::ecs::System&lt;'_&gt;&gt;::SystemData::setup(world);
+
+        world.insert(NonDefault);
+
+        SystemName::default()
+    }
+}
+</code></pre>
+<hr />
+<p>Документация была переведена специально для сообщества &quot;<strong>rust_lang_ru</strong>&quot;.</p>
+<p>Подпишись на нас в <strong><a href="http://tlinks.run/rust_lang_ru">Telegram</a></strong> и <strong><a href="https://www.youtube.com/channel/UCu413rnSfuSSOR3OsIThlZA">YouTube</a></strong>!</p>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                        
+                            <a rel="prev" href="../../concepts/system/chapter_3_part_5.1.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+                        
+
+                        
+                            <a rel="next" href="../../concepts/system/chapter_3_part_5.3.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+                        
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                
+                    <a href="../../concepts/system/chapter_3_part_5.1.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+                
+
+                
+                    <a href="../../concepts/system/chapter_3_part_5.3.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+                
+            </nav>
+
+        </div>
+
+        
+
+        
+
+        
+        
+        
+        <script type="text/javascript">
+            window.playpen_copyable = true;
+        </script>
+        
+
+        
+
+        
+        <script src="../../elasticlunr.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../../mark.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../../searcher.js" type="text/javascript" charset="utf-8"></script>
+        
+
+        <script src="../../clipboard.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../../highlight.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../../book.js" type="text/javascript" charset="utf-8"></script>
+
+        <!-- Custom JS scripts -->
+        
+
+        
+
+    </body>
+</html>

@@ -1,0 +1,673 @@
+<!DOCTYPE HTML>
+<html lang="ru" class="sidebar-visible no-js light">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Система - Amethyst Документация</title>
+        
+
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff" />
+
+        <link rel="shortcut icon" href="../favicon.png">
+        <link rel="stylesheet" href="../css/variables.css">
+        <link rel="stylesheet" href="../css/general.css">
+        <link rel="stylesheet" href="../css/chrome.css">
+        <link rel="stylesheet" href="../css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../FontAwesome/css/font-awesome.css">
+        <link href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" rel="stylesheet" type="text/css">
+        <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro:500" rel="stylesheet" type="text/css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="../highlight.css">
+        <link rel="stylesheet" href="../tomorrow-night.css">
+        <link rel="stylesheet" href="../ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+        
+
+        
+    </head>
+    <body>
+        <!-- Provide site root to javascript -->
+        <script type="text/javascript">
+            var path_to_root = "../";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "light" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script type="text/javascript">
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script type="text/javascript">
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('no-js')
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add('js');
+        </script>
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script type="text/javascript">
+            var html = document.querySelector('html');
+            var sidebar = 'hidden';
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            }
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div id="sidebar-scrollbox" class="sidebar-scrollbox">
+                <ol class="chapter"><li class="expanded "><a href="../chapter_1.html"><strong aria-hidden="true">1.</strong> Введение</a></li><li class="expanded "><a href="../chapter_2.html"><strong aria-hidden="true">2.</strong> Начало работы</a></li><li class="expanded "><a href="../concepts/chapter_3.html"><strong aria-hidden="true">3.</strong> Концепции</a></li><li><ol class="section"><li class="expanded "><a href="../concepts/chapter_3_part_1.html"><strong aria-hidden="true">3.1.</strong> Состояния</a></li><li class="expanded "><a href="../concepts/chapter_3_part_2.html"><strong aria-hidden="true">3.2.</strong> Сущность и компонент</a></li><li class="expanded "><a href="../concepts/chapter_3_part_3.html"><strong aria-hidden="true">3.3.</strong> Ресурс</a></li><li class="expanded "><a href="../concepts/chapter_3_part_4.html"><strong aria-hidden="true">3.4.</strong> Мир</a></li><li class="expanded "><a href="../concepts/chapter_3_part_5.html" class="active"><strong aria-hidden="true">3.5.</strong> Система</a></li><li><ol class="section"><li class="expanded "><a href="../concepts/system/chapter_3_part_5.1.html"><strong aria-hidden="true">3.5.1.</strong> Инициализация системы</a></li><li class="expanded "><a href="../concepts/system/chapter_3_part_5.2.html"><strong aria-hidden="true">3.5.2.</strong> Производная SystemDesc</a></li><li class="expanded "><a href="../concepts/system/chapter_3_part_5.3.html"><strong aria-hidden="true">3.5.3.</strong> Реализация типажа SystemDesc</a></li></ol></li></ol></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                
+                <div id="menu-bar" class="menu-bar">
+                    <div id="menu-bar-sticky-container">
+                        <div class="left-buttons">
+                            <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                                <i class="fa fa-bars"></i>
+                            </button>
+                            <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                                <i class="fa fa-paint-brush"></i>
+                            </button>
+                            <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                                <li role="none"><button role="menuitem" class="theme" id="light">Light (default)</button></li>
+                                <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                                <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                                <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                                <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                            </ul>
+                            
+                            <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                                <i class="fa fa-search"></i>
+                            </button>
+                            
+                        </div>
+
+                        <h1 class="menu-title">Amethyst Документация</h1>
+
+                        <div class="right-buttons">
+                            <a href="../print.html" title="Print this book" aria-label="Print this book">
+                                <i id="print-button" class="fa fa-print"></i>
+                            </a>
+                            
+                        </div>
+                    </div>
+                </div>
+
+                
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" name="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+                
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script type="text/javascript">
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1><a class="header" href="#Система" id="Система">Система</a></h1>
+<h2><a class="header" href="#Что-такое-система" id="Что-такое-система">Что такое система?</a></h2>
+<p>Система (<code>System</code>) - это место, где выполняется логика игры. На практике система состоит из структуры, реализующей функцию, выполняемую на каждой итерации игрового цикла, и принимающей в качестве аргумента данные об игре. Системы можно рассматривать как маленькую единицу логики. Все системы запускаются движком вместе (даже параллельно, когда это возможно) и выполняют специализированную операцию с одной или группой сущностей.</p>
+<p>Структура</p>
+<p>Структура системы - это структура, реализующая типаж amethyst::ecs::System. Вот очень простой пример реализации:</p>
+<pre><code class="language-rust edition2018 no_run noplaypen"><span class="boring">extern crate amethyst;
+</span><span class="boring">use amethyst::ecs::System;
+</span>struct MyFirstSystem;
+
+impl&lt;'a&gt; System&lt;'a&gt; for MyFirstSystem {
+    type SystemData = ();
+
+    fn run(&amp;mut self, data: Self::SystemData) {
+        println!(&quot;Hello!&quot;);
+    }
+}
+</code></pre>
+<p>Эта система будет на каждой итерации игрового цикла выводить «Hello!» в консоли. Это довольно скучная система, поскольку она вообще не взаимодействует с игрой. Давайте немного оживим это.</p>
+<p>Доступ к контексту игры</p>
+<p>В определении системы этот типаж требует от вас определения типа <code>SystemData</code>. Этот тип определяет, какие данные будут предоставляться системой при каждом вызове метода <code>run</code>. <code>SystemData</code> предназначен только для переноса информации, доступной для нескольких систем. Данные, локальные для системы, обычно хранятся в самой структуре системы.</p>
+<p>Движок Amethyst предоставляет полезные системные типы данных для доступа к контексту игры. Вот некоторые из наиболее важных:</p>
+<ul>
+<li><code>Read&lt;'a, Resource&gt;</code> (или <code>Write&lt;'a, Resource&gt;</code> соответственно) позволяет вам получить неизменяемую (или соответственно изменяемую) ссылку на ресурс указанного вами типа. Это гарантированно не завершится сбоем, так как если ресурс недоступен, он даст вам <code>Default::default()</code> вашего ресурса.</li>
+<li><code>ReadExpect&lt;'a, Resource&gt;</code> (или <code>WriteExpect&lt;'a, Resource&gt;</code> соответственно) является отказоустойчивой альтернативой предыдущему типу, поэтому вы можете использовать ресурсы, которые не реализуют типаж <code>Default</code>.</li>
+<li><code>ReadStorage&lt;'a, Component&gt;</code> (или <code>WriteStorage&lt;'a, Component&gt;</code> соответственно) позволяет получить неизменяемую (или соответственно изменяемую) ссылку на всё хранилище определенного типа <code>Component</code>.</li>
+<li><code>Entities&lt;'a&gt;</code> позволяет вам создавать или уничтожать сущности в контексте системы.</li>
+</ul>
+<p>Затем вы можете использовать один или несколько из них с помощью кортежа.</p>
+<pre><code class="language-rust edition2018 no_run noplaypen"><span class="boring">extern crate amethyst;
+</span><span class="boring">use amethyst::ecs::{System, Read};
+</span><span class="boring">use amethyst::core::timing::Time;
+</span>struct MyFirstSystem;
+
+impl&lt;'a&gt; System&lt;'a&gt; for MyFirstSystem {
+    type SystemData = Read&lt;'a, Time&gt;;
+
+    fn run(&amp;mut self, data: Self::SystemData) {
+        println!(&quot;{}&quot;, data.delta_seconds());
+    }
+}
+</code></pre>
+<p>Здесь мы получаем ресурс <code>amethyst::core::timer::Time</code> для печати в консоль времени, прошедшего между двумя кадрами. Хорошо! Но это все еще немного скучно.</p>
+<h2><a class="header" href="#Манипуляции-с-хранилищами" id="Манипуляции-с-хранилищами">Манипуляции с хранилищами</a></h2>
+<p>Получив доступ к хранилищу, вы можете использовать их по-разному.</p>
+<h3><a class="header" href="#Получение-компонента-конкретной-сущности" id="Получение-компонента-конкретной-сущности">Получение компонента конкретной сущности</a></h3>
+<p>Иногда бывает полезно получить компонент конкретной сущности из хранилища. Это легко сделать с помощью метода <code>get</code> или, для изменяемых хранилищ, метода <code>get_mut</code>.</p>
+<pre><code class="language-rust edition2018 no_run noplaypen"><span class="boring">extern crate amethyst;
+</span><span class="boring">use amethyst::ecs::{Entity, System, WriteStorage};
+</span><span class="boring">use amethyst::core::Transform;
+</span>struct WalkPlayerUp {
+    player: Entity,
+}
+
+impl&lt;'a&gt; System&lt;'a&gt; for WalkPlayerUp {
+    type SystemData = WriteStorage&lt;'a, Transform&gt;;
+
+    fn run(&amp;mut self, mut transforms: Self::SystemData) {
+        transforms.get_mut(self.player).unwrap().prepend_translation_y(0.1);
+    }
+}
+</code></pre>
+<p>Эта система заставляет игрока подниматься на 0,1 единицы за каждую итерацию игрового цикла! Чтобы определить, что это за игрок, мы заранее сохранили его в структуре системы. Затем мы получаем его <code>Transform</code> из хранилища <code>Transform</code> и перемещаем его вдоль оси Y на 0,1.</p>
+<blockquote>
+<p><code>Transform</code> - очень распространенная структура в разработке игр. Она представляет положение, вращение и масштаб объекта в игровом мире. Вы будете использовать их очень часто, так как они - то, что вам нужно изменить, когда вы хотите что-то изменить в своей игре.</p>
+</blockquote>
+<p>Однако такой подход довольно редок, потому что большую часть времени вы не знаете, какой сущностью вы хотите манипулировать, и чаще вы будете применить свои изменения к нескольким сущностям.</p>
+<h3><a class="header" href="#Получение-всех-сущностей-с-конкретными-компонентами" id="Получение-всех-сущностей-с-конкретными-компонентами">Получение всех сущностей с конкретными компонентами</a></h3>
+<p>В большинстве случаев вы захотите выполнить логику для всех сущностей с определенным компонентом или даже для всех сущностей с набором компонентов.</p>
+<p>Это возможно с помощью метода <code>join</code>. Возможно, вы знакомы с операциями объединения, если вы когда-либо работали с базами данных. Метод <code>join</code> принимает несколько хранилищ и выполняет итерацию по всем сущностям, которые имеют компонент в каждом из этих хранилищ. Это работает как &quot;И&quot; ворота. Он вернет итератор, содержащий кортеж всех запрошенных компонентов, если они <strong>все</strong> на одной и той же сущности.</p>
+<p>Если вы используете 'join' c компонентами A, B и C, будут рассматриваться только те объекты, которые имеют ВСЕ эти компоненты.</p>
+<p>Само собой разумеется, что вы можете использовать его только с одним хранилищем для перебора всех объектов с определенным компонентом.</p>
+<p>Помните, что метод <code>join</code> доступен только при импорте <code>amethyst::ecs::Join</code>.</p>
+<pre><code class="language-rust edition2018 no_run noplaypen"><span class="boring">extern crate amethyst;
+</span><span class="boring">use amethyst::ecs::{System, ReadStorage, WriteStorage};
+</span><span class="boring">use amethyst::core::Transform;
+</span><span class="boring">struct FallingObject;
+</span><span class="boring">impl amethyst::ecs::Component for FallingObject {
+</span><span class="boring">  type Storage = amethyst::ecs::DenseVecStorage&lt;FallingObject&gt;;
+</span><span class="boring">}
+</span>use amethyst::ecs::Join;
+
+struct MakeObjectsFall;
+
+impl&lt;'a&gt; System&lt;'a&gt; for MakeObjectsFall {
+    type SystemData = (
+        WriteStorage&lt;'a, Transform&gt;,
+        ReadStorage&lt;'a, FallingObject&gt;,
+    );
+
+    fn run(&amp;mut self, (mut transforms, falling): Self::SystemData) {
+        for (mut transform, _) in (&amp;mut transforms, &amp;falling).join() {
+            if transform.translation().y &gt; 0.0 {
+                transform.prepend_translation_y(-0.1);
+            }
+        }
+    }
+}
+</code></pre>
+<p>Эта система найдёт все сущности которым принадлежат оба компонента. Компонент <code>Transform</code> с положительной координатой <code>y</code> и компонент тег <code>FallingObject</code>. И уменьшит их координату <code>y</code> на 0,1 единицу за итерацию игрового цикла. Обратите внимание, что поскольку <code>FallingObject</code> присутствует здесь только в качестве тега для ограничения операции объединения (<code>join</code>), мы немедленно отбрасываем его, используя синтаксис <code>\_</code>.</p>
+<p>Здорово! Теперь это похоже на то, что мы действительно будем делать в наших играх!</p>
+<h3><a class="header" href="#Получение-сущностей-которые-имеют-некоторые-компоненты-но-не-другие" id="Получение-сущностей-которые-имеют-некоторые-компоненты-но-не-другие">Получение сущностей, которые имеют некоторые компоненты, но не другие</a></h3>
+<p>В спецификациях есть специальный тип хранилища, называемый <code>AntiStorage</code>. Оператор <em>not</em> (<code>!</code>) превращает хранилище в его аналог <code>AntiStorage</code>, что позволяет перебирать объекты, которые <em>не</em> имеют этот компонент.</p>
+<p>Используется так:</p>
+<pre><code class="language-rust edition2018 no_run noplaypen"><span class="boring">extern crate amethyst;
+</span><span class="boring">use amethyst::ecs::{System, ReadStorage, WriteStorage};
+</span><span class="boring">use amethyst::core::Transform;
+</span><span class="boring">struct FallingObject;
+</span><span class="boring">impl amethyst::ecs::Component for FallingObject {
+</span><span class="boring">  type Storage = amethyst::ecs::DenseVecStorage&lt;FallingObject&gt;;
+</span><span class="boring">}
+</span>use amethyst::ecs::Join;
+
+struct NotFallingObjects;
+
+impl&lt;'a&gt; System&lt;'a&gt; for NotFallingObjects {
+    type SystemData = (
+        WriteStorage&lt;'a, Transform&gt;,
+        ReadStorage&lt;'a, FallingObject&gt;,
+    );
+
+    fn run(&amp;mut self, (mut transforms, falling): Self::SystemData) {
+        for (mut transform, _) in (&amp;mut transforms, !&amp;falling).join() {
+            // Если они не падают, почему бы не заставить их подняться!
+            transform.prepend_translation_y(0.1);
+        }
+    }
+}
+</code></pre>
+<h2><a class="header" href="#Управление-структурой-сущностей" id="Управление-структурой-сущностей">Управление структурой сущностей</a></h2>
+<p>Иногда может быть полезно манипулировать структурой сущностей в системе, например, создавать новые или модифицировать компоновку существующих компонентов. Этот процесс выполняется с использованием системных данных <code>Entities &lt;'a&gt;</code>.</p>
+<blockquote>
+<p>Запрос <code>Entities&lt;'a&gt;</code> не влияет на производительность, поскольку он содержит только неизменяемые ресурсы и, следовательно, <a href="https://book-src.amethyst.rs/stable/concepts/dispatcher.html">не блокирует диспетчеризацию</a>.</p>
+</blockquote>
+<h3><a class="header" href="#Создание-новых-сущностей-в-системе" id="Создание-новых-сущностей-в-системе">Создание новых сущностей в системе</a></h3>
+<p>Создание сущности в контексте системы очень похоже на способ создания сущности с использованием структуры <code>World</code>. Единственное отличие состоит в том, что необходимо обеспечить изменяемые хранилища всех компонентов, которые вы планируете добавить в сущность.</p>
+<pre><code class="language-rust edition2018 no_run noplaypen"><span class="boring">extern crate amethyst;
+</span><span class="boring">use amethyst::ecs::{System, WriteStorage, Entities};
+</span><span class="boring">use amethyst::core::Transform;
+</span><span class="boring">struct Enemy;
+</span><span class="boring">impl amethyst::ecs::Component for Enemy {
+</span><span class="boring">  type Storage = amethyst::ecs::VecStorage&lt;Enemy&gt;;
+</span><span class="boring">}
+</span>struct SpawnEnemies {
+    counter: u32,
+}
+
+impl&lt;'a&gt; System&lt;'a&gt; for SpawnEnemies {
+    type SystemData = (
+        WriteStorage&lt;'a, Transform&gt;,
+        WriteStorage&lt;'a, Enemy&gt;,
+        Entities&lt;'a&gt;,
+    );
+
+    fn run(&amp;mut self, (mut transforms, mut enemies, entities): Self::SystemData) {
+        self.counter += 1;
+        if self.counter &gt; 200 {
+            entities.build_entity()
+                .with(Transform::default(), &amp;mut transforms)
+                .with(Enemy, &amp;mut enemies)
+                .build();
+            self.counter = 0;
+        }
+    }
+}
+</code></pre>
+<p>Эта система будет порождать нового врага каждые 200 итераций игрового цикла.</p>
+<h3><a class="header" href="#Удаление-сущности" id="Удаление-сущности">Удаление сущности</a></h3>
+<p>Удалить сущность очень легко, используя <code>Entities &lt;'a&gt;</code>.</p>
+<pre><code class="language-rust edition2018 no_run noplaypen"><span class="boring">extern crate amethyst;
+</span><span class="boring">use amethyst::ecs::{System, Entities, Entity};
+</span><span class="boring">struct MySystem { entity: Entity }
+</span><span class="boring">impl&lt;'a&gt; System&lt;'a&gt; for MySystem {
+</span><span class="boring">  type SystemData = Entities&lt;'a&gt;;
+</span><span class="boring">  fn run(&amp;mut self, entities: Self::SystemData) {
+</span><span class="boring">      let entity = self.entity;
+</span>entities.delete(entity);
+<span class="boring">  }
+</span><span class="boring">}
+</span></code></pre>
+<h3><a class="header" href="#Перебор-компонентов-со-связанной-сущностью" id="Перебор-компонентов-со-связанной-сущностью">Перебор компонентов со связанной сущностью</a></h3>
+<p>Иногда, когда вы перебираете компоненты, вы также можете узнать, с какой сущностью вы работаете. Для этого вы можете использовать операцию <code>join</code> с <code>Entities &lt;'a&gt;</code>.</p>
+<pre><code class="language-rust edition2018 no_run noplaypen"><span class="boring">extern crate amethyst;
+</span><span class="boring">use amethyst::ecs::{Join, System, Entities, WriteStorage, ReadStorage};
+</span><span class="boring">use amethyst::core::Transform;
+</span><span class="boring">struct FallingObject;
+</span><span class="boring">impl amethyst::ecs::Component for FallingObject {
+</span><span class="boring">  type Storage = amethyst::ecs::VecStorage&lt;FallingObject&gt;;
+</span><span class="boring">}
+</span>struct MakeObjectsFall;
+
+impl&lt;'a&gt; System&lt;'a&gt; for MakeObjectsFall {
+    type SystemData = (
+        Entities&lt;'a&gt;,
+        WriteStorage&lt;'a, Transform&gt;,
+        ReadStorage&lt;'a, FallingObject&gt;,
+    );
+
+    fn run(&amp;mut self, (entities, mut transforms, falling): Self::SystemData) {
+        for (e, mut transform, _) in (&amp;*entities, &amp;mut transforms, &amp;falling).join() {
+            if transform.translation().y &gt; 0.0 {
+                transform.prepend_translation_y(-0.1);
+            } else {
+                entities.delete(e);
+            }
+        }
+    }
+}
+</code></pre>
+<p>Эта система делает то же самое, что и предыдущая <code>MakeObjectsFall</code>, но также убирает падающие объекты, которые достигли земли.</p>
+<h3><a class="header" href="#Добавление-или-удаление-компонентов" id="Добавление-или-удаление-компонентов">Добавление или удаление компонентов</a></h3>
+<p>Вы также можете вставить или удалить компоненты из определенной сущности. Для этого вам нужно получить изменяемое хранилище компонента, который вы хотите изменить, и просто выполните:</p>
+<pre><code class="language-rust edition2018 no_run noplaypen"><span class="boring">extern crate amethyst;
+</span><span class="boring">use amethyst::ecs::{System, Entities, Entity, WriteStorage};
+</span><span class="boring">struct MyComponent;
+</span><span class="boring">impl amethyst::ecs::Component for MyComponent {
+</span><span class="boring">  type Storage = amethyst::ecs::VecStorage&lt;MyComponent&gt;;
+</span><span class="boring">}
+</span><span class="boring">struct MySystem { entity: Entity }
+</span><span class="boring">impl&lt;'a&gt; System&lt;'a&gt; for MySystem {
+</span><span class="boring">  type SystemData = WriteStorage&lt;'a, MyComponent&gt;;
+</span><span class="boring">  fn run(&amp;mut self, mut write_storage: Self::SystemData) {
+</span><span class="boring">      let entity = self.entity;
+</span>// Add the component
+write_storage.insert(entity, MyComponent);
+
+// Remove the component
+write_storage.remove(entity);
+<span class="boring">  }
+</span><span class="boring">}
+</span></code></pre>
+<p>Имейте в виду, что вставка компонента в сущность, которая уже имеет компонент того же типа, <em>перезапишет предыдущий</em>.</p>
+<h2><a class="header" href="#Изменение-состояния-через-ресурсы" id="Изменение-состояния-через-ресурсы">Изменение состояния через ресурсы</a></h2>
+<p>В одном из предыдущих разделов мы говорили о состояниях (<code>States</code>) и о том, как они используются для организации вашей игры в разные логические разделы. Иногда мы хотим инициировать переход состояния из системы. Например, если игрок умирает, мы можем захотеть удалить его сущность и дать сигнал конечному автомату выдвинуть состояние, которое показывает экран «Вы умерли».</p>
+<p>Итак, как мы можем влиять на состояния из систем? Есть несколько способов, но в этом разделе мы рассмотрим самый простой: использование ресурса (<code>Resource</code>).</p>
+<p>Перед этим давайте просто быстро напомним себе, что такое ресурс:</p>
+<blockquote>
+<p><code>Resource</code> - это любой тип, в котором хранятся данные, которые могут вам понадобиться для вашей игры, и которые не относятся к конкретной сущности.</p>
+</blockquote>
+<p>Данные в ресурсе доступны как для систем, так и для состояний. Мы можем использовать это в наших интересах!</p>
+<p>Допустим, у вас есть два следующих состояния:</p>
+<ul>
+<li><code>GameplayState</code>: состояние, в котором запущена игра.</li>
+<li><code>GameMenuState</code>: состояние, в котором игра приостановлена, и мы взаимодействуем с игровым меню.</li>
+</ul>
+<p>В следующем примере показано, как отслеживать в каком состоянии мы находимся в данный момент. Это позволяет нам сделать немного условной логики в наших системах, чтобы определить, что делать в зависимости от того, какое состояние в данный момент активно, и манипулировать состояниями, отслеживая действия пользователя.</p>
+<pre><code class="language-rust edition2018 no_run noplaypen"><span class="boring">extern crate amethyst;
+</span>use amethyst::prelude::*;
+
+#[derive(Clone, Copy, Debug, PartialEq, Eq)]
+enum CurrentState {
+    MainMenu,
+    Gameplay,
+}
+
+#[derive(Clone, Copy, Debug, PartialEq, Eq)]
+enum UserAction {
+    OpenMenu,
+    ResumeGame,
+    Quit,
+}
+
+impl Default for CurrentState {
+    fn default() -&gt; Self {
+        CurrentState::Gameplay
+    }
+}
+
+struct Game {
+    user_action: Option&lt;UserAction&gt;,
+    current_state: CurrentState,
+}
+
+impl Default for Game {
+    fn default() -&gt; Self {
+        Game {
+            user_action: None,
+            current_state: CurrentState::default(),
+        }
+    }
+}
+
+struct GameplayState;
+
+impl SimpleState for GameplayState {
+    fn update(&amp;mut self, data: &amp;mut StateData&lt;'_, GameData&lt;'_, '_&gt;&gt;) -&gt; SimpleTrans {
+        // Если ресурс `Game` был настроен для возврата в меню, нажмите
+        // состояние меню, чтобы мы вернулись.
+
+        let mut game = data.world.write_resource::&lt;Game&gt;();
+
+        if let Some(UserAction::OpenMenu) = game.user_action.take() {
+            return Trans::Push(Box::new(GameMenuState));
+        }
+
+        Trans::None
+    }
+
+    fn on_resume(&amp;mut self, mut data: StateData&lt;'_, GameData&lt;'_, '_&gt;&gt;) {
+        // Отметьте, что текущее состояние является состоянием геймплея.
+        data.world.write_resource::&lt;Game&gt;().current_state = CurrentState::Gameplay;
+    }
+}
+
+struct GameMenuState;
+
+impl SimpleState for GameMenuState {
+    fn update(&amp;mut self, data: &amp;mut StateData&lt;'_, GameData&lt;'_, '_&gt;&gt;) -&gt; SimpleTrans {
+        let mut game = data.world.write_resource::&lt;Game&gt;();
+
+        match game.user_action.take() {
+            Some(UserAction::ResumeGame) =&gt; Trans::Pop,
+            Some(UserAction::Quit) =&gt; {
+                // Примечание: убирать не нужно :)
+                Trans::Quit
+            },
+            _ =&gt; Trans::None,
+        }
+    }
+
+    fn on_resume(&amp;mut self, mut data: StateData&lt;'_, GameData&lt;'_, '_&gt;&gt;) {
+        // Отметьте, что текущее состояние является состоянием главного меню.
+        data.world.write_resource::&lt;Game&gt;().current_state = CurrentState::MainMenu;
+    }
+}
+</code></pre>
+<p>Допустим, мы хотим, чтобы игрок мог нажать escape, чтобы войти в меню. Мы модифицируем наш обработчик ввода, чтобы отобразить действие <code>open_menu</code> на <code>Esc</code>, и мы пишем следующую систему:</p>
+<pre><code class="language-rust edition2018 no_run noplaypen"><span class="boring">extern crate amethyst;
+</span><span class="boring">
+</span><span class="boring">#[derive(Clone, Copy, Debug, PartialEq, Eq)]
+</span><span class="boring">enum CurrentState {
+</span><span class="boring">    MainMenu,
+</span><span class="boring">    Gameplay,
+</span><span class="boring">}
+</span><span class="boring">
+</span><span class="boring">impl Default for CurrentState { fn default() -&gt; Self { CurrentState::Gameplay } }
+</span><span class="boring">
+</span><span class="boring">#[derive(Clone, Copy, Debug, PartialEq, Eq)]
+</span><span class="boring">enum UserAction {
+</span><span class="boring">    OpenMenu,
+</span><span class="boring">    ResumeGame,
+</span><span class="boring">    Quit,
+</span><span class="boring">}
+</span><span class="boring">
+</span><span class="boring">struct Game {
+</span><span class="boring">    user_action: Option&lt;UserAction&gt;,
+</span><span class="boring">    current_state: CurrentState,
+</span><span class="boring">}
+</span><span class="boring">
+</span><span class="boring">impl Default for Game {
+</span><span class="boring">    fn default() -&gt; Self {
+</span><span class="boring">        Game {
+</span><span class="boring">            user_action: None,
+</span><span class="boring">            current_state: CurrentState::default(),
+</span><span class="boring">        }
+</span><span class="boring">    }
+</span><span class="boring">}
+</span><span class="boring">
+</span>use amethyst::{
+    prelude::*,
+    ecs::{System, prelude::*},
+    input::{InputHandler, StringBindings},
+};
+
+struct MyGameplaySystem;
+
+impl&lt;'s&gt; System&lt;'s&gt; for MyGameplaySystem {
+    type SystemData = (
+        Read&lt;'s, InputHandler&lt;StringBindings&gt;&gt;,
+        Write&lt;'s, Game&gt;,
+    );
+
+    fn run(&amp;mut self, (input, mut game): Self::SystemData) {
+        match game.current_state {
+            CurrentState::Gameplay =&gt; {
+                let open_menu = input
+                    .action_is_down(&quot;open_menu&quot;)
+                    .unwrap_or(false);
+
+                // Переключите переменную `open_menu`, чтобы указать состояние
+                // перехода.
+                if open_menu {
+                    game.user_action = Some(UserAction::OpenMenu);
+                }
+            }
+            // Ничего не делать для других состояний.
+            _ =&gt; {}
+        }
+    }
+}
+</code></pre>
+<p>Теперь, когда вы играете в игру и нажимаете кнопку, связанную с действием <code>open_menu</code>, <code>GameMenuState</code> возобновляется, а <code>GameplayState</code> приостанавливается.</p>
+<h2><a class="header" href="#Типаж-systemdata" id="Типаж-systemdata">Типаж SystemData</a></h2>
+<p>Хоть это и редко может быть полезно, но возможно создание пользовательских типов <code>SystemData</code>.</p>
+<p><code>Dispatcher</code> заполняет <code>SystemData</code> при каждом вызове метода <code>run</code>. Чтобы сделать это, ваш тип <code>SystemData</code> должен реализовать типаж <code>amethyst::ecs::SystemData</code> для того, чтобы он был действительным.</p>
+<p>Это довольно сложная черта для реализации, к счастью, Amethyst предоставляет для нее производный макрос, который может реализовать черту для любой структуры, если все ее поля - <code>SystemData</code>. Однако в большинстве случаев вам даже не нужно будет реализовывать это вообще, так как вы будете использовать структуры <code>SystemData</code>, предоставляемые движком.</p>
+<p>Обратите внимание, что кортежи структур, реализующих <code>SystemData</code>, сами являются <code>SystemData</code>. Это очень полезно, когда вам нужно быстро запросить несколько <code>SystemData</code> одновременно.</p>
+<pre><code class="language-rust edition2018 no_run noplaypen"><span class="boring">extern crate amethyst;
+</span><span class="boring">extern crate shred;
+</span><span class="boring">#[macro_use] extern crate shred_derive;
+</span><span class="boring">
+</span><span class="boring">use amethyst::{
+</span><span class="boring">    ecs::{Component, Join, ReadStorage, System, SystemData, VecStorage, World, WriteStorage},
+</span><span class="boring">    shred::ResourceId,
+</span><span class="boring">};
+</span><span class="boring">
+</span><span class="boring">struct FooComponent {
+</span><span class="boring">  stuff: f32,
+</span><span class="boring">}
+</span><span class="boring">impl Component for FooComponent {
+</span><span class="boring">  type Storage = VecStorage&lt;FooComponent&gt;;
+</span><span class="boring">}
+</span><span class="boring">
+</span><span class="boring">struct BarComponent {
+</span><span class="boring">  stuff: f32,
+</span><span class="boring">}
+</span><span class="boring">impl Component for BarComponent {
+</span><span class="boring">  type Storage = VecStorage&lt;BarComponent&gt;;
+</span><span class="boring">}
+</span><span class="boring">
+</span><span class="boring">#[derive(SystemData)]
+</span><span class="boring">struct BazSystemData&lt;'a&gt; {
+</span><span class="boring"> field: ReadStorage&lt;'a, FooComponent&gt;,
+</span><span class="boring">}
+</span><span class="boring">
+</span><span class="boring">impl&lt;'a&gt; BazSystemData&lt;'a&gt; {
+</span><span class="boring">  fn should_process(&amp;self) -&gt; bool {
+</span><span class="boring">      true
+</span><span class="boring">  }
+</span><span class="boring">}
+</span><span class="boring">
+</span>#[derive(SystemData)]
+struct MySystemData&lt;'a&gt; {
+    foo: ReadStorage&lt;'a, FooComponent&gt;,
+    bar: WriteStorage&lt;'a, BarComponent&gt;,
+    baz: BazSystemData&lt;'a&gt;,
+}
+
+struct MyFirstSystem;
+
+impl&lt;'a&gt; System&lt;'a&gt; for MyFirstSystem {
+    type SystemData = MySystemData&lt;'a&gt;;
+
+    fn run(&amp;mut self, mut data: Self::SystemData) {
+        if data.baz.should_process() {
+            for (foo, mut bar) in (&amp;data.foo, &amp;mut data.bar).join() {
+                bar.stuff += foo.stuff;
+            }
+        }
+    }
+}
+</code></pre>
+<hr />
+<p>Документация была переведена специально для сообщества &quot;<strong>rust_lang_ru</strong>&quot;.</p>
+<p>Подпишись на нас в <strong><a href="http://tlinks.run/rust_lang_ru">Telegram</a></strong> и <strong><a href="https://www.youtube.com/channel/UCu413rnSfuSSOR3OsIThlZA">YouTube</a></strong>!</p>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                        
+                            <a rel="prev" href="../concepts/chapter_3_part_4.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+                        
+
+                        
+                            <a rel="next" href="../concepts/system/chapter_3_part_5.1.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+                        
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                
+                    <a href="../concepts/chapter_3_part_4.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+                
+
+                
+                    <a href="../concepts/system/chapter_3_part_5.1.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+                
+            </nav>
+
+        </div>
+
+        
+
+        
+
+        
+        
+        
+        <script type="text/javascript">
+            window.playpen_copyable = true;
+        </script>
+        
+
+        
+
+        
+        <script src="../elasticlunr.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../mark.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../searcher.js" type="text/javascript" charset="utf-8"></script>
+        
+
+        <script src="../clipboard.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../highlight.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../book.js" type="text/javascript" charset="utf-8"></script>
+
+        <!-- Custom JS scripts -->
+        
+
+        
+
+    </body>
+</html>
