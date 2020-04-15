@@ -11,3 +11,5 @@
     - [Инициализация системы](./concepts/system/chapter_3_part_5.1.md)
     - [Производная SystemDesc](./concepts/system/chapter_3_part_5.2.md)
     - [Реализация типажа SystemDesc](./concepts/system/chapter_3_part_5.3.md)
+  - [Диспетчер](./concepts/chapter_3_part_6.md)
+  - [Канал событий](./concepts/chapter_3_part_7.md)
