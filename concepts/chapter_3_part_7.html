@@ -149,7 +149,7 @@
                 <div id="content" class="content">
                     <main>
                         <h1><a class="header" href="#Канал-событий" id="Канал-событий">Канал событий</a></h1>
-<p>Что такое канал событий?</p>
+<h2><a class="header" href="#Что-такое-канал-событий" id="Что-такое-канал-событий">Что такое канал событий?</a></h2>
 <p><code>EventChannel</code> - это широковещательная очередь событий. События могут быть любого типа, который реализует <code>Send</code> + <code>Sync</code> + <code>'static</code>.</p>
 <p>Как правило, <code>EventChannels</code> вставляются как ресурсы в <code>World</code>.</p>
 <h2><a class="header" href="#Примеры" id="Примеры">Примеры</a></h2>
@@ -165,7 +165,7 @@ pub enum MyEvent {
 
 let mut channel = EventChannel::&lt;MyEvent&gt;::new();
 </code></pre>
-<p>Запись событий в канал событий</p>
+<h3><a class="header" href="#Запись-событий-в-канал-событий" id="Запись-событий-в-канал-событий">Запись событий в канал событий</a></h3>
 <p>Запись одного события:</p>
 <pre><code class="language-rust edition2018 no_run noplaypen"><span class="boring">extern crate amethyst;
 </span><span class="boring">#[derive(Debug)]
@@ -225,7 +225,7 @@ let mut channel = EventChannel::&lt;MyEvent&gt;::new();
 <p><strong>ВАЖНО:</strong> Канал событий автоматически увеличивается по мере добавления к нему событий и уменьшается в размере только после того, как все читатели прочитают старые события.</p>
 <p>Это означает, что если вы создаете <code>ReaderId</code>, но не читаете его в каждом кадре, канал событий начнет потреблять все больше и больше памяти.</p>
 </blockquote>
-<p>Шаблоны</p>
+<h2><a class="header" href="#Шаблоны" id="Шаблоны">Шаблоны</a></h2>
 <p>При использовании канала событий мы обычно снова и снова используем один и тот же шаблон, чтобы максимизировать параллелизм. Последовательность такая:</p>
 <p>Создаём канал событий и добавляем его в мир во время создания <code>State</code>:</p>
 <pre><code class="language-rust edition2018 no_run noplaypen"><span class="boring">extern crate amethyst;
