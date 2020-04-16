@@ -3,7 +3,7 @@
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
-        <title>Реализация типажа SystemDesc - Amethyst Документация</title>
+        <title>Игра Понг - Amethyst Документация</title>
         
 
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
@@ -11,21 +11,21 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="theme-color" content="#ffffff" />
 
-        <link rel="shortcut icon" href="../../favicon.png">
-        <link rel="stylesheet" href="../../css/variables.css">
-        <link rel="stylesheet" href="../../css/general.css">
-        <link rel="stylesheet" href="../../css/chrome.css">
-        <link rel="stylesheet" href="../../css/print.css" media="print">
+        <link rel="shortcut icon" href="favicon.png">
+        <link rel="stylesheet" href="css/variables.css">
+        <link rel="stylesheet" href="css/general.css">
+        <link rel="stylesheet" href="css/chrome.css">
+        <link rel="stylesheet" href="css/print.css" media="print">
 
         <!-- Fonts -->
-        <link rel="stylesheet" href="../../FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="FontAwesome/css/font-awesome.css">
         <link href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" rel="stylesheet" type="text/css">
         <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro:500" rel="stylesheet" type="text/css">
 
         <!-- Highlight.js Stylesheets -->
-        <link rel="stylesheet" href="../../highlight.css">
-        <link rel="stylesheet" href="../../tomorrow-night.css">
-        <link rel="stylesheet" href="../../ayu-highlight.css">
+        <link rel="stylesheet" href="highlight.css">
+        <link rel="stylesheet" href="tomorrow-night.css">
+        <link rel="stylesheet" href="ayu-highlight.css">
 
         <!-- Custom theme stylesheets -->
         
@@ -35,7 +35,7 @@
     <body>
         <!-- Provide site root to javascript -->
         <script type="text/javascript">
-            var path_to_root = "../../";
+            var path_to_root = "";
             var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "light" : "light";
         </script>
 
@@ -81,7 +81,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div id="sidebar-scrollbox" class="sidebar-scrollbox">
-                <ol class="chapter"><li class="expanded "><a href="../../chapter_1.html"><strong aria-hidden="true">1.</strong> Введение</a></li><li class="expanded "><a href="../../chapter_2.html"><strong aria-hidden="true">2.</strong> Начало работы</a></li><li class="expanded "><a href="../../chapter_3.html"><strong aria-hidden="true">3.</strong> Концепции</a></li><li><ol class="section"><li class="expanded "><a href="../../concepts/chapter_3_part_1.html"><strong aria-hidden="true">3.1.</strong> Состояния</a></li><li class="expanded "><a href="../../concepts/chapter_3_part_2.html"><strong aria-hidden="true">3.2.</strong> Сущность и компонент</a></li><li class="expanded "><a href="../../concepts/chapter_3_part_3.html"><strong aria-hidden="true">3.3.</strong> Ресурс</a></li><li class="expanded "><a href="../../concepts/chapter_3_part_4.html"><strong aria-hidden="true">3.4.</strong> Мир</a></li><li class="expanded "><a href="../../concepts/chapter_3_part_5.html"><strong aria-hidden="true">3.5.</strong> Система</a></li><li><ol class="section"><li class="expanded "><a href="../../concepts/system/chapter_3_part_5.1.html"><strong aria-hidden="true">3.5.1.</strong> Инициализация системы</a></li><li class="expanded "><a href="../../concepts/system/chapter_3_part_5.2.html"><strong aria-hidden="true">3.5.2.</strong> Производная SystemDesc</a></li><li class="expanded "><a href="../../concepts/system/chapter_3_part_5.3.html" class="active"><strong aria-hidden="true">3.5.3.</strong> Реализация типажа SystemDesc</a></li></ol></li><li class="expanded "><a href="../../concepts/chapter_3_part_6.html"><strong aria-hidden="true">3.6.</strong> Диспетчер</a></li><li class="expanded "><a href="../../concepts/chapter_3_part_7.html"><strong aria-hidden="true">3.7.</strong> Канал событий</a></li></ol></li><li class="expanded "><a href="../../chapter_4.html"><strong aria-hidden="true">4.</strong> Игра Понг</a></li><li><ol class="section"><li class="expanded "><a href="../../pong/chapter_4_part_1.html"><strong aria-hidden="true">4.1.</strong> Настройка проекта</a></li></ol></li></ol>
+                <ol class="chapter"><li class="expanded "><a href="chapter_1.html"><strong aria-hidden="true">1.</strong> Введение</a></li><li class="expanded "><a href="chapter_2.html"><strong aria-hidden="true">2.</strong> Начало работы</a></li><li class="expanded "><a href="chapter_3.html"><strong aria-hidden="true">3.</strong> Концепции</a></li><li><ol class="section"><li class="expanded "><a href="concepts/chapter_3_part_1.html"><strong aria-hidden="true">3.1.</strong> Состояния</a></li><li class="expanded "><a href="concepts/chapter_3_part_2.html"><strong aria-hidden="true">3.2.</strong> Сущность и компонент</a></li><li class="expanded "><a href="concepts/chapter_3_part_3.html"><strong aria-hidden="true">3.3.</strong> Ресурс</a></li><li class="expanded "><a href="concepts/chapter_3_part_4.html"><strong aria-hidden="true">3.4.</strong> Мир</a></li><li class="expanded "><a href="concepts/chapter_3_part_5.html"><strong aria-hidden="true">3.5.</strong> Система</a></li><li><ol class="section"><li class="expanded "><a href="concepts/system/chapter_3_part_5.1.html"><strong aria-hidden="true">3.5.1.</strong> Инициализация системы</a></li><li class="expanded "><a href="concepts/system/chapter_3_part_5.2.html"><strong aria-hidden="true">3.5.2.</strong> Производная SystemDesc</a></li><li class="expanded "><a href="concepts/system/chapter_3_part_5.3.html"><strong aria-hidden="true">3.5.3.</strong> Реализация типажа SystemDesc</a></li></ol></li><li class="expanded "><a href="concepts/chapter_3_part_6.html"><strong aria-hidden="true">3.6.</strong> Диспетчер</a></li><li class="expanded "><a href="concepts/chapter_3_part_7.html"><strong aria-hidden="true">3.7.</strong> Канал событий</a></li></ol></li><li class="expanded "><a href="chapter_4.html" class="active"><strong aria-hidden="true">4.</strong> Игра Понг</a></li><li><ol class="section"><li class="expanded "><a href="pong/chapter_4_part_1.html"><strong aria-hidden="true">4.1.</strong> Настройка проекта</a></li></ol></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
         </nav>
@@ -116,7 +116,7 @@
                         <h1 class="menu-title">Amethyst Документация</h1>
 
                         <div class="right-buttons">
-                            <a href="../../print.html" title="Print this book" aria-label="Print this book">
+                            <a href="print.html" title="Print this book" aria-label="Print this book">
                                 <i id="print-button" class="fa fa-print"></i>
                             </a>
                             
@@ -148,90 +148,30 @@
 
                 <div id="content" class="content">
                     <main>
-                        <h1><a class="header" href="#Реализация-типажа-systemdesc" id="Реализация-типажа-systemdesc">Реализация типажа SystemDesc</a></h1>
-<p>Если производная <code>SystemDesc</code> не может сгенерировать реализацию типажа <code>SystemDesc</code> для инициализации системы, типаж <code>SystemDesc</code> можно реализовать вручную:</p>
-<pre><code class="language-rust edition2018 no_run noplaypen"><span class="boring">extern crate amethyst;
-</span><span class="boring">
-</span>use amethyst::{
-    audio::output::Output,
-    core::SystemDesc,
-    ecs::{System, SystemData, World},
-};
+                        <h1><a class="header" href="#Игра-Понг" id="Игра-Понг">Игра Понг</a></h1>
+<p>Чтобы лучше понять, как работает Amethyst, мы создадим клон игры Понг. Вы можете найти <a href="https://github.com/amethyst/amethyst/tree/master/examples/pong">полный пример</a> этой игры (наша конечная цель) в <a href="https://github.com/amethyst/amethyst/tree/master/examples">папке примеров</a> Amethyst. Это руководство разбивает этот проект на отдельные шаги, чтобы было легче понять, что каждая отдельная часть кода делает.</p>
+<h2><a class="header" href="#Предварительные-требования" id="Предварительные-требования">Предварительные требования</a></h2>
+<p>Обязательно ознакомьтесь с главой <a href="./chapter_1.html">«Начало работы»</a>, перед началом урока или запуском примеров.</p>
+<h2><a class="header" href="#Выполнение-кода-после-прочтения-главы" id="Выполнение-кода-после-прочтения-главы">Выполнение кода после прочтения главы</a></h2>
+<p>Если вы клонировали репозиторий Amethyst, вы можете запустить любой из примеров следующим образом:</p>
+<blockquote>
+<p>&gt; <code>cargo run --example pong_tutorial_01 --features &quot;vulkan&quot;</code></p>
+</blockquote>
+<p>Пример с именем <code>pong_tutorial_xy</code> содержит код, который вы должны иметь после выполнения всех руководств, от 1 до xy.</p>
+<blockquote>
+<p><strong>Примечание.</strong> В macOS вы можете использовать <code>&quot;metal&quot;</code> вместо <code>&quot;vulkan&quot;</code>.</p>
+</blockquote>
+<p>Основное различие между реальным игровым кодом и кодом примера заключается в расположении папок <code>config</code> и <code>assets</code>.</p>
+<p>Например, в примере pong_tutorial_01 мы имеем:</p>
+<pre><code class="language-rust ignore">let display_config_path =
+    app_root.join(&quot;examples/pong_tutorial_01/config/display.ron&quot;);
 
-<span class="boring">/// Syncs 3D transform data with the audio engine to provide 3D audio.
-</span><span class="boring">#[derive(Debug, Default)]
-</span><span class="boring">pub struct AudioSystem(Output);
-</span><span class="boring">impl&lt;'a&gt; System&lt;'a&gt; for AudioSystem {
-</span><span class="boring">    type SystemData = ();
-</span><span class="boring">    fn run(&amp;mut self, _: Self::SystemData) {}
-</span><span class="boring">}
-</span><span class="boring">
-</span>/// Собирает `AudioSystem`.
-#[derive(Default, Debug)]
-pub struct AudioSystemDesc {
-    /// Аудио `Output`.
-    pub output: Output,
-}
-
-impl&lt;'a, 'b&gt; SystemDesc&lt;'a, 'b, AudioSystem&gt; for AudioSystemDesc {
-    fn build(self, world: &amp;mut World) -&gt; AudioSystem {
-        &lt;AudioSystem as System&lt;'_&gt;&gt;::SystemData::setup(world);
-
-        world.insert(self.output.clone());
-
-        AudioSystem(self.output)
-    }
-}
-
-// in `main.rs`:
-// let game_data = GameDataBuilder::default()
-//     .with_system_desc(AudioSystemDesc::default(), &quot;&quot;, &amp;[]);
+let assets_dir = app_root.join(&quot;examples/assets/&quot;);
 </code></pre>
-<h2><a class="header" href="#Шаблоны" id="Шаблоны">Шаблоны</a></h2>
-<pre><code class="language-rust ignore">use amethyst_core::SystemDesc;
+<p>Но в вашем проекте, вероятно, будет что-то вроде этого:</p>
+<pre><code class="language-rust ignore">let display_config_path = app_root.join(&quot;config/display.ron&quot;);
 
-/// Собирает `SystemName`.
-#[derive(Default, Debug)]
-pub struct SystemNameDesc;
-
-impl&lt;'a, 'b&gt; SystemDesc&lt;'a, 'b, SystemName&gt; for SystemNameDesc {
-    fn build(self, world: &amp;mut World) -&gt; SystemName {
-        &lt;SystemName as System&lt;'_&gt;&gt;::SystemData::setup(world);
-
-        let arg = unimplemented!(&quot;Replace code here&quot;);
-
-        SystemName::new(arg)
-    }
-}
-</code></pre>
-<p>С параметрами типа:</p>
-<pre><code class="language-rust ignore">use std::marker::PhantomData;
-
-use derivative::Derivative;
-
-use amethyst_core::ecs::SystemData;
-use amethyst_core::SystemDesc;
-
-/// Собирает `SystemName`.
-#[derive(Derivative, Debug)]
-#[derivative(Default(bound = &quot;&quot;))]
-pub struct SystemNameDesc&lt;T&gt; {
-    marker: PhantomData&lt;T&gt;,
-}
-
-impl&lt;'a, 'b, T&gt; SystemDesc&lt;'a, 'b, SystemName&lt;T&gt;&gt;
-    for SystemNameDesc&lt;T&gt;
-where
-    T: unimplemented!(&quot;Replace me.&quot;),
-{
-    fn build(self, world: &amp;mut World) -&gt; SystemName&lt;T&gt; {
-        &lt;SystemName&lt;T&gt; as System&lt;'_&gt;&gt;::SystemData::setup(world);
-
-        let arg = unimplemented!(&quot;Replace code here&quot;);
-
-        SystemName::new(arg)
-    }
-}
+let assets_dir = app_root.join(&quot;assets/&quot;);
 </code></pre>
 <hr />
 <p>Документация была переведена специально для сообщества &quot;<strong>rust_lang_ru</strong>&quot;.</p>
@@ -242,13 +182,13 @@ where
                     <nav class="nav-wrapper" aria-label="Page navigation">
                         <!-- Mobile navigation buttons -->
                         
-                            <a rel="prev" href="../../concepts/system/chapter_3_part_5.2.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                            <a rel="prev" href="concepts/chapter_3_part_7.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                                 <i class="fa fa-angle-left"></i>
                             </a>
                         
 
                         
-                            <a rel="next" href="../../concepts/chapter_3_part_6.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                            <a rel="next" href="pong/chapter_4_part_1.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                                 <i class="fa fa-angle-right"></i>
                             </a>
                         
@@ -260,13 +200,13 @@ where
 
             <nav class="nav-wide-wrapper" aria-label="Page navigation">
                 
-                    <a href="../../concepts/system/chapter_3_part_5.2.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                    <a href="concepts/chapter_3_part_7.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                         <i class="fa fa-angle-left"></i>
                     </a>
                 
 
                 
-                    <a href="../../concepts/chapter_3_part_6.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                    <a href="pong/chapter_4_part_1.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                         <i class="fa fa-angle-right"></i>
                     </a>
                 
@@ -289,14 +229,14 @@ where
         
 
         
-        <script src="../../elasticlunr.min.js" type="text/javascript" charset="utf-8"></script>
-        <script src="../../mark.min.js" type="text/javascript" charset="utf-8"></script>
-        <script src="../../searcher.js" type="text/javascript" charset="utf-8"></script>
+        <script src="elasticlunr.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="mark.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="searcher.js" type="text/javascript" charset="utf-8"></script>
         
 
-        <script src="../../clipboard.min.js" type="text/javascript" charset="utf-8"></script>
-        <script src="../../highlight.js" type="text/javascript" charset="utf-8"></script>
-        <script src="../../book.js" type="text/javascript" charset="utf-8"></script>
+        <script src="clipboard.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="highlight.js" type="text/javascript" charset="utf-8"></script>
+        <script src="book.js" type="text/javascript" charset="utf-8"></script>
 
         <!-- Custom JS scripts -->
         

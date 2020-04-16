@@ -83,7 +83,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div id="sidebar-scrollbox" class="sidebar-scrollbox">
-                <ol class="chapter"><li class="expanded "><a href="chapter_1.html"><strong aria-hidden="true">1.</strong> Введение</a></li><li class="expanded "><a href="chapter_2.html"><strong aria-hidden="true">2.</strong> Начало работы</a></li><li class="expanded "><a href="chapter_3.html"><strong aria-hidden="true">3.</strong> Концепции</a></li><li><ol class="section"><li class="expanded "><a href="concepts/chapter_3_part_1.html"><strong aria-hidden="true">3.1.</strong> Состояния</a></li><li class="expanded "><a href="concepts/chapter_3_part_2.html"><strong aria-hidden="true">3.2.</strong> Сущность и компонент</a></li><li class="expanded "><a href="concepts/chapter_3_part_3.html"><strong aria-hidden="true">3.3.</strong> Ресурс</a></li><li class="expanded "><a href="concepts/chapter_3_part_4.html"><strong aria-hidden="true">3.4.</strong> Мир</a></li><li class="expanded "><a href="concepts/chapter_3_part_5.html"><strong aria-hidden="true">3.5.</strong> Система</a></li><li><ol class="section"><li class="expanded "><a href="concepts/system/chapter_3_part_5.1.html"><strong aria-hidden="true">3.5.1.</strong> Инициализация системы</a></li><li class="expanded "><a href="concepts/system/chapter_3_part_5.2.html"><strong aria-hidden="true">3.5.2.</strong> Производная SystemDesc</a></li><li class="expanded "><a href="concepts/system/chapter_3_part_5.3.html"><strong aria-hidden="true">3.5.3.</strong> Реализация типажа SystemDesc</a></li></ol></li><li class="expanded "><a href="concepts/chapter_3_part_6.html"><strong aria-hidden="true">3.6.</strong> Диспетчер</a></li><li class="expanded "><a href="concepts/chapter_3_part_7.html"><strong aria-hidden="true">3.7.</strong> Канал событий</a></li></ol></li></ol>
+                <ol class="chapter"><li class="expanded "><a href="chapter_1.html"><strong aria-hidden="true">1.</strong> Введение</a></li><li class="expanded "><a href="chapter_2.html"><strong aria-hidden="true">2.</strong> Начало работы</a></li><li class="expanded "><a href="chapter_3.html"><strong aria-hidden="true">3.</strong> Концепции</a></li><li><ol class="section"><li class="expanded "><a href="concepts/chapter_3_part_1.html"><strong aria-hidden="true">3.1.</strong> Состояния</a></li><li class="expanded "><a href="concepts/chapter_3_part_2.html"><strong aria-hidden="true">3.2.</strong> Сущность и компонент</a></li><li class="expanded "><a href="concepts/chapter_3_part_3.html"><strong aria-hidden="true">3.3.</strong> Ресурс</a></li><li class="expanded "><a href="concepts/chapter_3_part_4.html"><strong aria-hidden="true">3.4.</strong> Мир</a></li><li class="expanded "><a href="concepts/chapter_3_part_5.html"><strong aria-hidden="true">3.5.</strong> Система</a></li><li><ol class="section"><li class="expanded "><a href="concepts/system/chapter_3_part_5.1.html"><strong aria-hidden="true">3.5.1.</strong> Инициализация системы</a></li><li class="expanded "><a href="concepts/system/chapter_3_part_5.2.html"><strong aria-hidden="true">3.5.2.</strong> Производная SystemDesc</a></li><li class="expanded "><a href="concepts/system/chapter_3_part_5.3.html"><strong aria-hidden="true">3.5.3.</strong> Реализация типажа SystemDesc</a></li></ol></li><li class="expanded "><a href="concepts/chapter_3_part_6.html"><strong aria-hidden="true">3.6.</strong> Диспетчер</a></li><li class="expanded "><a href="concepts/chapter_3_part_7.html"><strong aria-hidden="true">3.7.</strong> Канал событий</a></li></ol></li><li class="expanded "><a href="chapter_4.html"><strong aria-hidden="true">4.</strong> Игра Понг</a></li><li><ol class="section"><li class="expanded "><a href="pong/chapter_4_part_1.html"><strong aria-hidden="true">4.1.</strong> Настройка проекта</a></li></ol></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
         </nav>
@@ -2067,6 +2067,202 @@ let mut channel = EventChannel::&lt;MyEvent&gt;::new();
     }
 }
 </code></pre>
+<hr />
+<p>Документация была переведена специально для сообщества &quot;<strong>rust_lang_ru</strong>&quot;.</p>
+<p>Подпишись на нас в <strong><a href="http://tlinks.run/rust_lang_ru">Telegram</a></strong> и <strong><a href="https://www.youtube.com/channel/UCu413rnSfuSSOR3OsIThlZA">YouTube</a></strong>!</p>
+<h1><a class="header" href="#Игра-Понг" id="Игра-Понг">Игра Понг</a></h1>
+<p>Чтобы лучше понять, как работает Amethyst, мы создадим клон игры Понг. Вы можете найти <a href="https://github.com/amethyst/amethyst/tree/master/examples/pong">полный пример</a> этой игры (наша конечная цель) в <a href="https://github.com/amethyst/amethyst/tree/master/examples">папке примеров</a> Amethyst. Это руководство разбивает этот проект на отдельные шаги, чтобы было легче понять, что каждая отдельная часть кода делает.</p>
+<h2><a class="header" href="#Предварительные-требования" id="Предварительные-требования">Предварительные требования</a></h2>
+<p>Обязательно ознакомьтесь с главой <a href="./chapter_1.html">«Начало работы»</a>, перед началом урока или запуском примеров.</p>
+<h2><a class="header" href="#Выполнение-кода-после-прочтения-главы" id="Выполнение-кода-после-прочтения-главы">Выполнение кода после прочтения главы</a></h2>
+<p>Если вы клонировали репозиторий Amethyst, вы можете запустить любой из примеров следующим образом:</p>
+<blockquote>
+<p>&gt; <code>cargo run --example pong_tutorial_01 --features &quot;vulkan&quot;</code></p>
+</blockquote>
+<p>Пример с именем <code>pong_tutorial_xy</code> содержит код, который вы должны иметь после выполнения всех руководств, от 1 до xy.</p>
+<blockquote>
+<p><strong>Примечание.</strong> В macOS вы можете использовать <code>&quot;metal&quot;</code> вместо <code>&quot;vulkan&quot;</code>.</p>
+</blockquote>
+<p>Основное различие между реальным игровым кодом и кодом примера заключается в расположении папок <code>config</code> и <code>assets</code>.</p>
+<p>Например, в примере pong_tutorial_01 мы имеем:</p>
+<pre><code class="language-rust ignore">let display_config_path =
+    app_root.join(&quot;examples/pong_tutorial_01/config/display.ron&quot;);
+
+let assets_dir = app_root.join(&quot;examples/assets/&quot;);
+</code></pre>
+<p>Но в вашем проекте, вероятно, будет что-то вроде этого:</p>
+<pre><code class="language-rust ignore">let display_config_path = app_root.join(&quot;config/display.ron&quot;);
+
+let assets_dir = app_root.join(&quot;assets/&quot;);
+</code></pre>
+<hr />
+<p>Документация была переведена специально для сообщества &quot;<strong>rust_lang_ru</strong>&quot;.</p>
+<p>Подпишись на нас в <strong><a href="http://tlinks.run/rust_lang_ru">Telegram</a></strong> и <strong><a href="https://www.youtube.com/channel/UCu413rnSfuSSOR3OsIThlZA">YouTube</a></strong>!</p>
+<h1><a class="header" href="#Настройка-проекта" id="Настройка-проекта">Настройка проекта</a></h1>
+<p>В этой главе мы рассмотрим основы настройки проекта Amethyst, запуска логгера, открытия окна и подготовки простой настройки рендеринга.</p>
+<h2><a class="header" href="#Создание-нового-проекта" id="Создание-нового-проекта">Создание нового проекта</a></h2>
+<p>Давайте начнем новый проект:</p>
+<blockquote>
+<p>&gt; <code>amethyst new pong</code></p>
+</blockquote>
+<p>Обновите зависимости в файле <code>Cargo.toml</code> проекта, чтобы он содержал:</p>
+<pre><code class="language-toml">[package]
+name = &quot;pong&quot;
+version = &quot;0.1.0&quot;
+authors = []
+edition = &quot;2018&quot;
+
+[dependencies.amethyst]
+version = &quot;0.14&quot;
+features = [&quot;vulkan&quot;]
+</code></pre>
+<p>В качестве альтернативы, если вы разрабатываете на macOS, вы можете использовать бэкэнд рендеринга metal вместо vulkan. В этом случае вам следует изменить запись features в таблице зависимостей amethyst.</p>
+<pre><code class="language-toml">[dependencies.amethyst]
+version = &quot;0.14&quot;
+features = [&quot;metal&quot;]
+</code></pre>
+<p>Мы можем начать с редактирования файла <code>main.rs</code> внутри каталога <code>src</code>. Вы можете удалить все в этом файле, а затем импортировать эти модули:</p>
+<pre><code class="language-rust ignore">//! Pong Tutorial 1
+
+use amethyst::{
+    prelude::*,
+    renderer::{
+        plugins::{RenderFlat2D, RenderToWindow},
+        types::DefaultBackend,
+        RenderingBundle,
+    },
+    utils::application_root_dir,
+};
+</code></pre>
+<p>Мы узнаем больше об этом, когда пройдем этот урок. <code>prelude</code> включает в себя основные (и наиболее важные) типы, такие как приложение (<code>Application</code>), мир (<code>World</code>) и состояние (<code>State</code>). Мы также импортируем все необходимые типы, чтобы определить базовый конвейер рендеринга.</p>
+<p>Теперь у нас установлены все зависимости и подготовлен импорт, и мы готовы приступить к определению кода нашей игры.</p>
+<h2><a class="header" href="#Создание-игрового-состояния" id="Создание-игрового-состояния">Создание игрового состояния</a></h2>
+<p>Теперь мы создаем нашу основную структуру игры:</p>
+<pre><code class="language-rust edition2018 no_run noplaypen">pub struct Pong;
+</code></pre>
+<p>Мы будем реализовывать типаж <code>SimpleState</code> в этой структуре, которая используется конечным автоматом Amethyst для запуска, остановки и обновления игры.</p>
+<pre><code class="language-rust ignore">impl SimpleState for Pong {}
+</code></pre>
+<p>Реализация <code>SimpleState</code> учит наше приложение, что делать, когда от вашей операционной системы поступает сигнал закрытия. Это происходит при нажатии кнопки закрытия в графическом окружении. Это позволяет приложению выходить по мере необходимости.</p>
+<p>Теперь, когда наша структура <code>Pong</code> это состояние игры, давайте добавим немного кода! Мы начнем с нашей функции <code>main()</code>, она возвращает <code>Result</code>, чтобы мы могли использовать <code>?</code>. Это позволит нам автоматически выйти, если во время установки возникнут какие-либо ошибки.</p>
+<pre><code class="language-rust edition2018 no_run noplaypen"><span class="boring">extern crate amethyst;
+</span><span class="boring">use amethyst::prelude::*;
+</span>fn main() -&gt; amethyst::Result&lt;()&gt; {
+
+    // Мы разместим остальную часть кода здесь.
+
+    Ok(())
+}
+</code></pre>
+<blockquote>
+<p><strong>Примечание.</strong> <code>SimpleState</code> - это просто упрощенная версия типажа <code>State</code>. Он уже реализует для нас кучу вещей, таких как методы <code>update</code> и <code>handle_event</code>, которые вы должны были бы реализовать самостоятельно, если бы использовали обычный типаж <code>State</code>. Его поведение в основном касается аккуратной обработки сигнала на выход из приложения непосредственно из текущего состояния.</p>
+</blockquote>
+<h2><a class="header" href="#Настройка-логгера" id="Настройка-логгера">Настройка логгера</a></h2>
+<p>Внутри <code>main()</code> мы сначала запускаем логгер со стандартным <code>LoggerConfig</code>, чтобы мы могли видеть ошибки, предупреждения и сообщения отладки во время работы программы.</p>
+<pre><code class="language-rust edition2018 no_run noplaypen"><span class="boring">extern crate amethyst;
+</span><span class="boring">
+</span><span class="boring">fn main() {
+</span>amethyst::start_logger(Default::default());
+<span class="boring">}
+</span></code></pre>
+<p>Отныне каждая информация, предупреждение и ошибка будут присутствовать и четко форматироваться внутри окна вашего терминала.</p>
+<blockquote>
+<p><strong>Примечание.</strong> Существует много способов настройки этого логгера, например, для записи журнала в файловую систему. Вы можете найти больше информации о том, как это сделать, в Справочнике по <a href="https://docs.amethyst.rs/stable/amethyst/struct.Logger.html">Logger API</a>. Мы будем использовать самые основные настройки в этом руководстве для простоты.</p>
+</blockquote>
+<h2><a class="header" href="#Подготовка-конфигурации-дисплея" id="Подготовка-конфигурации-дисплея">Подготовка конфигурации дисплея</a></h2>
+<p>Далее нам нужно создать <code>DisplayConfig</code> для хранения конфигурации окна нашей игры. Мы можем определить конфигурацию в нашем коде или, что еще лучше, загрузить ее из файла. Последний подход удобнее, поскольку он позволяет нам изменять конфигурацию (например, размер окна) без необходимости каждый раз перекомпилировать нашу игру.</p>
+<p>При создании проекта с помощью <code>amethyst new</code> должны автоматически генерироваться данные <code>DisplayConfig</code> в <code>config/display.ron</code>. Если вы создали проект вручную, создайте его сейчас.</p>
+<p>В любом случае откройте <code>display.ron</code> и измените его содержимое на следующее:</p>
+<pre><code class="language-rust ignore">(
+    title: &quot;Pong!&quot;,
+    dimensions: Some((500, 500)),
+)
+</code></pre>
+<blockquote>
+<p><strong>Примечание.</strong> Если вы никогда ранее не сталкивались с Rusty Object Notation (или RON для краткости), это формат хранения данных, который отражает синтаксис Rust. Здесь данные представляют структуру <a href="https://docs.amethyst.rs/stable/amethyst_renderer/struct.DisplayConfig.html"><code>DisplayConfig</code></a>. Если вы хотите узнать больше о синтаксисе RON, вы можете посетить <a href="https://github.com/ron-rs/ron">официальный репозиторий</a>.</p>
+</blockquote>
+<p>Это установит размеры окна по умолчанию на 500 x 500, и заголовок &quot;Pong!&quot; вместо грустного, строчного «pong» по умолчанию.</p>
+<p>В функции <code>main()</code> файла <code>main.rs</code> мы подготовим путь к файлу, содержащему конфигурацию дисплея:</p>
+<pre><code class="language-rust edition2018 no_run noplaypen"><span class="boring">extern crate amethyst;
+</span><span class="boring">
+</span><span class="boring">use amethyst::{
+</span><span class="boring">    utils::application_root_dir,
+</span><span class="boring">    Error,
+</span><span class="boring">};
+</span><span class="boring">
+</span><span class="boring">fn main() -&gt; Result&lt;(), Error&gt;{
+</span>let app_root = application_root_dir()?;
+let display_config_path = app_root.join(&quot;config&quot;).join(&quot;display.ron&quot;);
+<span class="boring">    Ok(())
+</span><span class="boring">}
+</span></code></pre>
+<h2><a class="header" href="#Создание-приложения" id="Создание-приложения">Создание приложения</a></h2>
+<p>В функции <code>main()</code> файла <code>main.rs</code> мы собираемся добавить базовую настройку приложения:</p>
+<pre><code class="language-rust edition2018 no_run noplaypen"><span class="boring">extern crate amethyst;
+</span><span class="boring">use amethyst::{
+</span><span class="boring">    prelude::*,
+</span><span class="boring">    utils::application_root_dir,
+</span><span class="boring">};
+</span><span class="boring">fn main() -&gt; Result&lt;(), amethyst::Error&gt; {
+</span><span class="boring">struct Pong; impl SimpleState for Pong {}
+</span>let game_data = GameDataBuilder::default();
+
+<span class="boring">let app_root = application_root_dir()?;
+</span>let assets_dir = app_root.join(&quot;assets&quot;);
+let mut game = Application::new(assets_dir, Pong, game_data)?;
+game.run();
+<span class="boring">    Ok(())
+</span><span class="boring">}
+</span></code></pre>
+<p>Здесь мы создаем новый экземпляр <code>GameDataBuilder</code>, центральное хранилище всей игровой логики, которое периодически запускается во время игры. Сейчас он пуст, но скоро мы начнем добавлять в него всевозможные системы и комплекты, которые будут запускать наш игровой код.</p>
+<p>Затем этот конструктор объединяется со структурой состояния игры (<code>Pong</code>), создавая всеобъемлющий корневой объект Amethyst - <a href="https://docs.amethyst.rs/stable/amethyst/type.Application.html"><code>Application</code></a>. Он связывает цикл событий ОС, конечные автоматы, таймеры и другие основные компоненты в одном месте.</p>
+<p>Затем мы вызываем метод <code>.run()</code> для объекта <code>game</code>, которая запускает игровой цикл. Игра будет продолжаться до тех пор, пока <code>SimpleState</code> не вернет <code>Trans::Quit</code> или пока все состояния не будут вытолкнуты из стека конечного автомата.</p>
+<p>Теперь попробуйте скомпилировать код.</p>
+<blockquote>
+<p><strong>Примечание.</strong> Обратите внимание, что при первой компиляции игры это может занять более получаса. Будьте уверены, что последующие сборки проекта будут быстрее.</p>
+</blockquote>
+<p>Вы должны увидеть запуск приложения, но ничего не произойдет, и ваш терминал зависнет, пока вы не завершите процесс. Это означает, что основной игровой цикл работает по кругу и ожидает задания. Давайте дадим ему что-то сделать, добавив рендер!</p>
+<h2><a class="header" href="#Настройка-базового-рендеринга" id="Настройка-базового-рендеринга">Настройка базового рендеринга</a></h2>
+<p>После подготовки конфигурации дисплея и настройки приложения пришло время его использовать. Мы оставили наш экземпляр <code>GameDataBuilder</code> пустым, теперь мы добавим к нему несколько систем.</p>
+<pre><code class="language-rust edition2018 no_run noplaypen"><span class="boring">extern crate amethyst;
+</span><span class="boring">use amethyst::{
+</span><span class="boring">    prelude::*,
+</span><span class="boring">    renderer::{
+</span><span class="boring">        plugins::{RenderFlat2D, RenderToWindow},
+</span><span class="boring">        types::DefaultBackend,
+</span><span class="boring">        RenderingBundle,
+</span><span class="boring">    },
+</span><span class="boring">    utils::application_root_dir,
+</span><span class="boring">};
+</span><span class="boring">fn main() -&gt; Result&lt;(), amethyst::Error&gt;{
+</span>let app_root = application_root_dir()?;
+
+let display_config_path = app_root.join(&quot;config&quot;).join(&quot;display.ron&quot;);
+
+let game_data = GameDataBuilder::default()
+    .with_bundle(
+        RenderingBundle::&lt;DefaultBackend&gt;::new()
+            // Плагин RenderToWindow предоставляет функционал для открытия окна и рисования на нем
+            .with_plugin(
+                RenderToWindow::from_config_path(display_config_path)?
+                    .with_clear([0.0, 0.0, 0.0, 1.0]),
+            )
+            // Плагин RenderFlat2D используется для визуализации объектов с помощью компонента SpriteRender.
+            .with_plugin(RenderFlat2D::default()),
+    )?;
+<span class="boring">Ok(()) }
+</span></code></pre>
+<p>Здесь мы добавляем комплект <code>RenderingBundle</code>. Комплекты - это, по сути, наборы систем, предварительно настроенных для совместной работы, поэтому вам не нужно записывать их все по одной.</p>
+<blockquote>
+<p><strong>Примечание.</strong> Мы рассмотрим системы и комплекты более подробно позже. Пока что давайте думать о комплекте как о наборе систем, которые, в сочетании, обеспечат определенную функцию движку. Вы наверняка скоро напишете свои собственные комплекты для функций своей игры.</p>
+</blockquote>
+<p><code>RenderingBundle</code> отличается от большинства других комплектов: он сам по себе мало что делает. Вместо этого он использует собственную систему плагинов для определения того, что и как следует отображать. Мы используем метод <code>with_plugin</code>, чтобы сообщить ему, что мы хотим добавить плагины <code>RenderToWindow</code> и <code>RenderFlat2D</code>. Эти плагины дадут нашему рендереру возможность открывать окно и рисовать на нем спрайты.</p>
+<p>В этой конфигурации наше окно будет иметь черный фон. Если вы хотите использовать другой цвет, вы можете настроить значения RGBA внутри <code>with_clear</code>. Значения варьируются от <code>0.0</code> до <code>1.0</code>, попробуйте использовать, например, <code>[0.00196, 0.23726, 0.21765, 1.0]</code>, чтобы получить красивое окно голубого цвета.</p>
+<blockquote>
+<p><strong>Примечание.</strong> Этот установочный код использует систему, основанную на особенностях <code>RenderPlugin</code> Amethyst, которая использует пакет <code>rendy</code> для определения рендеринга. Если вы планируете выйти за рамки строительных блоков рендеринга, которые Amethyst предоставляет «из коробки», вы можете прочитать о графике рендеринга в <a href="https://github.com/amethyst/rendy/blob/master/docs/graph.md">документации rendy</a>.</p>
+</blockquote>
+<p>Ура! Теперь мы можем скомпилировать и запустить этот код с помощью <code>cargo run</code> и получить окно. Это должно выглядеть примерно так:</p>
+<p><img src="pong/..%5Cimages%5Cchapter_4_part_1.png" alt="Окно с тёмным фоном." /></p>
 <hr />
 <p>Документация была переведена специально для сообщества &quot;<strong>rust_lang_ru</strong>&quot;.</p>
 <p>Подпишись на нас в <strong><a href="http://tlinks.run/rust_lang_ru">Telegram</a></strong> и <strong><a href="https://www.youtube.com/channel/UCu413rnSfuSSOR3OsIThlZA">YouTube</a></strong>!</p>
