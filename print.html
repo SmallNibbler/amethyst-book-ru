@@ -83,7 +83,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div id="sidebar-scrollbox" class="sidebar-scrollbox">
-                <ol class="chapter"><li class="expanded "><a href="chapter_1.html"><strong aria-hidden="true">1.</strong> Введение</a></li><li class="expanded "><a href="chapter_2.html"><strong aria-hidden="true">2.</strong> Начало работы</a></li><li class="expanded "><a href="chapter_3.html"><strong aria-hidden="true">3.</strong> Концепции</a></li><li><ol class="section"><li class="expanded "><a href="concepts/chapter_3_part_1.html"><strong aria-hidden="true">3.1.</strong> Состояния</a></li><li class="expanded "><a href="concepts/chapter_3_part_2.html"><strong aria-hidden="true">3.2.</strong> Сущность и компонент</a></li><li class="expanded "><a href="concepts/chapter_3_part_3.html"><strong aria-hidden="true">3.3.</strong> Ресурс</a></li><li class="expanded "><a href="concepts/chapter_3_part_4.html"><strong aria-hidden="true">3.4.</strong> Мир</a></li><li class="expanded "><a href="concepts/chapter_3_part_5.html"><strong aria-hidden="true">3.5.</strong> Система</a></li><li><ol class="section"><li class="expanded "><a href="concepts/system/chapter_3_part_5.1.html"><strong aria-hidden="true">3.5.1.</strong> Инициализация системы</a></li><li class="expanded "><a href="concepts/system/chapter_3_part_5.2.html"><strong aria-hidden="true">3.5.2.</strong> Производная SystemDesc</a></li><li class="expanded "><a href="concepts/system/chapter_3_part_5.3.html"><strong aria-hidden="true">3.5.3.</strong> Реализация типажа SystemDesc</a></li></ol></li><li class="expanded "><a href="concepts/chapter_3_part_6.html"><strong aria-hidden="true">3.6.</strong> Диспетчер</a></li><li class="expanded "><a href="concepts/chapter_3_part_7.html"><strong aria-hidden="true">3.7.</strong> Канал событий</a></li></ol></li><li class="expanded "><a href="chapter_4.html"><strong aria-hidden="true">4.</strong> Игра Понг</a></li><li><ol class="section"><li class="expanded "><a href="pong/chapter_4_part_1.html"><strong aria-hidden="true">4.1.</strong> Настройка проекта</a></li></ol></li></ol>
+                <ol class="chapter"><li class="expanded "><a href="chapter_1.html"><strong aria-hidden="true">1.</strong> Введение</a></li><li class="expanded "><a href="chapter_2.html"><strong aria-hidden="true">2.</strong> Начало работы</a></li><li class="expanded "><a href="chapter_3.html"><strong aria-hidden="true">3.</strong> Концепции</a></li><li><ol class="section"><li class="expanded "><a href="concepts/chapter_3_part_1.html"><strong aria-hidden="true">3.1.</strong> Состояния</a></li><li class="expanded "><a href="concepts/chapter_3_part_2.html"><strong aria-hidden="true">3.2.</strong> Сущность и компонент</a></li><li class="expanded "><a href="concepts/chapter_3_part_3.html"><strong aria-hidden="true">3.3.</strong> Ресурс</a></li><li class="expanded "><a href="concepts/chapter_3_part_4.html"><strong aria-hidden="true">3.4.</strong> Мир</a></li><li class="expanded "><a href="concepts/chapter_3_part_5.html"><strong aria-hidden="true">3.5.</strong> Система</a></li><li><ol class="section"><li class="expanded "><a href="concepts/system/chapter_3_part_5.1.html"><strong aria-hidden="true">3.5.1.</strong> Инициализация системы</a></li><li class="expanded "><a href="concepts/system/chapter_3_part_5.2.html"><strong aria-hidden="true">3.5.2.</strong> Производная SystemDesc</a></li><li class="expanded "><a href="concepts/system/chapter_3_part_5.3.html"><strong aria-hidden="true">3.5.3.</strong> Реализация типажа SystemDesc</a></li></ol></li><li class="expanded "><a href="concepts/chapter_3_part_6.html"><strong aria-hidden="true">3.6.</strong> Диспетчер</a></li><li class="expanded "><a href="concepts/chapter_3_part_7.html"><strong aria-hidden="true">3.7.</strong> Канал событий</a></li></ol></li><li class="expanded "><a href="chapter_4.html"><strong aria-hidden="true">4.</strong> Игра Понг</a></li><li><ol class="section"><li class="expanded "><a href="pong/chapter_4_part_1.html"><strong aria-hidden="true">4.1.</strong> Настройка проекта</a></li><li class="expanded "><a href="pong/chapter_4_part_2.html"><strong aria-hidden="true">4.2.</strong> Отрисовка ракеток</a></li></ol></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
         </nav>
@@ -486,7 +486,7 @@ impl State&lt;(), MyEvent&gt; for GameplayState {
 <tr><td align="center">Person C</td><td align="center">100.5</td><td align="center">300.8</td><td align="center"></td><td align="center"></td><td align="center">&quot;Peter&quot;</td></tr>
 </tbody></table>
 <p>Мы можем разделить свойства бутылки на <code>PositionComponent</code> и <code>BottleComponent</code>, а свойства человека на <code>PositionComponent</code> и <code>PersonComponent</code>. Вот иллюстрация того, как будут храниться три объекта.</p>
-<p><img src="concepts/..%5Cimages%5Cchapter_3_part_2.png" alt="alt text" /></p>
+<p><img src="concepts/..%5Cimages%5Ccomponent_and_entity.png" alt="alt text" /></p>
 <p>Как видно из графика, сущности не хранят данные. Они также не знают никакой информации о своих компонентах. Они служат для идентификации объекта и отслеживания существования объекта. Хранилище компонентов хранит все данные и их связь с сущностями.</p>
 <p>Если вы знакомы с реляционными базами данных, эта организация выглядит очень похоже на таблицы в базе данных, где идентификатор сущности служит ключом в каждой таблице. На самом деле, вы даже можете объединять компоненты или сущности, также как объединяете таблицы. Например, чтобы обновить положение всех людей, вам нужно соединить <code>PersonComponent</code> и <code>PositionComponent</code>.</p>
 <h2><a class="header" href="#entitiesres" id="entitiesres">EntitiesRes</a></h2>
@@ -2262,7 +2262,483 @@ let game_data = GameDataBuilder::default()
 <p><strong>Примечание.</strong> Этот установочный код использует систему, основанную на особенностях <code>RenderPlugin</code> Amethyst, которая использует пакет <code>rendy</code> для определения рендеринга. Если вы планируете выйти за рамки строительных блоков рендеринга, которые Amethyst предоставляет «из коробки», вы можете прочитать о графике рендеринга в <a href="https://github.com/amethyst/rendy/blob/master/docs/graph.md">документации rendy</a>.</p>
 </blockquote>
 <p>Ура! Теперь мы можем скомпилировать и запустить этот код с помощью <code>cargo run</code> и получить окно. Это должно выглядеть примерно так:</p>
-<p><img src="pong/..%5Cimages%5Cchapter_4_part_1.png" alt="Окно с тёмным фоном." /></p>
+<p><img src="pong/..%5Cimages%5Cpong_01.png" alt="Окно с тёмным фоном." /></p>
+<hr />
+<p>Документация была переведена специально для сообщества &quot;<strong>rust_lang_ru</strong>&quot;.</p>
+<p>Подпишись на нас в <strong><a href="http://tlinks.run/rust_lang_ru">Telegram</a></strong> и <strong><a href="https://www.youtube.com/channel/UCu413rnSfuSSOR3OsIThlZA">YouTube</a></strong>!</p>
+<h1><a class="header" href="#Отрисовка-ракеток" id="Отрисовка-ракеток">Отрисовка ракеток</a></h1>
+<p>Теперь давайте немного разберёмся с отрисовкой! Чтобы нам что-то нарисовать на экране, нам нужно сперва это что-то нарисовать. В Аметисте эти «нечто» называются сущностями.</p>
+<p>Аметист использует платформу Entity-Component-System (ECS), называемую <strong>Specs</strong>, также написанную на Rust. Вы можете узнать больше о Specs в <a href="https://specs.amethyst.rs/docs/tutorials/">The Specs Book</a>. Вот основное объяснение ECS из документации:</p>
+<blockquote>
+<p>Термин ECS - сокращение от Entity-Component-System. Это три основных понятия. Каждая сущность связана с некоторыми компонентами. Эти сущности и компоненты обрабатываются системами. Таким образом, ваши данные (компоненты) полностью отделены от поведения (систем). Сущность просто логически группирует компоненты; поэтому компонент <code>Velocity</code> может быть применен к компоненту <code>Position</code> той же сущности.</p>
+</blockquote>
+<p>Я рекомендую, всё же, просмотреть The Specs Book, чтобы понять, как работает Amethyst, особенно если вы новичок в ECS.</p>
+<h2><a class="header" href="#Быстрый-рефакторинг" id="Быстрый-рефакторинг">Быстрый рефакторинг</a></h2>
+<p>Прежде чем добавить больше логики Pong, необходимо отделить код инициализации приложения от кода Pong.</p>
+<ol>
+<li>
+<p>В каталоге <code>src</code> создайте новый файл с именем <code>pong.rs</code> и добавьте следующие операторы use. Это необходимо, чтобы пройти через эту главу:</p>
+<pre><code class="language-rust edition2018 no_run noplaypen"><span class="boring">extern crate amethyst;
+</span><span class="boring">
+</span>use amethyst::{
+    assets::{AssetStorage, Loader, Handle},
+    core::transform::Transform,
+    ecs::prelude::{Component, DenseVecStorage},
+    prelude::*,
+    renderer::{Camera, ImageFormat, SpriteRender, SpriteSheet, SpriteSheetFormat, Texture},
+};
+</code></pre>
+</li>
+<li>
+<p>Переместите структуру <code>Pong</code> и блок <code>impl SimpleState for Pong</code> из <code>main.rs</code> в <code>pong.rs</code>.</p>
+</li>
+<li>
+<p>В <code>main.rs</code> объявите <code>pong</code> как модуль и импортируйте состояние <code>Pong</code>:</p>
+<pre><code class="language-rust ignore">mod pong;
+
+use crate::pong::Pong;
+</code></pre>
+</li>
+</ol>
+<h2><a class="header" href="#Обойти-мир" id="Обойти-мир">Обойти мир</a></h2>
+<p>Во-первых, в <code>pong.rs</code> давайте добавим новый метод в нашу реализацию <code>State</code>: <code>on_start</code>. Этот метод вызывается при запуске <code>State</code>. Мы пока оставим это пустым.</p>
+<pre><code class="language-rust edition2018 no_run noplaypen"><span class="boring">extern crate amethyst;
+</span><span class="boring">use amethyst::prelude::*;
+</span><span class="boring">struct Pong;
+</span>impl SimpleState for Pong {
+    fn on_start(&amp;mut self, data: StateData&lt;'_, GameData&lt;'_, '_&gt;&gt;) {
+
+    }
+}
+</code></pre>
+<p><code>StateData&lt;'_, GameData &lt;'_, '_&gt;&gt;</code> - это структура, предоставляемая всем методам <code>State</code>. Важной частью её содержания здесь является её поле <code>world</code>. Структура <code>World</code> хранит все данные созданные во время выполнения игры - сущности и компоненты.</p>
+<h2><a class="header" href="#Рендеринг-игры-с-помощью-камеры" id="Рендеринг-игры-с-помощью-камеры">Рендеринг игры с помощью камеры</a></h2>
+<p>Первое, что нам понадобится в нашей игре, - это <code>Camera</code>. Это компонент, который будет определять то, что отображается на экране. Он ведет себя как настоящая камера: он смотрит на конкретную часть мира и может перемещаться по желанию.</p>
+<ol>
+<li>
+<p>Определите размер игровой зоны в верхней части <code>pong.rs</code>.</p>
+<pre><code class="language-rust edition2018 no_run noplaypen">pub const ARENA_HEIGHT: f32 = 100.0;
+pub const ARENA_WIDTH: f32 = 100.0;
+</code></pre>
+<p>Они общедоступны, так как будут использоваться в других модулях.</p>
+</li>
+<li>
+<p>Создайте объект камеры.</p>
+<p>В игре понг мы хотим, чтобы камера покрывала всю арену. Давайте сделаем это в новой функции <code>initialise_camera</code>:</p>
+<pre><code class="language-rust edition2018 no_run noplaypen"><span class="boring">extern crate amethyst;
+</span><span class="boring">
+</span><span class="boring">const ARENA_HEIGHT: f32 = 100.0;
+</span><span class="boring">const ARENA_WIDTH: f32 = 100.0;
+</span><span class="boring">use amethyst::prelude::*;
+</span><span class="boring">use amethyst::ecs::World;
+</span><span class="boring">use amethyst::renderer::Camera;
+</span><span class="boring">use amethyst::core::Transform;
+</span>fn initialise_camera(world: &amp;mut World) {
+    // Настроим камеру таким образом, чтобы наш экран покрывал всю арену и (0, 0) находился внизу слева.
+    let mut transform = Transform::default();
+    transform.set_translation_xyz(ARENA_WIDTH * 0.5, ARENA_HEIGHT * 0.5, 1.0);
+
+    world
+        .create_entity()
+        .with(Camera::standard_2d(ARENA_WIDTH, ARENA_HEIGHT))
+        .with(transform)
+        .build();
+}
+</code></pre>
+<p>Это создает объект, который будет нести нашу камеру с ортогональной проекцией размера нашей арены. Мы также прикрепляем компонент <code>Transform</code>, представляющий его положение в мире.</p>
+<p>Функция <code>Camera::standard_2d</code> создает 2D-камеру по умолчанию, которая направлена ​​вдоль мировой оси <strong>Z</strong>. Область перед камерой имеет горизонтальную ось <strong>X</strong> и вертикальную ось <strong>Y</strong>. Ось <strong>X</strong> увеличивается при движении вправо, а ось <strong>Y</strong> увеличивается при движении вверх. Положение камеры - центр видимой области. Мы помещаем камеру с <code>set_translation_xyz</code> в середину игровой арены так, чтобы <code>(0, 0)</code> находился внизу слева от видимой области, а <code>(ARENA_WIDTH, ARENA_HEIGHT)</code> - вверху справа.</p>
+<p>Обратите внимание, что мы также сместили камеру на <code>1.0</code> вдоль оси <strong>Z</strong>. Это сделано для того, чтобы камера могла видеть спрайты, расположенные на плоскости <strong>XY</strong>, где <strong>Z</strong> равно <code>0,0</code>:</p>
+<p><img src="pong/..%5Cimages%5Ccamera.png" alt="Положение камеры в пространстве." /></p>
+<blockquote>
+<p><strong>Примечание.</strong> Ортогональные проекции - это тип трехмерной визуализации на двухмерных экранах, в котором соотношение размеров двумерных изображений не изменяется. Они очень полезны в играх без реального 3D, как наш пример с понгом. Перспективные проекции - это еще один способ отображения графики, более полезный в трехмерных сценах.</p>
+</blockquote>
+</li>
+<li>
+<p>Чтобы завершить настройку камеры, нам нужно вызвать <code>initialise_camera</code> из метода <code>on_start</code> состояния <code>Pong</code>:</p>
+<pre><code class="language-rust edition2018 no_run noplaypen"><span class="boring">extern crate amethyst;
+</span><span class="boring">use amethyst::prelude::*;
+</span><span class="boring">use amethyst::ecs::World;
+</span><span class="boring">fn initialise_camera(world: &amp;mut World) { }
+</span><span class="boring">struct MyState;
+</span><span class="boring">impl SimpleState for MyState {
+</span>fn on_start(&amp;mut self, data: StateData&lt;'_, GameData&lt;'_, '_&gt;&gt;) {
+    let world = data.world;
+
+    initialise_camera(world);
+}
+<span class="boring">}
+</span></code></pre>
+<p>Теперь, когда наша камера настроена, пришло время добавить ракетки.</p>
+</li>
+</ol>
+<h2><a class="header" href="#Наш-первый-компонент" id="Наш-первый-компонент">Наш первый компонент</a></h2>
+<p>Теперь мы создадим компонент <code>Paddle</code>, весь следующий код будет добавлен в <code>pong.rs</code>.</p>
+<ol>
+<li>
+<p>Определите константы для ширины и высоты весла.</p>
+<pre><code class="language-rust edition2018 no_run noplaypen">pub const PADDLE_HEIGHT: f32 = 16.0;
+pub const PADDLE_WIDTH: f32 = 4.0;
+</code></pre>
+</li>
+<li>
+<p>Определите перечисление <code>Side</code> и структуру <code>Paddle</code>:</p>
+<pre><code class="language-rust edition2018 no_run noplaypen"><span class="boring">pub const PADDLE_HEIGHT: f32 = 16.0;
+</span><span class="boring">pub const PADDLE_WIDTH: f32 = 4.0;
+</span><span class="boring">
+</span>#[derive(PartialEq, Eq)]
+pub enum Side {
+    Left,
+    Right,
+}
+
+pub struct Paddle {
+    pub side: Side,
+    pub width: f32,
+    pub height: f32,
+}
+
+impl Paddle {
+    fn new(side: Side) -&gt; Paddle {
+        Paddle {
+            side,
+            width: PADDLE_WIDTH,
+            height: PADDLE_HEIGHT,
+        }
+    }
+}
+</code></pre>
+<p>Вы можете сказать: &quot;Но это выглядит как обычная структура!&quot;. И вы будете правы, специальный соус идет дальше.</p>
+</li>
+<li>
+<p>Реализуйте типаж <code>Component</code> для <code>Paddle</code>:</p>
+<pre><code class="language-rust edition2018 no_run noplaypen"><span class="boring">extern crate amethyst;
+</span><span class="boring">
+</span><span class="boring">use amethyst::ecs::{Component, DenseVecStorage};
+</span><span class="boring">
+</span><span class="boring">struct Paddle;
+</span><span class="boring">
+</span>impl Component for Paddle {
+   type Storage = DenseVecStorage&lt;Self&gt;;
+}
+</code></pre>
+<p>Благодаря реализации <code>Component</code> для структуры <code>Paddle</code>, теперь она может быть присоединена к объектам в игре.</p>
+<p>При реализации свойства <code>Component</code> мы должны указать тип хранилища. Различные типы хранилищ оптимизируют для более быстрого доступа, более низкого использования памяти или баланса между ними. Для получения дополнительной информации о типах хранилищ, ознакомьтесь с <a href="https://specs.amethyst.rs/docs/tutorials/05_storages.html#densevecstorage">документацией Specs</a>.</p>
+</li>
+</ol>
+<h2><a class="header" href="#Инициализируем-некоторые-сущности" id="Инициализируем-некоторые-сущности">Инициализируем некоторые сущности</a></h2>
+<p>Теперь, когда у нас есть компонент <code>Paddle</code>, давайте определим некоторые объекты <code>Paddle</code>, которые включают этот компонент, и добавим их в наш <code>World</code>.</p>
+<p>Сначала давайте посмотрим на наш импорт:</p>
+<pre><code class="language-rust edition2018 no_run noplaypen"><span class="boring">extern crate amethyst;
+</span>use amethyst::core::transform::Transform;
+</code></pre>
+<p><code>Transform</code> является компонентом Amethyst ECS, который несет информацию о положении и ориентации относительно родителя, если таковой существует.</p>
+<p>Хорошо, давайте сделаем несколько сущностей! Мы определим функцию <code>initialise_paddles</code>, которая будет создавать объекты левой и правой ракетки и прикрепили к каждому компонент <code>Transform</code>, чтобы расположить их в нашем мире. Как мы определили ранее, наш холст от <code>0.0</code> до <code>ARENA_WIDTH</code> в горизонтальном измерении и от <code>0.0</code> до <code>ARENA_HEIGHT</code> в вертикальном измерении. Помните, что точка привязки наших сущностей будет находиться в середине изображения, которое мы хотим отобразить поверх них. Это хорошее правило, которому нужно следовать в целом, поскольку оно облегчает такие операции, как вращение.</p>
+<pre><code class="language-rust edition2018 no_run noplaypen"><span class="boring">extern crate amethyst;
+</span><span class="boring">use amethyst::prelude::*;
+</span><span class="boring">use amethyst::core::Transform;
+</span><span class="boring">use amethyst::ecs::World;
+</span><span class="boring">enum Side {
+</span><span class="boring">  Left,
+</span><span class="boring">  Right,
+</span><span class="boring">}
+</span><span class="boring">struct Paddle;
+</span><span class="boring">impl amethyst::ecs::Component for Paddle {
+</span><span class="boring">  type Storage = amethyst::ecs::VecStorage&lt;Paddle&gt;;
+</span><span class="boring">}
+</span><span class="boring">impl Paddle {
+</span><span class="boring">  fn new(side: Side) -&gt; Paddle { Paddle }
+</span><span class="boring">}
+</span><span class="boring">const PADDLE_HEIGHT: f32 = 16.0;
+</span><span class="boring">const PADDLE_WIDTH: f32 = 4.0;
+</span><span class="boring">const ARENA_HEIGHT: f32 = 100.0;
+</span><span class="boring">const ARENA_WIDTH: f32 = 100.0;
+</span>/// Инициализирует одну ракетку слева, а другую - справа.
+fn initialise_paddles(world: &amp;mut World) {
+    let mut left_transform = Transform::default();
+    let mut right_transform = Transform::default();
+
+    // Правильно располагаем ракетки
+    let y = ARENA_HEIGHT / 2.0;
+    left_transform.set_translation_xyz(PADDLE_WIDTH * 0.5, y, 0.0);
+    right_transform.set_translation_xyz(ARENA_WIDTH - PADDLE_WIDTH * 0.5, y, 0.0);
+
+    // Создаём левую сущность ракетки.
+    world
+        .create_entity()
+        .with(Paddle::new(Side::Left))
+        .with(left_transform)
+        .build();
+
+    // Создаём правую сущность ракетки.
+    world
+        .create_entity()
+        .with(Paddle::new(Side::Right))
+        .with(right_transform)
+        .build();
+}
+</code></pre>
+<p>Это все, что нужно Amethyst, чтобы отслеживать и перемещать ракетки в нашем виртуальном мире, но нам потребуется еще немного поработать, чтобы нарисовать их. В качестве проверки работоспособности давайте удостоверимся, что код для инициализации весла компилируется. Обновите метод <code>on_start</code> следующим образом:</p>
+<pre><code class="language-rust edition2018 no_run noplaypen"><span class="boring">extern crate amethyst;
+</span><span class="boring">use amethyst::prelude::*;
+</span><span class="boring">use amethyst::ecs::World;
+</span><span class="boring">fn initialise_paddles(world: &amp;mut World) { }
+</span><span class="boring">fn initialise_camera(world: &amp;mut World) { }
+</span><span class="boring">struct MyState;
+</span><span class="boring">impl SimpleState for MyState {
+</span>fn on_start(&amp;mut self, data: StateData&lt;'_, GameData&lt;'_, '_&gt;&gt;) {
+    let world = data.world;
+
+    initialise_paddles(world);
+    initialise_camera(world);
+}
+<span class="boring">}
+</span></code></pre>
+<p>Давайте запустим нашу игру с пустым экраном!</p>
+<pre><code class="language-text ignore">Tried to fetch resource of type `MaskedStorage&lt;Paddle&gt;`[^1] from the `World`, but the resource does not exist.
+
+You may ensure the resource exists through one of the following methods:
+
+* Inserting it when the world is created: `world.insert(..)`.
+* If the resource implements `Default`, include it in a system's `SystemData`, and ensure the system is registered in the dispatcher.
+* If the resource does not implement `Default`, insert in the world during `System::setup`.
+
+[^1]: Full type name: `amethyst::ecs::storage::MaskedStorage&lt;pong::Paddle&gt;`
+</code></pre>
+<p>Ой, что не так? Для использования <code>Component</code> в <code>World</code> должен быть настроен ресурс <code>Storage&lt;ComponentType&gt;</code>. Приведенное выше сообщение об ошибке означает, что мы зарегистрировали компонент <code>Paddle</code> на сущности, но не настроили хранилище. Мы можем исправить это, добавив следующую строку перед <code>initialise_paddles(world)</code> в методе <code>on_start</code>:</p>
+<pre><code class="language-rust edition2018 no_run noplaypen"><span class="boring">extern crate amethyst;
+</span><span class="boring">use amethyst::ecs::{World, WorldExt};
+</span><span class="boring">struct Paddle;
+</span><span class="boring">impl amethyst::ecs::Component for Paddle {
+</span><span class="boring">  type Storage = amethyst::ecs::VecStorage&lt;Paddle&gt;;
+</span><span class="boring">}
+</span><span class="boring">fn register() {
+</span><span class="boring">  let mut world = World::new();
+</span>world.register::&lt;Paddle&gt;();
+<span class="boring">}
+</span></code></pre>
+<p>Это довольно неудобно - необходимо вручную зарегистрировать каждый компонент, прежде чем его можно будет использовать. Должен быть лучший способ. <strong>Подсказка:</strong> есть.</p>
+<p>Когда мы добавляем системы в наше приложение, любой компонент, который использует <code>System</code>, автоматически регистрируется. Тем не менее, поскольку у нас нет <code>System</code>, нам приходится вручную регистрировать компонент <code>Paddle</code>.</p>
+<p>Давайте снова запустим игру.</p>
+<p>Amethyst имеет много внутренних систем, которые он использует, чтобы поддерживать работу, которую мы должны внести в контекст <code>World</code>. Для простоты они были сгруппированы в «Связки», которые включают связанные системы и ресурсы. Мы можем добавить их в <code>GameData</code> нашего приложения, используя метод <code>with_bundle</code>, аналогично тому, как вы регистрируете систему. У нас уже есть <code>RenderBundle</code>, регистрация другого будет выглядеть аналогично. Вы должны сначала импортировать <code>TransformBundle</code>, а затем зарегистрировать его следующим образом:</p>
+<pre><code class="language-rust edition2018 no_run noplaypen"><span class="boring">extern crate amethyst;
+</span><span class="boring">
+</span>use amethyst::core::transform::TransformBundle;
+<span class="boring">
+</span><span class="boring">use amethyst::{
+</span><span class="boring">    prelude::*,
+</span><span class="boring">    utils::application_root_dir,
+</span><span class="boring">};
+</span><span class="boring">
+</span><span class="boring">struct Pong;
+</span><span class="boring">impl SimpleState for Pong { }
+</span><span class="boring">
+</span>fn main() -&gt; amethyst::Result&lt;()&gt; {
+<span class="boring">  amethyst::start_logger(Default::default());
+</span><span class="boring">
+</span><span class="boring">  let app_root = application_root_dir()?;
+</span><span class="boring">  let display_config_path =
+</span><span class="boring">      app_root.join(&quot;examples/pong_tutorial_02/config/display.ron&quot;);
+</span><span class="boring">
+</span>    // ...
+    let game_data = GameDataBuilder::default()
+        // ...
+
+        // Добавим связку преобразования, которая обрабатывает позиции отслеживания объектов
+        .with_bundle(TransformBundle::new())?;
+
+<span class="boring">  let assets_dir = &quot;/&quot;;
+</span><span class="boring">  let mut game = Application::new(assets_dir, Pong, game_data)?;
+</span><span class="boring">  Ok(())
+</span>}
+</code></pre>
+<p>На этот раз, когда вы запустите игру, вы должны увидеть знакомый черный экран. Ура!</p>
+<h2><a class="header" href="#Отрисовка" id="Отрисовка">Отрисовка</a></h2>
+<p>Этот раздел, наконец, позволит нам увидеть что-то.</p>
+<p>Первое, что нам нужно сделать, это загрузить спрайт-лист, который мы будем использовать для всей нашей графики в игре. Создайте папку с текстурами <code>texture</code> в директории ресурсов проекта <code>assets</code>. Она будет содержать <a href="https://book-src.amethyst.rs/stable/images/pong_tutorial/pong_spritesheet.png">спрайт-лист текстуру</a> <code>pong_spritesheet.png</code>, которая нам нужна для визуализации элементов игры. Мы будем выполнять загрузку в новой функции в <code>pong.rs</code>, которая называется <code>load_sprite_sheet</code>.</p>
+<p>Сначала давайте объявим функцию и загрузим данные изображения листа спрайта.</p>
+<pre><code class="language-rust edition2018 no_run noplaypen"><span class="boring">extern crate amethyst;
+</span><span class="boring">
+</span><span class="boring">use amethyst::{
+</span><span class="boring">    assets::{AssetStorage, Loader, Handle},
+</span><span class="boring">    core::transform::Transform,
+</span><span class="boring">    ecs::prelude::{Component, DenseVecStorage},
+</span><span class="boring">    prelude::*,
+</span><span class="boring">    renderer::{
+</span><span class="boring">        camera::{Camera, Projection},
+</span><span class="boring">        formats::texture::ImageFormat,
+</span><span class="boring">        sprite::{SpriteRender, SpriteSheet, SpriteSheetFormat},
+</span><span class="boring">        Texture,
+</span><span class="boring">    },
+</span><span class="boring">};
+</span><span class="boring">
+</span>fn load_sprite_sheet(world: &amp;mut World) -&gt; Handle&lt;SpriteSheet&gt; {
+    // Load the sprite sheet necessary to render the graphics.
+    // The texture is the pixel data
+    // `texture_handle` is a cloneable reference to the texture
+    let texture_handle = {
+        let loader = world.read_resource::&lt;Loader&gt;();
+        let texture_storage = world.read_resource::&lt;AssetStorage&lt;Texture&gt;&gt;();
+        loader.load(
+            &quot;texture/pong_spritesheet.png&quot;,
+            ImageFormat::default(),
+            (),
+            &amp;texture_storage,
+        )
+    };
+
+    //...
+<span class="boring">  unimplemented!()
+</span>}
+</code></pre>
+<p><code>Loader</code> - это загрузчик ресурсов, который определяется как ресурс (не <code>Entity</code>, <code>Component</code> или <code>System</code>, но все еще является частью нашего ECS <code>World</code>). Он был создан, когда мы создавали наше приложение в <code>main.rs</code>, и он может читать ресурсы, такие как файлы .obj, но также он может загружать (<code>load</code>) .png в качестве текстуры (<code>Texture</code>), как в нашем случае использования.</p>
+<blockquote>
+<p>Ресурсы в Specs - это тип данных, которые могут совместно использоваться системами, будучи независимыми от сущностей, в отличие от компонентов, которые привязаны к конкретным сущностям.</p>
+</blockquote>
+<p><code>AssetStorage&lt;Texture&gt;</code> также является ресурсом; это то, куда загрузчик помещает <code>Texture</code>, которую он загрузит с нашего спрайт-листа. Чтобы управлять ими, оставаясь быстрым, Amethyst не дает нам прямой доступ к ассетам, которые мы загружаем. Если бы это произошло иначе, нам пришлось бы ждать полной загрузки текстуры, чтобы сделать все остальные вещи, которые мы должны подготовить, что было бы пустой тратой времени! Вместо этого функция загрузки <code>load</code> вернет <code>Handle&lt;Texture&gt;</code>. Этот дескриптор «указывает» на место, где ассет будет загружен. В терминах Rust это эквивалентно опции с подсчетом ссылок. Это чрезвычайно полезно, особенно потому, что клонирование дескриптора не клонирует ассет в памяти, поэтому многие вещи могут использовать один и тот же ассет одновременно.</p>
+<p>Наряду с нашей текстурой спрайт-листа нам нужен файл, описывающий расположение спрайтов на листе. Давайте создадим прямо рядом с ним файл с именем <code>pong_spritesheet.ron</code>. Он будет содержать следующее определение листа спрайта:</p>
+<pre><code class="language-text ignore">List((
+    texture_width: 8,
+    texture_height: 16,
+    sprites: [
+        (
+            x: 0,
+            y: 0,
+            width: 4,
+            height: 16,
+        ),
+        (
+            x: 4,
+            y: 0,
+            width: 4,
+            height: 4,
+        ),
+    ],
+))
+</code></pre>
+<blockquote>
+<p><strong>Примечание.</strong> Обязательно обратите внимание на вид скобок в файле ron. Особенно, если вы привыкли писать файлы в формате JSON или аналогичные, у вас может возникнуть соблазн использовать там фигурные скобки; однако это приведет к очень трудным для отладки ошибкам, тем более что аметист не предупредит вас об этом при компиляции.</p>
+</blockquote>
+<p>Наконец, мы загружаем файл, содержащий положение каждого спрайта на листе.</p>
+<pre><code class="language-rust edition2018 no_run noplaypen"><span class="boring">extern crate amethyst;
+</span><span class="boring">
+</span><span class="boring">use amethyst::{
+</span><span class="boring">    assets::{AssetStorage, Handle, Loader},
+</span><span class="boring">    core::transform::Transform,
+</span><span class="boring">    ecs::prelude::{Component, DenseVecStorage},
+</span><span class="boring">    prelude::*,
+</span><span class="boring">    renderer::{
+</span><span class="boring">        camera::{Camera, Projection},
+</span><span class="boring">        formats::texture::ImageFormat,
+</span><span class="boring">        sprite::{SpriteRender, SpriteSheet, SpriteSheetFormat},
+</span><span class="boring">        Texture,
+</span><span class="boring">    },
+</span><span class="boring">};
+</span><span class="boring">
+</span>fn load_sprite_sheet(world: &amp;mut World) -&gt; Handle&lt;SpriteSheet&gt; {
+<span class="boring">
+</span><span class="boring">  let texture_handle = {
+</span><span class="boring">      let loader = world.read_resource::&lt;Loader&gt;();
+</span><span class="boring">      let texture_storage = world.read_resource::&lt;AssetStorage&lt;Texture&gt;&gt;();
+</span><span class="boring">      loader.load(
+</span><span class="boring">          &quot;texture/pong_spritesheet.png&quot;,
+</span><span class="boring">          ImageFormat::default(),
+</span><span class="boring">          (),
+</span><span class="boring">          &amp;texture_storage,
+</span><span class="boring">      )
+</span><span class="boring">  };
+</span><span class="boring">
+</span>    // ...
+
+    let loader = world.read_resource::&lt;Loader&gt;();
+    let sprite_sheet_store = world.read_resource::&lt;AssetStorage&lt;SpriteSheet&gt;&gt;();
+    loader.load(
+        &quot;texture/pong_spritesheet.ron&quot;, // Here we load the associated ron file
+        SpriteSheetFormat(texture_handle),
+        (),
+        &amp;sprite_sheet_store,
+    )
+<span class="boring">}
+</span></code></pre>
+<p>Здесь мы должны использовать дескриптор текстуры. <code>Loader</code> возьмет файл, содержащий позиции спрайтов и дескриптор текстуры, и создаст красиво упакованную структуру <code>SpriteSheet</code>. Именно эту структуру мы будем использовать для рисования чего-либо на экране.</p>
+<p>Обратите внимание, что порядок спрайтов, объявленных в файле листа спрайтов, также имеет большое значение, поскольку на спрайты ссылается индекс в векторе. Если вас интересует спрайт с мячом, он существует на изображении, но мы вернемся к нему в следующей части урока.</p>
+<p>Все идет нормально. У нас загружен лист спрайтов, теперь нам нужно связать спрайты с ракетками. Мы обновляем функцию <code>initialise_paddles</code>, изменяя ее сигнатуру на:</p>
+<pre><code class="language-rust edition2018 no_run noplaypen"><span class="boring">extern crate amethyst;
+</span><span class="boring">use amethyst::ecs::World;
+</span><span class="boring">use amethyst::{assets::Handle, renderer::sprite::SpriteSheet};
+</span>fn initialise_paddles(world: &amp;mut World, sprite_sheet_handle: Handle&lt;SpriteSheet&gt;)
+<span class="boring">{ }
+</span></code></pre>
+<p>Внутри <code>initialise_paddles</code> мы создаем <code>SpriteRender</code> для ракетки. Здесь нам нужен только один, так как единственное различие между двумя ракетками заключается в том, что правая перевернута горизонтально.</p>
+<pre><code class="language-rust edition2018 no_run noplaypen"><span class="boring">extern crate amethyst;
+</span><span class="boring">use amethyst::ecs::World;
+</span><span class="boring">use amethyst::{assets::Handle, renderer::{SpriteRender, SpriteSheet}};
+</span><span class="boring">fn initialise_paddles(world: &amp;mut World, sprite_sheet_handle: Handle&lt;SpriteSheet&gt;) {
+</span>// Назначаем спрайты для ракеток
+let sprite_render = SpriteRender {
+    sprite_sheet: sprite_sheet_handle,
+    sprite_number: 0, // ракетка это первый спрайт в sprite_sheet
+};
+<span class="boring">}
+</span></code></pre>
+<p><code>SpriteRender</code> - это <code>Component</code>, который указывает, какой спрайт какого листа спрайта должен быть нарисован для конкретной сущности. Поскольку ракетка является первым спрайтом в листе спрайтов, мы используем <code>0</code> для <code>sprite_number</code>.</p>
+<p>Далее мы просто добавляем компоненты к объектам весла:</p>
+<pre><code class="language-rust edition2018 no_run noplaypen"><span class="boring">extern crate amethyst;
+</span><span class="boring">use amethyst::ecs::World;
+</span><span class="boring">use amethyst::assets::Handle;
+</span><span class="boring">use amethyst::renderer::sprite::{SpriteSheet, SpriteRender};
+</span><span class="boring">use amethyst::prelude::*;
+</span><span class="boring">fn initialise_paddles(world: &amp;mut World, sprite_sheet_handle: Handle&lt;SpriteSheet&gt;) {
+</span><span class="boring">let sprite_render = SpriteRender {
+</span><span class="boring">  sprite_sheet: sprite_sheet_handle,
+</span><span class="boring">  sprite_number: 0, // paddle is the first sprite in the sprite_sheet
+</span><span class="boring">};
+</span>// Создаём левую сущность ракетки.
+world
+    .create_entity()
+    .with(sprite_render.clone())
+    // ... другие компоненты
+    .build();
+
+// Создаём правую сущность ракетки.
+world
+    .create_entity()
+    .with(sprite_render)
+    // ... другие компоненты
+    .build();
+<span class="boring">}
+</span></code></pre>
+<p>Почти готово, нам просто нужно подключить спрайт к ракеткам. Мы собираем все это вместе в методе <code>on_start()</code>:</p>
+<pre><code class="language-rust edition2018 no_run noplaypen"><span class="boring">extern crate amethyst;
+</span><span class="boring">use amethyst::assets::Handle;
+</span><span class="boring">use amethyst::prelude::*;
+</span><span class="boring">use amethyst::renderer::{sprite::SpriteSheet, Texture};
+</span><span class="boring">use amethyst::ecs::World;
+</span><span class="boring">struct Paddle;
+</span><span class="boring">impl amethyst::ecs::Component for Paddle {
+</span><span class="boring">  type Storage = amethyst::ecs::VecStorage&lt;Paddle&gt;;
+</span><span class="boring">}
+</span><span class="boring">fn initialise_paddles(world: &amp;mut World, spritesheet: Handle&lt;SpriteSheet&gt;) { }
+</span><span class="boring">fn initialise_camera(world: &amp;mut World) { }
+</span><span class="boring">fn load_sprite_sheet(world: &amp;mut World) -&gt; Handle&lt;SpriteSheet&gt; { unimplemented!() }
+</span><span class="boring">struct MyState;
+</span><span class="boring">impl SimpleState for MyState {
+</span>fn on_start(&amp;mut self, data: StateData&lt;'_, GameData&lt;'_, '_&gt;&gt;) {
+    let world = data.world;
+
+    // Загружаем спрайт-лист, необходимый для визуализации графики.
+    let sprite_sheet_handle = load_sprite_sheet(world);
+
+    world.register::&lt;Paddle&gt;();
+
+    initialise_paddles(world, sprite_sheet_handle);
+    initialise_camera(world);
+}
+<span class="boring">}
+</span></code></pre>
+<p>И мы сделали это. Давайте запустим нашу игру и повеселимся!</p>
+<p>Если все хорошо, мы должны получить что-то похожее на это:</p>
+<p><img src="pong/../images/pong_02.png" alt="Окно с отрисоваными ракетками" /></p>
+<p>В следующей главе мы рассмотрим «S» в ECS и приведем эти ракетки в движение!</p>
 <hr />
 <p>Документация была переведена специально для сообщества &quot;<strong>rust_lang_ru</strong>&quot;.</p>
 <p>Подпишись на нас в <strong><a href="http://tlinks.run/rust_lang_ru">Telegram</a></strong> и <strong><a href="https://www.youtube.com/channel/UCu413rnSfuSSOR3OsIThlZA">YouTube</a></strong>!</p>

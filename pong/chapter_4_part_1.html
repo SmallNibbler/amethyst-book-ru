@@ -81,7 +81,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div id="sidebar-scrollbox" class="sidebar-scrollbox">
-                <ol class="chapter"><li class="expanded "><a href="../chapter_1.html"><strong aria-hidden="true">1.</strong> Введение</a></li><li class="expanded "><a href="../chapter_2.html"><strong aria-hidden="true">2.</strong> Начало работы</a></li><li class="expanded "><a href="../chapter_3.html"><strong aria-hidden="true">3.</strong> Концепции</a></li><li><ol class="section"><li class="expanded "><a href="../concepts/chapter_3_part_1.html"><strong aria-hidden="true">3.1.</strong> Состояния</a></li><li class="expanded "><a href="../concepts/chapter_3_part_2.html"><strong aria-hidden="true">3.2.</strong> Сущность и компонент</a></li><li class="expanded "><a href="../concepts/chapter_3_part_3.html"><strong aria-hidden="true">3.3.</strong> Ресурс</a></li><li class="expanded "><a href="../concepts/chapter_3_part_4.html"><strong aria-hidden="true">3.4.</strong> Мир</a></li><li class="expanded "><a href="../concepts/chapter_3_part_5.html"><strong aria-hidden="true">3.5.</strong> Система</a></li><li><ol class="section"><li class="expanded "><a href="../concepts/system/chapter_3_part_5.1.html"><strong aria-hidden="true">3.5.1.</strong> Инициализация системы</a></li><li class="expanded "><a href="../concepts/system/chapter_3_part_5.2.html"><strong aria-hidden="true">3.5.2.</strong> Производная SystemDesc</a></li><li class="expanded "><a href="../concepts/system/chapter_3_part_5.3.html"><strong aria-hidden="true">3.5.3.</strong> Реализация типажа SystemDesc</a></li></ol></li><li class="expanded "><a href="../concepts/chapter_3_part_6.html"><strong aria-hidden="true">3.6.</strong> Диспетчер</a></li><li class="expanded "><a href="../concepts/chapter_3_part_7.html"><strong aria-hidden="true">3.7.</strong> Канал событий</a></li></ol></li><li class="expanded "><a href="../chapter_4.html"><strong aria-hidden="true">4.</strong> Игра Понг</a></li><li><ol class="section"><li class="expanded "><a href="../pong/chapter_4_part_1.html" class="active"><strong aria-hidden="true">4.1.</strong> Настройка проекта</a></li></ol></li></ol>
+                <ol class="chapter"><li class="expanded "><a href="../chapter_1.html"><strong aria-hidden="true">1.</strong> Введение</a></li><li class="expanded "><a href="../chapter_2.html"><strong aria-hidden="true">2.</strong> Начало работы</a></li><li class="expanded "><a href="../chapter_3.html"><strong aria-hidden="true">3.</strong> Концепции</a></li><li><ol class="section"><li class="expanded "><a href="../concepts/chapter_3_part_1.html"><strong aria-hidden="true">3.1.</strong> Состояния</a></li><li class="expanded "><a href="../concepts/chapter_3_part_2.html"><strong aria-hidden="true">3.2.</strong> Сущность и компонент</a></li><li class="expanded "><a href="../concepts/chapter_3_part_3.html"><strong aria-hidden="true">3.3.</strong> Ресурс</a></li><li class="expanded "><a href="../concepts/chapter_3_part_4.html"><strong aria-hidden="true">3.4.</strong> Мир</a></li><li class="expanded "><a href="../concepts/chapter_3_part_5.html"><strong aria-hidden="true">3.5.</strong> Система</a></li><li><ol class="section"><li class="expanded "><a href="../concepts/system/chapter_3_part_5.1.html"><strong aria-hidden="true">3.5.1.</strong> Инициализация системы</a></li><li class="expanded "><a href="../concepts/system/chapter_3_part_5.2.html"><strong aria-hidden="true">3.5.2.</strong> Производная SystemDesc</a></li><li class="expanded "><a href="../concepts/system/chapter_3_part_5.3.html"><strong aria-hidden="true">3.5.3.</strong> Реализация типажа SystemDesc</a></li></ol></li><li class="expanded "><a href="../concepts/chapter_3_part_6.html"><strong aria-hidden="true">3.6.</strong> Диспетчер</a></li><li class="expanded "><a href="../concepts/chapter_3_part_7.html"><strong aria-hidden="true">3.7.</strong> Канал событий</a></li></ol></li><li class="expanded "><a href="../chapter_4.html"><strong aria-hidden="true">4.</strong> Игра Понг</a></li><li><ol class="section"><li class="expanded "><a href="../pong/chapter_4_part_1.html" class="active"><strong aria-hidden="true">4.1.</strong> Настройка проекта</a></li><li class="expanded "><a href="../pong/chapter_4_part_2.html"><strong aria-hidden="true">4.2.</strong> Отрисовка ракеток</a></li></ol></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
         </nav>
@@ -312,7 +312,7 @@ let game_data = GameDataBuilder::default()
 <p><strong>Примечание.</strong> Этот установочный код использует систему, основанную на особенностях <code>RenderPlugin</code> Amethyst, которая использует пакет <code>rendy</code> для определения рендеринга. Если вы планируете выйти за рамки строительных блоков рендеринга, которые Amethyst предоставляет «из коробки», вы можете прочитать о графике рендеринга в <a href="https://github.com/amethyst/rendy/blob/master/docs/graph.md">документации rendy</a>.</p>
 </blockquote>
 <p>Ура! Теперь мы можем скомпилировать и запустить этот код с помощью <code>cargo run</code> и получить окно. Это должно выглядеть примерно так:</p>
-<p><img src="..%5Cimages%5Cchapter_4_part_1.png" alt="Окно с тёмным фоном." /></p>
+<p><img src="..%5Cimages%5Cpong_01.png" alt="Окно с тёмным фоном." /></p>
 <hr />
 <p>Документация была переведена специально для сообщества &quot;<strong>rust_lang_ru</strong>&quot;.</p>
 <p>Подпишись на нас в <strong><a href="http://tlinks.run/rust_lang_ru">Telegram</a></strong> и <strong><a href="https://www.youtube.com/channel/UCu413rnSfuSSOR3OsIThlZA">YouTube</a></strong>!</p>
@@ -328,6 +328,10 @@ let game_data = GameDataBuilder::default()
                         
 
                         
+                            <a rel="next" href="../pong/chapter_4_part_2.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+                        
 
                         <div style="clear: both"></div>
                     </nav>
@@ -341,6 +345,10 @@ let game_data = GameDataBuilder::default()
                     </a>
                 
 
+                
+                    <a href="../pong/chapter_4_part_2.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
                 
             </nav>
 
