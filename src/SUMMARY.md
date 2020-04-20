@@ -15,3 +15,4 @@
   - [Канал событий](./concepts/chapter_3_part_7.md)
 - [Игра Понг](./chapter_4.md)
   - [Настройка проекта](./pong/chapter_4_part_1.md)
+  - [Отрисовка ракеток](./pong/chapter_4_part_2.md)
