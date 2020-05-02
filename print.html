@@ -83,7 +83,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div id="sidebar-scrollbox" class="sidebar-scrollbox">
-                <ol class="chapter"><li class="expanded "><a href="chapter_1.html"><strong aria-hidden="true">1.</strong> Введение</a></li><li class="expanded "><a href="chapter_2.html"><strong aria-hidden="true">2.</strong> Начало работы</a></li><li class="expanded "><a href="chapter_3.html"><strong aria-hidden="true">3.</strong> Концепции</a></li><li><ol class="section"><li class="expanded "><a href="concepts/chapter_3_part_1.html"><strong aria-hidden="true">3.1.</strong> Состояния</a></li><li class="expanded "><a href="concepts/chapter_3_part_2.html"><strong aria-hidden="true">3.2.</strong> Сущность и компонент</a></li><li class="expanded "><a href="concepts/chapter_3_part_3.html"><strong aria-hidden="true">3.3.</strong> Ресурс</a></li><li class="expanded "><a href="concepts/chapter_3_part_4.html"><strong aria-hidden="true">3.4.</strong> Мир</a></li><li class="expanded "><a href="concepts/chapter_3_part_5.html"><strong aria-hidden="true">3.5.</strong> Система</a></li><li><ol class="section"><li class="expanded "><a href="concepts/system/chapter_3_part_5.1.html"><strong aria-hidden="true">3.5.1.</strong> Инициализация системы</a></li><li class="expanded "><a href="concepts/system/chapter_3_part_5.2.html"><strong aria-hidden="true">3.5.2.</strong> Производная SystemDesc</a></li><li class="expanded "><a href="concepts/system/chapter_3_part_5.3.html"><strong aria-hidden="true">3.5.3.</strong> Реализация типажа SystemDesc</a></li></ol></li><li class="expanded "><a href="concepts/chapter_3_part_6.html"><strong aria-hidden="true">3.6.</strong> Диспетчер</a></li><li class="expanded "><a href="concepts/chapter_3_part_7.html"><strong aria-hidden="true">3.7.</strong> Канал событий</a></li></ol></li><li class="expanded "><a href="chapter_4.html"><strong aria-hidden="true">4.</strong> Игра Понг</a></li><li><ol class="section"><li class="expanded "><a href="pong/chapter_4_part_1.html"><strong aria-hidden="true">4.1.</strong> Настройка проекта</a></li><li class="expanded "><a href="pong/chapter_4_part_2.html"><strong aria-hidden="true">4.2.</strong> Отрисовка ракеток</a></li></ol></li></ol>
+                <ol class="chapter"><li class="expanded "><a href="chapter_1.html"><strong aria-hidden="true">1.</strong> Введение</a></li><li class="expanded "><a href="chapter_2.html"><strong aria-hidden="true">2.</strong> Начало работы</a></li><li class="expanded "><a href="chapter_3.html"><strong aria-hidden="true">3.</strong> Концепции</a></li><li><ol class="section"><li class="expanded "><a href="concepts/chapter_3_part_1.html"><strong aria-hidden="true">3.1.</strong> Состояния</a></li><li class="expanded "><a href="concepts/chapter_3_part_2.html"><strong aria-hidden="true">3.2.</strong> Сущность и компонент</a></li><li class="expanded "><a href="concepts/chapter_3_part_3.html"><strong aria-hidden="true">3.3.</strong> Ресурс</a></li><li class="expanded "><a href="concepts/chapter_3_part_4.html"><strong aria-hidden="true">3.4.</strong> Мир</a></li><li class="expanded "><a href="concepts/chapter_3_part_5.html"><strong aria-hidden="true">3.5.</strong> Система</a></li><li><ol class="section"><li class="expanded "><a href="concepts/system/chapter_3_part_5.1.html"><strong aria-hidden="true">3.5.1.</strong> Инициализация системы</a></li><li class="expanded "><a href="concepts/system/chapter_3_part_5.2.html"><strong aria-hidden="true">3.5.2.</strong> Производная SystemDesc</a></li><li class="expanded "><a href="concepts/system/chapter_3_part_5.3.html"><strong aria-hidden="true">3.5.3.</strong> Реализация типажа SystemDesc</a></li></ol></li><li class="expanded "><a href="concepts/chapter_3_part_6.html"><strong aria-hidden="true">3.6.</strong> Диспетчер</a></li><li class="expanded "><a href="concepts/chapter_3_part_7.html"><strong aria-hidden="true">3.7.</strong> Канал событий</a></li></ol></li><li class="expanded "><a href="chapter_4.html"><strong aria-hidden="true">4.</strong> Игра Понг</a></li><li><ol class="section"><li class="expanded "><a href="pong/chapter_4_part_1.html"><strong aria-hidden="true">4.1.</strong> Настройка проекта</a></li><li class="expanded "><a href="pong/chapter_4_part_2.html"><strong aria-hidden="true">4.2.</strong> Отрисовка ракеток</a></li><li class="expanded "><a href="pong/chapter_4_part_3.html"><strong aria-hidden="true">4.3.</strong> Перемещение ракеток</a></li></ol></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
         </nav>
@@ -2739,6 +2739,300 @@ world
 <p>Если все хорошо, мы должны получить что-то похожее на это:</p>
 <p><img src="pong/../images/pong_02.png" alt="Окно с отрисоваными ракетками" /></p>
 <p>В следующей главе мы рассмотрим «S» в ECS и приведем эти ракетки в движение!</p>
+<hr />
+<p>Документация была переведена специально для сообщества &quot;<strong>rust_lang_ru</strong>&quot;.</p>
+<p>Подпишись на нас в <strong><a href="http://tlinks.run/rust_lang_ru">Telegram</a></strong> и <strong><a href="https://www.youtube.com/channel/UCu413rnSfuSSOR3OsIThlZA">YouTube</a></strong>!</p>
+<h1><a class="header" href="#Перемещение-ракеток" id="Перемещение-ракеток">Перемещение ракеток</a></h1>
+<p>В предыдущей главе мы узнали об отношениях между сущностями и компонентами, а также о том, как они представляют «вещи» в наших играх. Эта глава знакомит с системами (Systems) - S в «ECS». Системы - это объекты, которые представляют операции над сущностями или, более конкретно, над комбинациями компонентов. Давайте добавим систему, которая перемещает ракетки на основе пользовательского ввода.</p>
+<p>Система - это не что иное, как функция, которая запускается один раз в каждом кадре и потенциально вносит некоторые изменения в компоненты. Если вы использовали другие игровые движки, это, вероятно, звучит знакомо: движок Unity называет эти объекты <code>MonoBehaviours</code>, а движок Unreal называет их <code>Actors</code>, но все они представляют одну и ту же базовую идею.</p>
+<p>Системы в Specs/Amethyst немного отличаются. Вместо описания поведения одного экземпляра (например, одного врага в вашей игре), они описывают поведение всех компонентов определенного типа (всех врагов). Это делает ваш код более модульным, его легче тестировать и он работает быстрее.</p>
+<p>Давайте начнем.</p>
+<h2><a class="header" href="#Захват-пользовательского-ввода" id="Захват-пользовательского-ввода">Захват пользовательского ввода</a></h2>
+<p>Чтобы захватить ввод пользователя, нам нужно добавить еще несколько файлов в нашу игру. Начнем с создания файла конфигурации в каталоге <code>config</code> нашего проекта с именем <code>bindings.ron</code>, который будет содержать RON-представление структуры <a href="https://docs.amethyst.rs/stable/amethyst_input/struct.Bindings.html"><code>amethyst_input::Bindings</code></a>:</p>
+<pre><code class="language-ron ignore">(
+  axes: {
+    &quot;left_paddle&quot;: Emulated(pos: Key(W), neg: Key(S)),
+    &quot;right_paddle&quot;: Emulated(pos: Key(Up), neg: Key(Down)),
+  },
+  actions: {},
+)
+</code></pre>
+<p>В Amethyst вводом могут быть либо оси (<code>axes</code>) (диапазон, который представляет собой аналоговый джойстик или связывает две кнопки как противоположные концы диапазона), либо действия (<code>actions</code>) (также известные как скалярный ввод - кнопка, которая либо нажата, либо нет). В этом файле мы создаем входные данные для перемещения каждой ракетки вверх (<code>pos:</code>) или вниз (<code>neg:</code>) по вертикальной оси: <strong>W</strong> и <strong>S</strong> для левой ракетки и клавиши со стрелками <strong>вверх</strong> и <strong>вниз</strong> для правой ракетки. Мы называем их <code>«left_paddle»</code> и <code>«right_paddle»</code>, что позволит нам ссылаться на них по имени в коде, когда нам потребуется прочитать их соответствующие значения для обновления позиций.</p>
+<p>Далее мы добавим <code>InputBundle</code> к игровому объекту <code>Application</code>, который содержит систему <code>InputHandler</code>, которая захватывает входные данные и сопоставляет их с осями, которые мы определили. Давайте внесем следующие изменения в <code>main.rs</code>.</p>
+<pre><code class="language-rust edition2018 no_run noplaypen"><span class="boring">extern crate amethyst;
+</span><span class="boring">use amethyst::prelude::*;
+</span><span class="boring">use amethyst::core::transform::TransformBundle;
+</span><span class="boring">use amethyst::utils::application_root_dir;
+</span><span class="boring">use amethyst::window::DisplayConfig;
+</span><span class="boring">macro_rules! env { ($x:expr) =&gt; (&quot;&quot;) }
+</span><span class="boring">fn main() -&gt; amethyst::Result&lt;()&gt; {
+</span>use amethyst::input::{InputBundle, StringBindings};
+
+<span class="boring">let app_root = application_root_dir()?;
+</span>let binding_path = app_root.join(&quot;config&quot;).join(&quot;bindings.ron&quot;);
+
+let input_bundle = InputBundle::&lt;StringBindings&gt;::new()
+    .with_bindings_from_file(binding_path)?;
+
+<span class="boring">let path = &quot;./config/display.ron&quot;;
+</span><span class="boring">let config = DisplayConfig::load(&amp;path)?;
+</span><span class="boring">let assets_dir = &quot;assets&quot;;
+</span><span class="boring">struct Pong;
+</span><span class="boring">impl SimpleState for Pong { }
+</span>let game_data = GameDataBuilder::default()
+    .with_bundle(TransformBundle::new())?
+    .with_bundle(input_bundle)?
+    // ..
+    ;
+let mut game = Application::new(assets_dir, Pong, game_data)?;
+game.run();
+<span class="boring">Ok(())
+</span><span class="boring">}
+</span></code></pre>
+<p>Для <code>InputBundle&lt;StringBindings&gt;</code> тип параметра определяет способ идентификации <code>axes</code> и <code>actions</code> в файле <code>bindings.ron</code> (в этом примере используются строки (<code>String</code>); например, <code>«left_paddle»</code>).</p>
+<p>На этом этапе мы готовы написать систему, которая считывает ввод с <code>InputHandler</code> и соответственно перемещает ракетки. Во-первых, мы создадим каталог с именем <code>systems</code> в <code>src</code> для хранения всех наших систем. Мы будем использовать модуль для сбора и экспорта каждой из наших систем в остальную часть приложения. Вот наш <code>mod.rs</code> для <code>src/systems</code>:</p>
+<pre><code class="language-rust ignore">pub use self::paddle::PaddleSystem;
+
+mod paddle;
+</code></pre>
+<p>Наконец, мы готовы реализовать <code>PaddleSystem</code> в <code>systems/paddle.rs</code>:</p>
+<pre><code class="language-rust edition2018 no_run noplaypen"><span class="boring">extern crate amethyst;
+</span><span class="boring">
+</span><span class="boring">mod pong {
+</span><span class="boring">    use amethyst::ecs::prelude::*;
+</span><span class="boring">
+</span><span class="boring">    pub enum Side {
+</span><span class="boring">      Left,
+</span><span class="boring">      Right,
+</span><span class="boring">    }
+</span><span class="boring">    pub struct Paddle {
+</span><span class="boring">      pub side: Side,
+</span><span class="boring">    }
+</span><span class="boring">    impl Component for Paddle {
+</span><span class="boring">      type Storage = VecStorage&lt;Self&gt;;
+</span><span class="boring">    }
+</span><span class="boring">
+</span><span class="boring">    pub const ARENA_HEIGHT: f32 = 100.0;
+</span><span class="boring">    pub const PADDLE_HEIGHT: f32 = 16.0;
+</span><span class="boring">}
+</span><span class="boring">
+</span>use amethyst::core::{Transform, SystemDesc};
+use amethyst::derive::SystemDesc;
+use amethyst::ecs::{Join, Read, ReadStorage, System, SystemData, World, WriteStorage};
+use amethyst::input::{InputHandler, StringBindings};
+
+// Вам нужно будет пометить PADDLE_HEIGHT как общедоступную (pub) в pong.rs
+use crate::pong::{Paddle, Side, ARENA_HEIGHT, PADDLE_HEIGHT};
+
+#[derive(SystemDesc)]
+pub struct PaddleSystem;
+
+impl&lt;'s&gt; System&lt;'s&gt; for PaddleSystem {
+    type SystemData = (
+        WriteStorage&lt;'s, Transform&gt;,
+        ReadStorage&lt;'s, Paddle&gt;,
+        Read&lt;'s, InputHandler&lt;StringBindings&gt;&gt;,
+    );
+
+    fn run(&amp;mut self, (mut transforms, paddles, input): Self::SystemData) {
+        for (paddle, transform) in (&amp;paddles, &amp;mut transforms).join() {
+            let movement = match paddle.side {
+                Side::Left =&gt; input.axis_value(&quot;left_paddle&quot;),
+                Side::Right =&gt; input.axis_value(&quot;right_paddle&quot;),
+            };
+            if let Some(mv_amount) = movement {
+                if mv_amount != 0.0 {
+                    let side_name = match paddle.side {
+                        Side::Left =&gt; &quot;left&quot;,
+                        Side::Right =&gt; &quot;right&quot;,
+                    };
+                    println!(&quot;Side {:?} moving {}&quot;, side_name, mv_amount);
+                }
+            }
+        }
+    }
+}
+<span class="boring">
+</span><span class="boring">fn main() {}
+</span></code></pre>
+<p>Хорошо, здесь происходит довольно много всего!</p>
+<p>Мы создаем структуру <code>PaddleSystem</code>, и помечаем её как производную от <code>SystemDesc</code>. Это сокращение от <strong>System Descriptor</strong> (Системный дескриптор). В Amethyst системам может потребоваться доступ к ресурсам из <code>World</code>, чтобы их можно было создать. Для каждой системы должна быть предусмотрена реализация типажа <code>SystemDesc</code>, чтобы указать логику для создания экземпляра системы. Для систем, которые не требуют специальной логики создания экземпляров, производная от <code>SystemDesc</code> автоматически реализует признак <code>SystemDesc</code> для типа системы.</p>
+<p>Затем мы реализуем для нее типаж <code>System</code> с временем жизни компонентов, на которых она работает. Внутри реализации мы определяем данные, над которыми работает система, в кортеже <code>SystemData</code>: <code>WriteStorage</code>, <code>ReadStorage</code> и <code>Read</code>. В частности, обобщенные типы, которые мы использовали здесь, говорят нам, что <code>PaddleSystem</code> изменяет компоненты <code>Transform</code>, <code>WriteStorage &lt;'s, Transform&gt;</code>, читает компоненты <code>Paddle</code>, <code>ReadStorage &lt;'s, Paddle&gt;</code>, а также обращается к ресурсу <code>InputHandler&lt;StringBindings&gt;</code>, который мы создали ранее, используя структуру <code>Read</code>.</p>
+<blockquote>
+<p>Для <code>InputHandler&lt;StringBindings&gt;</code> убедитесь, что тип параметра совпадает с тем, который использовался для создания <code>InputBundle</code> ранее.</p>
+</blockquote>
+<p>Теперь, когда у нас есть доступ к хранилищам компонентов, которые нам необходимы, мы можем перебирать их. Мы выполняем операцию соединения с хранилищами <code>Transform</code> и <code>Paddle</code>. Это будет перебирать все сущности, к которым прикреплены <code>Paddle</code> и <code>Transform</code>, и даст нам доступ к фактическим компонентам, без возможности изменения для <code>Paddle</code> и с возможностью изменения для <code>Transform</code>.</p>
+<blockquote>
+<p>Есть много других способов использования хранилищ. Например, вы можете использовать их, чтобы получить ссылку на компонент определенного типа, содержащийся в объекте, или просто выполнить итерацию по ним без объединения. Однако на практике ваше наиболее распространенное использование - объединение нескольких хранилищ, поскольку система редко влияет на один конкретный компонент.</p>
+</blockquote>
+<blockquote>
+<p>Также обратите внимание, что можно объединить хранилища, используя несколько потоков, используя <code>par_join</code> вместо <code>join</code>, но здесь вводимые издержки не стоят того, что дает параллелизм.</p>
+</blockquote>
+<p>Давайте добавим эту систему в наш <code>GameDataBuilder</code> в <code>main.rs</code>:</p>
+<pre><code class="language-rust edition2018 no_run noplaypen">mod systems; // Импортируем модуль
+// --вырезано--
+
+<span class="boring">extern crate amethyst;
+</span><span class="boring">use amethyst::prelude::*;
+</span><span class="boring">use amethyst::core::transform::TransformBundle;
+</span><span class="boring">use amethyst::input::StringBindings;
+</span><span class="boring">use amethyst::window::DisplayConfig;
+</span>fn main() -&gt; amethyst::Result&lt;()&gt; {
+// --вырезано--
+
+<span class="boring">let path = &quot;./config/display.ron&quot;;
+</span><span class="boring">let config = DisplayConfig::load(&amp;path)?;
+</span><span class="boring">mod systems {
+</span><span class="boring">
+</span><span class="boring">use amethyst::core::ecs::{System, SystemData, World};
+</span><span class="boring">use amethyst::core::SystemDesc;
+</span><span class="boring">use amethyst::derive::SystemDesc;
+</span><span class="boring">
+</span><span class="boring">use amethyst;
+</span><span class="boring">#[derive(SystemDesc)]
+</span><span class="boring">pub struct PaddleSystem;
+</span><span class="boring">impl&lt;'a&gt; amethyst::ecs::System&lt;'a&gt; for PaddleSystem {
+</span><span class="boring">type SystemData = ();
+</span><span class="boring">fn run(&amp;mut self, _: Self::SystemData) { }
+</span><span class="boring">}
+</span><span class="boring">}
+</span><span class="boring">let input_bundle = amethyst::input::InputBundle::&lt;StringBindings&gt;::new();
+</span>let game_data = GameDataBuilder::default()
+    // ...
+    .with_bundle(TransformBundle::new())?
+    .with_bundle(input_bundle)?
+    .with(systems::PaddleSystem, &quot;paddle_system&quot;, &amp;[&quot;input_system&quot;]) // Добавим эту линию
+    // ...
+<span class="boring">  ;
+</span><span class="boring">let assets_dir = &quot;/&quot;;
+</span><span class="boring">struct Pong;
+</span><span class="boring">impl SimpleState for Pong { }
+</span><span class="boring">let mut game = Application::new(assets_dir, Pong, game_data)?;
+</span><span class="boring">Ok(())
+</span>}
+</code></pre>
+<p>Посмотрите на вызов метода <code>with</code>. Здесь мы не добавляем комплект, мы добавляем только систему. Мы предоставляем экземпляр системы, строку, представляющую её имя и список зависимостей. Зависимости - это имена систем, которые должны быть запущены до нашей новой системы. Здесь мы требуем, чтобы <code>input_system</code> была уже запущена, поскольку мы будем использовать пользовательский ввод для перемещения ракетки, поэтому нам нужно подготовить эти данные. Имя системы <code>input_system</code> определено в стандартном <code>InputBundle</code>.</p>
+<h2><a class="header" href="#Изменение-позиции" id="Изменение-позиции">Изменение позиции</a></h2>
+<p>Если мы запустим игру сейчас, мы увидим, как консоль печатает наши нажатия клавиш. Давайте сделаем так, чтобы она обновляла положение ракетки. Для этого мы изменим позицию по оси <strong>y</strong>.</p>
+<pre><code class="language-rust edition2018 no_run noplaypen"><span class="boring">extern crate amethyst;
+</span><span class="boring">use amethyst::core::Transform;
+</span><span class="boring">use amethyst::core::SystemDesc;
+</span><span class="boring">use amethyst::derive::SystemDesc;
+</span><span class="boring">use amethyst::ecs::{Join, Read, ReadStorage, System, SystemData, World, WriteStorage};
+</span><span class="boring">use amethyst::input::{InputHandler, StringBindings};
+</span><span class="boring">enum Side {
+</span><span class="boring">  Left,
+</span><span class="boring">  Right,
+</span><span class="boring">}
+</span><span class="boring">pub struct Paddle {
+</span><span class="boring">  side: Side,
+</span><span class="boring">}
+</span><span class="boring">impl amethyst::ecs::Component for Paddle {
+</span><span class="boring">  type Storage = amethyst::ecs::VecStorage&lt;Paddle&gt;;
+</span><span class="boring">}
+</span><span class="boring">#[derive(SystemDesc)]
+</span><span class="boring">pub struct PaddleSystem;
+</span><span class="boring">impl&lt;'s&gt; System&lt;'s&gt; for PaddleSystem {
+</span><span class="boring"> type SystemData = (
+</span><span class="boring">   WriteStorage&lt;'s, Transform&gt;,
+</span><span class="boring">   ReadStorage&lt;'s, Paddle&gt;,
+</span><span class="boring">   Read&lt;'s, InputHandler&lt;StringBindings&gt;&gt;,
+</span><span class="boring"> );
+</span>fn run(&amp;mut self, (mut transforms, paddles, input): Self::SystemData) {
+    for (paddle, transform) in (&amp;paddles, &amp;mut transforms).join() {
+        let movement = match paddle.side {
+            Side::Left =&gt; input.axis_value(&quot;left_paddle&quot;),
+            Side::Right =&gt; input.axis_value(&quot;right_paddle&quot;),
+        };
+        if let Some(mv_amount) = movement {
+            let scaled_amount = 1.2 * mv_amount as f32;
+            transform.prepend_translation_y(scaled_amount);
+        }
+    }
+}
+<span class="boring">}
+</span></code></pre>
+<p>Это наша первая попытка перемещения ракеток: мы берем движение и масштабируем его по некоторому коэффициенту, чтобы движение казалось плавным. В реальной игре мы использовали бы время прошедшее между кадрами, для определения того, как далеко нужно перемещать ракетку. Это необходимо чтобы поведение игры не было привязано к частоте кадров игры. Amethyst предоставляет вам  <code>amethyst::core::timing::Time</code> для этой цели, но на данный момент достаточно подходящего. Если вы запустите игру сейчас, вы заметите, что ракетки могут уходить за край игровой зоны.</p>
+<p>Чтобы это исправить, нам нужно ограничить движение ракетки до границы арены минимальным и максимальным значением. Но поскольку точка привязки ракетки находится в середине спрайта, нам также необходимо сместить этот предел на половину высоты спрайта, чтобы ракетки не выходили на половину спрайта за экран. Поэтому мы ограничим значение <strong>y</strong> преобразования от <code>ARENA_HEIGHT - PADDLE_HEIGHT * 0,5</code> (верх арены минус смещение) до <code>PADDLE_HEIGHT * 0,5</code> (низ арены плюс смещение).</p>
+<p>Наша функция <code>run</code> должна выглядеть примерно так:</p>
+<pre><code class="language-rust edition2018 no_run noplaypen"><span class="boring">extern crate amethyst;
+</span><span class="boring">use amethyst::core::Transform;
+</span><span class="boring">use amethyst::core::SystemDesc;
+</span><span class="boring">use amethyst::derive::SystemDesc;
+</span><span class="boring">use amethyst::ecs::{Join, Read, ReadStorage, System, SystemData, World, WriteStorage};
+</span><span class="boring">use amethyst::input::{InputHandler, StringBindings};
+</span><span class="boring">const PADDLE_HEIGHT: f32 = 16.0;
+</span><span class="boring">const PADDLE_WIDTH: f32 = 4.0;
+</span><span class="boring">const ARENA_HEIGHT: f32 = 100.0;
+</span><span class="boring">const ARENA_WIDTH: f32 = 100.0;
+</span><span class="boring">enum Side {
+</span><span class="boring">  Left,
+</span><span class="boring">  Right,
+</span><span class="boring">}
+</span><span class="boring">pub struct Paddle {
+</span><span class="boring">  side: Side,
+</span><span class="boring">}
+</span><span class="boring">impl amethyst::ecs::Component for Paddle {
+</span><span class="boring">  type Storage = amethyst::ecs::VecStorage&lt;Paddle&gt;;
+</span><span class="boring">}
+</span><span class="boring">#[derive(SystemDesc)]
+</span><span class="boring">pub struct PaddleSystem;
+</span><span class="boring">impl&lt;'s&gt; System&lt;'s&gt; for PaddleSystem {
+</span><span class="boring"> type SystemData = (
+</span><span class="boring">   WriteStorage&lt;'s, Transform&gt;,
+</span><span class="boring">   ReadStorage&lt;'s, Paddle&gt;,
+</span><span class="boring">   Read&lt;'s, InputHandler&lt;StringBindings&gt;&gt;,
+</span><span class="boring"> );
+</span>fn run(&amp;mut self, (mut transforms, paddles, input): Self::SystemData) {
+    for (paddle, transform) in (&amp;paddles, &amp;mut transforms).join() {
+        let movement = match paddle.side {
+            Side::Left =&gt; input.axis_value(&quot;left_paddle&quot;),
+            Side::Right =&gt; input.axis_value(&quot;right_paddle&quot;),
+        };
+        if let Some(mv_amount) = movement {
+            let scaled_amount = 1.2 * mv_amount as f32;
+            let paddle_y = transform.translation().y;
+            transform.set_translation_y(
+                (paddle_y + scaled_amount)
+                    .min(ARENA_HEIGHT - PADDLE_HEIGHT * 0.5)
+                    .max(PADDLE_HEIGHT * 0.5),
+            );
+        }
+    }
+}
+<span class="boring">}
+</span></code></pre>
+<h2><a class="header" href="#Автоматическая-настройка-ресурсов-системой" id="Автоматическая-настройка-ресурсов-системой">Автоматическая настройка ресурсов системой</a></h2>
+<p>Возможно, вы помните, что у нас были проблемы, потому что Amethyst требует от нас зарегистрировать (<code>register</code>) хранилище для <code>Paddle</code>, прежде чем мы сможем его использовать. Теперь, когда у нас есть система, использующая компонент <code>Paddle</code>, нам больше не нужно вручную регистрировать его используя <code>world</code>: система позаботится об этом за нас, а также настроит хранилище.</p>
+<pre><code class="language-rust edition2018 no_run noplaypen"><span class="boring">extern crate amethyst;
+</span><span class="boring">use amethyst::assets::Handle;
+</span><span class="boring">use amethyst::ecs::World;
+</span><span class="boring">use amethyst::prelude::*;
+</span><span class="boring">use amethyst::renderer::SpriteSheet;
+</span><span class="boring">struct Paddle;
+</span><span class="boring">impl amethyst::ecs::Component for Paddle {
+</span><span class="boring">  type Storage = amethyst::ecs::VecStorage&lt;Paddle&gt;;
+</span><span class="boring">}
+</span><span class="boring">fn initialise_paddles(world: &amp;mut World, spritesheet: Handle&lt;SpriteSheet&gt;) { }
+</span><span class="boring">fn initialise_camera(world: &amp;mut World) { }
+</span><span class="boring">fn load_sprite_sheet(world: &amp;mut World) -&gt; Handle&lt;SpriteSheet&gt; { unimplemented!() }
+</span><span class="boring">struct MyState;
+</span><span class="boring">impl SimpleState for MyState {
+</span>fn on_start(&amp;mut self, data: StateData&lt;'_, GameData&lt;'_, '_&gt;&gt;) {
+    let world = data.world;
+
+    // Загрузка спрайт-листа необходима для визуализации графики.
+    let sprite_sheet_handle = load_sprite_sheet(world);
+
+    world.register::&lt;Paddle&gt;(); // &lt;&lt;-- Более не требуется
+
+    initialise_paddles(world, sprite_sheet_handle);
+    initialise_camera(world);
+}
+<span class="boring">}
+</span></code></pre>
+<h2><a class="header" href="#Подведём-итог" id="Подведём-итог">Подведём итог</a></h2>
+<p>В этой главе мы добавили обработчик ввода в нашу игру, чтобы мы могли фиксировать нажатия клавиш. Затем мы создали систему, которая будет интерпретировать эти нажатия клавиш и соответственно перемещать ракетки нашей игры. В следующей главе мы рассмотрим еще одну ключевую концепцию в играх реального времени: время. Мы проинформируем нашу игру о времени и добавим шар, который будет отталкиваться от.</p>
 <hr />
 <p>Документация была переведена специально для сообщества &quot;<strong>rust_lang_ru</strong>&quot;.</p>
 <p>Подпишись на нас в <strong><a href="http://tlinks.run/rust_lang_ru">Telegram</a></strong> и <strong><a href="https://www.youtube.com/channel/UCu413rnSfuSSOR3OsIThlZA">YouTube</a></strong>!</p>
