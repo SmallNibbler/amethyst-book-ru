@@ -2375,7 +2375,7 @@ pub const ARENA_WIDTH: f32 = 100.0;
 <p>Теперь мы создадим компонент <code>Paddle</code>, весь следующий код будет добавлен в <code>pong.rs</code>.</p>
 <ol>
 <li>
-<p>Определите константы для ширины и высоты весла.</p>
+<p>Определите константы для ширины и высоты ракеток.</p>
 <pre><code class="language-rust edition2018 no_run noplaypen">pub const PADDLE_HEIGHT: f32 = 16.0;
 pub const PADDLE_WIDTH: f32 = 4.0;
 </code></pre>
@@ -2477,7 +2477,7 @@ fn initialise_paddles(world: &amp;mut World) {
         .build();
 }
 </code></pre>
-<p>Это все, что нужно Amethyst, чтобы отслеживать и перемещать ракетки в нашем виртуальном мире, но нам потребуется еще немного поработать, чтобы нарисовать их. В качестве проверки работоспособности давайте удостоверимся, что код для инициализации весла компилируется. Обновите метод <code>on_start</code> следующим образом:</p>
+<p>Это все, что нужно Amethyst, чтобы отслеживать и перемещать ракетки в нашем виртуальном мире, но нам потребуется еще немного поработать, чтобы нарисовать их. В качестве проверки работоспособности давайте удостоверимся, что код для инициализации ракеток компилируется. Обновите метод <code>on_start</code> следующим образом:</p>
 <pre><code class="language-rust edition2018 no_run noplaypen"><span class="boring">extern crate amethyst;
 </span><span class="boring">use amethyst::prelude::*;
 </span><span class="boring">use amethyst::ecs::World;
@@ -2681,7 +2681,7 @@ let sprite_render = SpriteRender {
 <span class="boring">}
 </span></code></pre>
 <p><code>SpriteRender</code> - это <code>Component</code>, который указывает, какой спрайт какого листа спрайта должен быть нарисован для конкретной сущности. Поскольку ракетка является первым спрайтом в листе спрайтов, мы используем <code>0</code> для <code>sprite_number</code>.</p>
-<p>Далее мы просто добавляем компоненты к объектам весла:</p>
+<p>Далее мы просто добавляем компоненты к объектам ракеток:</p>
 <pre><code class="language-rust edition2018 no_run noplaypen"><span class="boring">extern crate amethyst;
 </span><span class="boring">use amethyst::ecs::World;
 </span><span class="boring">use amethyst::assets::Handle;
